@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-fsck Documentation
 docname: git-fsck
-version: 2.47.0
-latest-changes: 2.47.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-fsck/index.html"
 ---
@@ -340,6 +340,10 @@ by setting the corresponding <code>fsck.&lt;msg-id&gt;</code> configuration vari
 <dd>
 <p>(ERROR) A commit object has a bad parent sha1.</p>
 </dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-codebadRefContentcode"> <a class="anchor" href="#Documentation/git-fsck.txt-codebadRefContentcode"></a><code>badRefContent</code> </dt>
+<dd>
+<p>(ERROR) A ref has bad content.</p>
+</dd>
 <dt class="hdlist1" id="Documentation/git-fsck.txt-codebadRefFiletypecode"> <a class="anchor" href="#Documentation/git-fsck.txt-codebadRefFiletypecode"></a><code>badRefFiletype</code> </dt>
 <dd>
 <p>(ERROR) A ref has a bad file type.</p>
@@ -347,6 +351,10 @@ by setting the corresponding <code>fsck.&lt;msg-id&gt;</code> configuration vari
 <dt class="hdlist1" id="Documentation/git-fsck.txt-codebadRefNamecode"> <a class="anchor" href="#Documentation/git-fsck.txt-codebadRefNamecode"></a><code>badRefName</code> </dt>
 <dd>
 <p>(ERROR) A ref has an invalid format.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-codebadReferentNamecode"> <a class="anchor" href="#Documentation/git-fsck.txt-codebadReferentNamecode"></a><code>badReferentName</code> </dt>
+<dd>
+<p>(ERROR) The referent name of a symref is invalid.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-fsck.txt-codebadTagNamecode"> <a class="anchor" href="#Documentation/git-fsck.txt-codebadTagNamecode"></a><code>badTagName</code> </dt>
 <dd>
@@ -543,6 +551,39 @@ default value is 4096.</p>
 <dt class="hdlist1" id="Documentation/git-fsck.txt-codenullSha1code"> <a class="anchor" href="#Documentation/git-fsck.txt-codenullSha1code"></a><code>nullSha1</code> </dt>
 <dd>
 <p>(WARN) Tree contains entries pointing to a null sha1.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-coderefMissingNewlinecode"> <a class="anchor" href="#Documentation/git-fsck.txt-coderefMissingNewlinecode"></a><code>refMissingNewline</code> </dt>
+<dd>
+<p>(INFO) A loose ref that does not end with newline(LF). As
+valid implementations of Git never created such a loose ref
+file, it may become an error in the future. Report to the
+<a href="mailto:git@vger.kernel.org">git@vger.kernel.org</a> mailing list if you see this error, as
+we need to know what tools created such a file.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-codesymlinkRefcode"> <a class="anchor" href="#Documentation/git-fsck.txt-codesymlinkRefcode"></a><code>symlinkRef</code> </dt>
+<dd>
+<p>(INFO) A symbolic link is used as a symref. Report to the
+<a href="mailto:git@vger.kernel.org">git@vger.kernel.org</a> mailing list if you see this error, as we
+are assessing the feasibility of dropping the support to drop
+creating symbolic links as symrefs.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-codesymrefTargetIsNotARefcode"> <a class="anchor" href="#Documentation/git-fsck.txt-codesymrefTargetIsNotARefcode"></a><code>symrefTargetIsNotARef</code> </dt>
+<dd>
+<p>(INFO) The target of a symbolic reference points neither to
+a root reference nor to a reference starting with "refs/".
+Although we allow create a symref pointing to the referent which
+is outside the "ref" by using <code>git symbolic-ref</code>, we may tighten
+the rule in the future. Report to the <a href="mailto:git@vger.kernel.org">git@vger.kernel.org</a>
+mailing list if you see this error, as we need to know what tools
+created such a file.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-fsck.txt-codetrailingRefContentcode"> <a class="anchor" href="#Documentation/git-fsck.txt-codetrailingRefContentcode"></a><code>trailingRefContent</code> </dt>
+<dd>
+<p>(INFO) A loose ref has trailing content. As valid implementations
+of Git never created such a loose ref file, it may become an
+error in the future. Report to the <a href="mailto:git@vger.kernel.org">git@vger.kernel.org</a> mailing
+list if you see this error, as we need to know what tools
+created such a file.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-fsck.txt-codetreeNotSortedcode"> <a class="anchor" href="#Documentation/git-fsck.txt-codetreeNotSortedcode"></a><code>treeNotSorted</code> </dt>
 <dd>

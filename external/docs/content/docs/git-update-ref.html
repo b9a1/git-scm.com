@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-update-ref Documentation
 docname: git-update-ref
-version: 2.46.0
-latest-changes: 2.46.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-update-ref/index.html"
 ---
@@ -46,49 +46,18 @@ as &lt;old-oid&gt; to make sure that the ref you are creating does
 not exist.</p>
 </div>
 <div class="paragraph">
-<p>It also allows a "ref" file to be a symbolic pointer to another
-ref file by starting with the four-byte header sequence of
-"ref:".</p>
-</div>
-<div class="paragraph">
-<p>More importantly, it allows the update of a ref file to follow
-these symbolic pointers, whether they are symlinks or these
-"regular file symbolic refs".  It follows <strong>real</strong> symlinks only
-if they start with "refs/": otherwise it will just try to read
-them and update them as a regular file (i.e. it will allow the
-filesystem to follow them, but will overwrite such a symlink to
-somewhere else with a regular filename).</p>
+<p>The final arguments are object names; this command without any options
+does not support updating a symbolic ref to point to another ref (see
+<a href='{{< relurl "docs/git-symbolic-ref" >}}'>git-symbolic-ref[1]</a>).  But <code>git update-ref --stdin</code> does have
+the <code>symref-*</code> commands so that regular refs and symbolic refs can be
+committed in the same transaction.</p>
 </div>
 <div class="paragraph">
 <p>If --no-deref is given, &lt;ref&gt; itself is overwritten, rather than
 the result of following the symbolic pointers.</p>
 </div>
 <div class="paragraph">
-<p>In general, using</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>git update-ref HEAD "$head"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>should be a <em>lot</em> safer than doing</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>echo "$head" &gt; "$GIT_DIR/HEAD"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>both from a symlink following standpoint <strong>and</strong> an error checking
-standpoint.  The "refs/" rule for symlinks means that symlinks
-that point to "outside" the tree are safe: they&#8217;ll be followed
-for reading but not for writing (so we&#8217;ll never write through a
-ref symlink to some other tree, if you have copied a whole
-archive by creating a symlink tree).</p>
-</div>
-<div class="paragraph">
-<p>With <code>-d</code> flag, it deletes the named &lt;ref&gt; after verifying it
+<p>With <code>-d</code>, it deletes the named &lt;ref&gt; after verifying that it
 still contains &lt;old-oid&gt;.</p>
 </div>
 <div class="paragraph">
@@ -163,12 +132,12 @@ ref does not exist before the update.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-update-ref.txt-create"> <a class="anchor" href="#Documentation/git-update-ref.txt-create"></a>create </dt>
 <dd>
-<p>Create &lt;ref&gt; with &lt;new-oid&gt; after verifying it does not
+<p>Create &lt;ref&gt; with &lt;new-oid&gt; after verifying that it does not
 exist.  The given &lt;new-oid&gt; may not be zero.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-update-ref.txt-delete"> <a class="anchor" href="#Documentation/git-update-ref.txt-delete"></a>delete </dt>
 <dd>
-<p>Delete &lt;ref&gt; after verifying it exists with &lt;old-oid&gt;, if
+<p>Delete &lt;ref&gt; after verifying that it exists with &lt;old-oid&gt;, if
 given.  If given, &lt;old-oid&gt; may not be zero.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-update-ref.txt-symref-update"> <a class="anchor" href="#Documentation/git-update-ref.txt-symref-update"></a>symref-update </dt>
@@ -186,14 +155,14 @@ exist before the update.</p>
 </div>
 <div class="paragraph">
 <p>symref-create:
-	Create symbolic ref &lt;ref&gt; with &lt;new-target&gt; after verifying
+	Create symbolic ref &lt;ref&gt; with &lt;new-target&gt; after verifying that
 	it does not exist.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1" id="Documentation/git-update-ref.txt-symref-delete"> <a class="anchor" href="#Documentation/git-update-ref.txt-symref-delete"></a>symref-delete </dt>
 <dd>
-<p>Delete &lt;ref&gt; after verifying it exists with &lt;old-target&gt;, if given.</p>
+<p>Delete &lt;ref&gt; after verifying that it exists with &lt;old-target&gt;, if given.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-update-ref.txt-symref-verify"> <a class="anchor" href="#Documentation/git-update-ref.txt-symref-verify"></a>symref-verify </dt>
 <dd>
@@ -280,6 +249,29 @@ value supplied to the -m option.</p>
 <p>An update will fail (without changing &lt;ref&gt;) if the current user is
 unable to create a new log file, append to the existing log file
 or does not have committer information available.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes"><a class="anchor" href="#_notes"></a>NOTES</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Symbolic refs were initially implemented using symbolic links.  This is
+now deprecated since not all filesystems support symbolic links.</p>
+</div>
+<div class="paragraph">
+<p>This command follows <strong>real</strong> symlinks only if they start with "refs/":
+otherwise it will just try to read them and update them as a regular
+file (i.e. it will allow the filesystem to follow them, but will
+overwrite such a symlink to somewhere else with a regular filename).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also"><a class="anchor" href="#_see_also"></a>SEE ALSO</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href='{{< relurl "docs/git-symbolic-ref" >}}'>git-symbolic-ref[1]</a></p>
 </div>
 </div>
 </div>

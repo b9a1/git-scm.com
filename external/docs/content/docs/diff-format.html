@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - diff-format Documentation
 docname: diff-format
-version: 2.43.0
-latest-changes: 2.43.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/diff-format/index.html"
 ---
@@ -15,8 +15,8 @@ aliases:
 <h2 id="_raw_output_format"><a class="anchor" href="#_raw_output_format"></a>Raw output format</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The raw output format from "git-diff-index", "git-diff-tree",
-"git-diff-files" and "git diff --raw" are very similar.</p>
+<p>The raw output format from <code>git-diff-index</code>, <code>git-diff-tree</code>,
+<code>git-diff-files</code> and <code>git diff --raw</code> are very similar.</p>
 </div>
 <div class="paragraph">
 <p>These commands all compare two sets of things; what is
@@ -24,26 +24,26 @@ compared differs:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="Documentation/diff-format.txt-git-diff-indexlttree-ishgt"> <a class="anchor" href="#Documentation/diff-format.txt-git-diff-indexlttree-ishgt"></a>git-diff-index &lt;tree-ish&gt; </dt>
+<dt class="hdlist1" id="Documentation/diff-format.txt-codegit-diff-indexlttree-ishgtcode"> <a class="anchor" href="#Documentation/diff-format.txt-codegit-diff-indexlttree-ishgtcode"></a><code>git-diff-index &lt;tree-ish&gt;</code> </dt>
 <dd>
-<p>compares the &lt;tree-ish&gt; and the files on the filesystem.</p>
+<p>compares the <em>&lt;tree-ish&gt;</em> and the files on the filesystem.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/diff-format.txt-git-diff-index--cachedlttree-ishgt"> <a class="anchor" href="#Documentation/diff-format.txt-git-diff-index--cachedlttree-ishgt"></a>git-diff-index --cached &lt;tree-ish&gt; </dt>
+<dt class="hdlist1" id="Documentation/diff-format.txt-codegit-diff-index--cachedlttree-ishgtcode"> <a class="anchor" href="#Documentation/diff-format.txt-codegit-diff-index--cachedlttree-ishgtcode"></a><code>git-diff-index --cached &lt;tree-ish&gt;</code> </dt>
 <dd>
-<p>compares the &lt;tree-ish&gt; and the index.</p>
+<p>compares the <em>&lt;tree-ish&gt;</em> and the index.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/diff-format.txt-git-diff-tree-rlttree-ish-1gtlttree-ish-2gtltpatterngt82308203"> <a class="anchor" href="#Documentation/diff-format.txt-git-diff-tree-rlttree-ish-1gtlttree-ish-2gtltpatterngt82308203"></a>git-diff-tree [-r] &lt;tree-ish-1&gt; &lt;tree-ish-2&gt; [&lt;pattern&gt;&#8230;&#8203;] </dt>
+<dt class="hdlist1" id="Documentation/diff-format.txt-codegit-diff-tree-rlttree-ish-1gtlttree-ish-2gtltpatterngtcode"> <a class="anchor" href="#Documentation/diff-format.txt-codegit-diff-tree-rlttree-ish-1gtlttree-ish-2gtltpatterngtcode"></a><code>git-diff-tree [-r] &lt;tree-ish-1&gt; &lt;tree-ish-2&gt; [&lt;pattern&gt;...]</code> </dt>
 <dd>
 <p>compares the trees named by the two arguments.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/diff-format.txt-git-diff-filesltpatterngt82308203"> <a class="anchor" href="#Documentation/diff-format.txt-git-diff-filesltpatterngt82308203"></a>git-diff-files [&lt;pattern&gt;&#8230;&#8203;] </dt>
+<dt class="hdlist1" id="Documentation/diff-format.txt-codegit-diff-filesltpatterngtcode"> <a class="anchor" href="#Documentation/diff-format.txt-codegit-diff-filesltpatterngtcode"></a><code>git-diff-files [&lt;pattern&gt;...]</code> </dt>
 <dd>
 <p>compares the index and the files on the filesystem.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>The "git-diff-tree" command begins its output by printing the hash of
+<p>The <code>git-diff-tree</code> command begins its output by printing the hash of
 what is being compared. After that, all the commands print one output
 line per changed file.</p>
 </div>
@@ -118,36 +118,36 @@ unmerged       :000000 000000 0000000 0000000 U file6</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>A: addition of a file</p>
+<p><code>A</code>: addition of a file</p>
 </li>
 <li>
-<p>C: copy of a file into a new one</p>
+<p><code>C</code>: copy of a file into a new one</p>
 </li>
 <li>
-<p>D: deletion of a file</p>
+<p><code>D</code>: deletion of a file</p>
 </li>
 <li>
-<p>M: modification of the contents or mode of a file</p>
+<p><code>M</code>: modification of the contents or mode of a file</p>
 </li>
 <li>
-<p>R: renaming of a file</p>
+<p><code>R</code>: renaming of a file</p>
 </li>
 <li>
-<p>T: change in the type of the file (regular file, symbolic link or submodule)</p>
+<p><code>T</code>: change in the type of the file (regular file, symbolic link or submodule)</p>
 </li>
 <li>
-<p>U: file is unmerged (you must complete the merge before it can
+<p><code>U</code>: file is unmerged (you must complete the merge before it can
 be committed)</p>
 </li>
 <li>
-<p>X: "unknown" change type (most probably a bug, please report it)</p>
+<p><code>X</code>: "unknown" change type (most probably a bug, please report it)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Status letters C and R are always followed by a score (denoting the
+<p>Status letters <code>C</code> and <code>R</code> are always followed by a score (denoting the
 percentage of similarity between the source and target of the move or
-copy).  Status letter M may be followed by a score (denoting the
+copy).  Status letter <code>M</code> may be followed by a score (denoting the
 percentage of dissimilarity) for file rewrites.</p>
 </div>
 <div class="paragraph">
@@ -174,7 +174,7 @@ verbatim and the line is terminated by a NUL byte.</p>
 <h2 id="_diff_format_for_merges"><a class="anchor" href="#_diff_format_for_merges"></a>diff format for merges</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>"git-diff-tree", "git-diff-files" and "git-diff --raw"
+<p><code>git-diff-tree</code>, <code>git-diff-files</code> and <code>git-diff --raw</code>
 can take <code>-c</code> or <code>--cc</code> option
 to generate diff output also for merge commits.  The output differs
 from the format described above in the following way:</p>
@@ -247,7 +247,7 @@ You can customize the creation of patch text via the
 (see <a href='{{< relurl "docs/git" >}}'>git[1]</a>), and the <code>diff</code> attribute (see <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a>).</p>
 </div>
 <div class="paragraph">
-<p>What the -p option produces is slightly different from the traditional
+<p>What the <code>-p</code> option produces is slightly different from the traditional
 diff format:</p>
 </div>
 <div class="olist arabic">
@@ -272,9 +272,8 @@ the file that the rename/copy produces, respectively.</p>
 </li>
 <li>
 <p>It is followed by one or more extended header lines:</p>
-<div class="literalblock">
-<div class="content">
-<pre>old mode &lt;mode&gt;
+<div class="paragraph">
+<p>old mode &lt;mode&gt;
 new mode &lt;mode&gt;
 deleted file mode &lt;mode&gt;
 new file mode &lt;mode&gt;
@@ -284,11 +283,10 @@ rename from &lt;path&gt;
 rename to &lt;path&gt;
 similarity index &lt;number&gt;
 dissimilarity index &lt;number&gt;
-index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</pre>
-</div>
+index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p>File modes are printed as 6-digit octal numbers including the file type
+<p>File modes <em>&lt;mode&gt;</em> are printed as 6-digit octal numbers including the file type
 and file permission bits.</p>
 </div>
 <div class="paragraph">
@@ -304,7 +302,7 @@ file made it into the new one.</p>
 </div>
 <div class="paragraph">
 <p>The index line includes the blob object names before and after the change.
-The &lt;mode&gt; is included if the file mode does not change; otherwise,
+The <em>&lt;mode&gt;</em> is included if the file mode does not change; otherwise,
 separate lines indicate the old and the new mode.</p>
 </div>
 </li>
@@ -406,20 +404,18 @@ this (when the <code>-c</code> option is used):</p>
 <li>
 <p>It is followed by one or more extended header lines
 (this example shows a merge with two parents):</p>
-<div class="literalblock">
-<div class="content">
-<pre>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
-mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;
+<div class="paragraph">
+<p>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
+mode &lt;mode&gt;,&lt;mode&gt;<code>..</code>&lt;mode&gt;
 new file mode &lt;mode&gt;
-deleted file mode &lt;mode&gt;,&lt;mode&gt;</pre>
-</div>
+deleted file mode &lt;mode&gt;,&lt;mode&gt;</p>
 </div>
 <div class="paragraph">
 <p>The <code>mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;</code> line appears only if at least one of
 the &lt;mode&gt; is different from the rest. Extended headers with
 information about detected content movement (renames and
 copying detection) are designed to work with the diff of two
-&lt;tree-ish&gt; and are not used by combined diff format.</p>
+<em>&lt;tree-ish&gt;</em> and are not used by combined diff format.</p>
 </div>
 </li>
 <li>
@@ -510,7 +506,7 @@ two unresolved merge parents with the working tree file
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>--summary</code> option describes newly added, deleted, renamed and
-copied files.  The <code>--stat</code> option adds diffstat(1) graph to the
+copied files.  The <code>--stat</code> option adds <code>diffstat</code>(1) graph to the
 output.  These options can be combined with other options, such as
 <code>-p</code>, and are meant for human consumption.</p>
 </div>

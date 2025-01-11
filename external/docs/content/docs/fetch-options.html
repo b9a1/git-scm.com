@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - fetch-options Documentation
 docname: fetch-options
-version: 2.46.2
-latest-changes: 2.46.2
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/fetch-options/index.html"
 ---
@@ -52,7 +52,7 @@ each remote branch history.</p>
 <p>Deepen or shorten the history of a shallow repository to
 include all reachable commits after &lt;date&gt;.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/fetch-options.txt---shallow-excludeltrevisiongt"> <a class="anchor" href="#Documentation/fetch-options.txt---shallow-excludeltrevisiongt"></a>--shallow-exclude=&lt;revision&gt; </dt>
+<dt class="hdlist1" id="Documentation/fetch-options.txt---shallow-excludeltrefgt"> <a class="anchor" href="#Documentation/fetch-options.txt---shallow-excludeltrefgt"></a>--shallow-exclude=&lt;ref&gt; </dt>
 <dd>
 <p>Deepen or shorten the history of a shallow repository to
 exclude commits reachable from a specified remote branch or tag.
@@ -346,7 +346,10 @@ protocol version 2.  The given string must not contain a NUL or LF
 character.  The server&#8217;s handling of server options, including
 unknown ones, is server-specific.
 When multiple <code>--server-option=&lt;option&gt;</code> are given, they are all
-sent to the other side in the order listed on the command line.</p>
+sent to the other side in the order listed on the command line.
+When no <code>--server-option=&lt;option&gt;</code> is given from the command line,
+the values of configuration variable <code>remote.&lt;name&gt;.serverOption</code>
+are used instead.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/fetch-options.txt---show-forced-updates"> <a class="anchor" href="#Documentation/fetch-options.txt---show-forced-updates"></a>--show-forced-updates </dt>
 <dd>

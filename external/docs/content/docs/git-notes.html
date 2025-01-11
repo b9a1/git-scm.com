@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-notes Documentation
 docname: git-notes
-version: 2.44.0
-latest-changes: 2.44.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-notes/index.html"
 ---
@@ -24,9 +24,9 @@ aliases:
 <div class="sectionbody">
 <div class="verseblock">
 <pre class="content"><em>git notes</em> [list [&lt;object&gt;]]
-<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [&lt;object&gt;]
+<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [-e] [&lt;object&gt;]
 <em>git notes</em> copy [-f] ( --stdin | &lt;from-object&gt; [&lt;to-object&gt;] )
-<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [&lt;object&gt;]
+<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [-e] [&lt;object&gt;]
 <em>git notes</em> edit [--allow-empty] [&lt;object&gt;] [--[no-]stripspace]
 <em>git notes</em> show [&lt;object&gt;]
 <em>git notes</em> merge [-v | -q] [-s &lt;strategy&gt; ] &lt;notes-ref&gt;
@@ -95,7 +95,9 @@ to supply the notes contents), then - instead of aborting -
 the existing notes will be opened in the editor (like the <code>edit</code>
 subcommand). If you specify multiple <code>-m</code> and <code>-F</code>, a blank
 line will be inserted between the messages. Use the <code>--separator</code>
-option to insert other delimiters.</p>
+option to insert other delimiters. You can use <code>-e</code> to edit and
+fine-tune the message(s) supplied from <code>-m</code> and <code>-F</code> options
+interactively (using an editor) before adding the note.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-notes.txt-copy"> <a class="anchor" href="#Documentation/git-notes.txt-copy"></a>copy </dt>
 <dd>
@@ -125,7 +127,9 @@ existing note, or add them as a new note if one does not
 exist, for the object (defaults to HEAD).  When appending to
 an existing note, a blank line is added before each new
 message as an inter-paragraph separator.  The separator can
-be customized with the <code>--separator</code> option.</p>
+be customized with the <code>--separator</code> option.
+Edit the notes to be appended given by <code>-m</code> and <code>-F</code> options with
+<code>-e</code> interactively (using an editor) before appending the note.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-notes.txt-edit"> <a class="anchor" href="#Documentation/git-notes.txt-edit"></a>edit </dt>
 <dd>

@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - diff-generate-patch Documentation
 docname: diff-generate-patch
-version: 2.43.0
-latest-changes: 2.43.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/diff-generate-patch/index.html"
 ---
@@ -28,7 +28,7 @@ You can customize the creation of patch text via the
 (see <a href='{{< relurl "docs/git" >}}'>git[1]</a>), and the <code>diff</code> attribute (see <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a>).</p>
 </div>
 <div class="paragraph">
-<p>What the -p option produces is slightly different from the traditional
+<p>What the <code>-p</code> option produces is slightly different from the traditional
 diff format:</p>
 </div>
 <div class="olist arabic">
@@ -53,9 +53,8 @@ the file that the rename/copy produces, respectively.</p>
 </li>
 <li>
 <p>It is followed by one or more extended header lines:</p>
-<div class="literalblock">
-<div class="content">
-<pre>old mode &lt;mode&gt;
+<div class="paragraph">
+<p>old mode &lt;mode&gt;
 new mode &lt;mode&gt;
 deleted file mode &lt;mode&gt;
 new file mode &lt;mode&gt;
@@ -65,11 +64,10 @@ rename from &lt;path&gt;
 rename to &lt;path&gt;
 similarity index &lt;number&gt;
 dissimilarity index &lt;number&gt;
-index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</pre>
-</div>
+index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p>File modes are printed as 6-digit octal numbers including the file type
+<p>File modes <em>&lt;mode&gt;</em> are printed as 6-digit octal numbers including the file type
 and file permission bits.</p>
 </div>
 <div class="paragraph">
@@ -85,7 +83,7 @@ file made it into the new one.</p>
 </div>
 <div class="paragraph">
 <p>The index line includes the blob object names before and after the change.
-The &lt;mode&gt; is included if the file mode does not change; otherwise,
+The <em>&lt;mode&gt;</em> is included if the file mode does not change; otherwise,
 separate lines indicate the old and the new mode.</p>
 </div>
 </li>
@@ -187,20 +185,18 @@ this (when the <code>-c</code> option is used):</p>
 <li>
 <p>It is followed by one or more extended header lines
 (this example shows a merge with two parents):</p>
-<div class="literalblock">
-<div class="content">
-<pre>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
-mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;
+<div class="paragraph">
+<p>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
+mode &lt;mode&gt;,&lt;mode&gt;<code>..</code>&lt;mode&gt;
 new file mode &lt;mode&gt;
-deleted file mode &lt;mode&gt;,&lt;mode&gt;</pre>
-</div>
+deleted file mode &lt;mode&gt;,&lt;mode&gt;</p>
 </div>
 <div class="paragraph">
 <p>The <code>mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;</code> line appears only if at least one of
 the &lt;mode&gt; is different from the rest. Extended headers with
 information about detected content movement (renames and
 copying detection) are designed to work with the diff of two
-&lt;tree-ish&gt; and are not used by combined diff format.</p>
+<em>&lt;tree-ish&gt;</em> and are not used by combined diff format.</p>
 </div>
 </li>
 <li>

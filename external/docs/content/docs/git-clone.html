@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-clone Documentation
 docname: git-clone
-version: 2.47.0
-latest-changes: 2.47.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-clone/index.html"
 ---
@@ -22,16 +22,16 @@ aliases:
 <div class="sect1">
 <h2 id="_synopsis"><a class="anchor" href="#_synopsis"></a>SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="verseblock">
-<pre class="content"><code>git clone</code> [<code>--template=</code><em>&lt;template-directory&gt;</em>]
-	  [<code>-l</code>] [<code>-s</code>] [<code>--no-hardlinks</code>] [<code>-q</code>] [<code>-n</code>] [<code>--bare</code>] [<code>--mirror</code>]
-	  [<code>-o</code> <em>&lt;name&gt;</em>] [<code>-b</code> <em>&lt;name&gt;</em>] [<code>-u</code> <em>&lt;upload-pack&gt;</em>] [<code>--reference</code> <em>&lt;repository&gt;</em>]
-	  [<code>--dissociate</code>] [<code>--separate-git-dir</code> <em>&lt;git-dir&gt;</em>]
-	  [<code>--depth</code> <em>&lt;depth&gt;</em>] [<code>--</code>[<code>no-</code>]<code>single-branch</code>] [<code>--no-tags</code>]
-	  [<code>--recurse-submodules</code>[<code>=</code><em>&lt;pathspec&gt;</em>]] [<code>--</code>[<code>no-</code>]<code>shallow-submodules</code>]
-	  [<code>--</code>[<code>no-</code>]<code>remote-submodules</code>] [<code>--jobs</code> <em>&lt;n&gt;</em>] [<code>--sparse</code>] [<code>--</code>[<code>no-</code>]<code>reject-shallow</code>]
-	  [<code>--filter=</code><em>&lt;filter-spec&gt;</em>] [<code>--also-filter-submodules</code>]] [<code>--</code>] <em>&lt;repository&gt;</em>
-	  [<em>&lt;directory&gt;</em>]</pre>
+<div class="paragraph">
+<p>git clone [--template=&lt;template-directory&gt;]
+	  [-l] [-s] [--no-hardlinks] [-q] [-n] [--bare] [--mirror]
+	  [-o &lt;name&gt;] [-b &lt;name&gt;] [-u &lt;upload-pack&gt;] [--reference &lt;repository&gt;]
+	  [--dissociate] [--separate-git-dir &lt;git-dir&gt;]
+	  [--depth &lt;depth&gt;] [--[no-]single-branch] [--no-tags]
+	  [--recurse-submodules[=&lt;pathspec&gt;]] [--[no-]shallow-submodules]
+	  [--[no-]remote-submodules] [--jobs &lt;n&gt;] [--sparse] [--[no-]reject-shallow]
+	  [--filter=&lt;filter-spec&gt;] [--also-filter-submodules]] [--] &lt;repository&gt;
+	  [&lt;directory&gt;]</p>
 </div>
 </div>
 </div>
@@ -76,7 +76,7 @@ The files under <code>.git/objects/</code> directory are hardlinked
 to save space when possible.</p>
 <div class="paragraph">
 <p>If the repository is specified as a local path (e.g., <code>/path/to/repo</code>),
-this is the default, and --local is essentially a no-op.  If the
+this is the default, and <code>--local</code> is essentially a no-op.  If the
 repository is specified as a URL, then this flag is ignored (and we
 never use the local optimizations).  Specifying <code>--no-local</code> will
 override the default when <code>/path/to/repo</code> is given, using the regular
@@ -89,9 +89,13 @@ prevent the unintentional copying of files by dereferencing the symbolic
 links.</p>
 </div>
 <div class="paragraph">
+<p>This option does not work with repositories owned by other users for security
+reasons, and <code>--no-local</code> must be specified for the clone to succeed.</p>
+</div>
+<div class="paragraph">
 <p><strong>NOTE</strong>: this operation can race with concurrent modification to the
-source repository, similar to running <code>cp -r src dst</code> while modifying
-<code>src</code>.</p>
+source repository, similar to running <code>cp -r &lt;src&gt; &lt;dst&gt;</code> while modifying
+<em>&lt;src&gt;</em>.</p>
 </div>
 </dd>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code--no-hardlinkscode"> <a class="anchor" href="#Documentation/git-clone.txt-code--no-hardlinkscode"></a><code>--no-hardlinks</code> </dt>
@@ -133,7 +137,7 @@ its source repository, you can simply run <code>git repack -a</code> to copy all
 objects from the source repository into a pack in the cloned repository.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--referencecodecode-if-ablecodeemltrepositorygtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--referencecodecode-if-ablecodeemltrepositorygtem"></a><code>--reference</code>[<code>-if-able</code>] <em>&lt;repository&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--reference-if-ableltrepositorygtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--reference-if-ableltrepositorygtcode"></a><code>--reference[-if-able] &lt;repository&gt;</code> </dt>
 <dd>
 <p>If the reference <em>&lt;repository&gt;</em> is on the local machine,
 automatically setup <code>.git/objects/info/alternates</code> to
@@ -180,19 +184,22 @@ by default when it is attached to a terminal, unless <code>--quiet</code>
 is specified. This flag forces progress status even if the
 standard error stream is not directed to a terminal.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--server-optioncodeemltoptiongtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--server-optioncodeemltoptiongtem"></a><code>--server-option=</code><em>&lt;option&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--server-optionltoptiongtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--server-optionltoptiongtcode"></a><code>--server-option=&lt;option&gt;</code> </dt>
 <dd>
 <p>Transmit the given string to the server when communicating using
 protocol version 2.  The given string must not contain a NUL or LF
 character.  The server&#8217;s handling of server options, including
 unknown ones, is server-specific.
-When multiple <code>--server-option=</code><em>&lt;option&gt;</em> are given, they are all
-sent to the other side in the order listed on the command line.</p>
+When multiple <code>--server-option=&lt;option&gt;</code> are given, they are all
+sent to the other side in the order listed on the command line.
+When no <code>--server-option=</code><em>&lt;option&gt;</em> is given from the command
+line, the values of configuration variable <code>remote.&lt;name&gt;.serverOption</code>
+are used instead.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code-ncode"> <a class="anchor" href="#Documentation/git-clone.txt-code-ncode"></a><code>-n</code> </dt>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code--no-checkoutcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--no-checkoutcode"></a><code>--no-checkout</code> </dt>
 <dd>
-<p>No checkout of HEAD is performed after the clone is complete.</p>
+<p>No checkout of <code>HEAD</code> is performed after the clone is complete.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code--codecodeno-codecodereject-shallowcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--codecodeno-codecodereject-shallowcode"></a><code>--</code>[<code>no-</code>]<code>reject-shallow</code> </dt>
 <dd>
@@ -204,7 +211,7 @@ specify the default.</p>
 <dd>
 <p>Make a <em>bare</em> Git repository.  That is, instead of
 creating <em>&lt;directory&gt;</em> and placing the administrative
-files in <em>&lt;directory&gt;</em>`/.git`, make the <em>&lt;directory&gt;</em>
+files in <code>&lt;directory&gt;/.git</code>, make the <em>&lt;directory&gt;</em>
 itself the <code>$GIT_DIR</code>. This obviously implies the <code>--no-checkout</code>
 because there is nowhere to check out the working tree.
 Also the branch heads at the remote are copied directly
@@ -220,14 +227,14 @@ directory initially being present.  The
 <a href='{{< relurl "docs/git-sparse-checkout" >}}'>git-sparse-checkout[1]</a> command can be used to grow the
 working directory as needed.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--filtercodeemltfilter-specgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--filtercodeemltfilter-specgtem"></a><code>--filter=</code><em>&lt;filter-spec&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--filterltfilter-specgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--filterltfilter-specgtcode"></a><code>--filter=&lt;filter-spec&gt;</code> </dt>
 <dd>
 <p>Use the partial clone feature and request that the server sends
 a subset of reachable objects according to a given object filter.
 When using <code>--filter</code>, the supplied <em>&lt;filter-spec&gt;</em> is used for
 the partial clone filter. For example, <code>--filter=blob:none</code> will
 filter out all blobs (file contents) until needed by Git. Also,
-<code>--filter=blob:limit=</code><em>&lt;size&gt;</em> will filter out all blobs of size
+<code>--filter=blob:limit=&lt;size&gt;</code> will filter out all blobs of size
 at least <em>&lt;size&gt;</em>. For more details on filter specifications, see
 the <code>--filter</code> option in <a href='{{< relurl "docs/git-rev-list" >}}'>git-rev-list[1]</a>.</p>
 </dd>
@@ -256,11 +263,11 @@ config.</p>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code-bcodeemltnamegtem"> <a class="anchor" href="#Documentation/git-clone.txt-code-bcodeemltnamegtem"></a><code>-b</code> <em>&lt;name&gt;</em> </dt>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code--branchcodeemltnamegtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--branchcodeemltnamegtem"></a><code>--branch</code> <em>&lt;name&gt;</em> </dt>
 <dd>
-<p>Instead of pointing the newly created HEAD to the branch pointed
-to by the cloned repository&#8217;s HEAD, point to <em>&lt;name&gt;</em> branch
+<p>Instead of pointing the newly created <code>HEAD</code> to the branch pointed
+to by the cloned repository&#8217;s <code>HEAD</code>, point to <em>&lt;name&gt;</em> branch
 instead. In a non-bare repository, this is the branch that will
 be checked out.
-<code>--branch</code> can also take tags and detaches the HEAD at that commit
+<code>--branch</code> can also take tags and detaches the <code>HEAD</code> at that commit
 in the resulting repository.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-clone.txt-code-ucodeemltupload-packgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code-ucodeemltupload-packgtem"></a><code>-u</code> <em>&lt;upload-pack&gt;</em> </dt>
@@ -270,13 +277,13 @@ in the resulting repository.</p>
 via ssh, this specifies a non-default path for the command
 run on the other end.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--templatecodeemlttemplate-directorygtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--templatecodeemlttemplate-directorygtem"></a><code>--template=</code><em>&lt;template-directory&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--templatelttemplate-directorygtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--templatelttemplate-directorygtcode"></a><code>--template=&lt;template-directory&gt;</code> </dt>
 <dd>
 <p>Specify the directory from which templates will be used;
 (See the "TEMPLATE DIRECTORY" section of <a href='{{< relurl "docs/git-init" >}}'>git-init[1]</a>.)</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code-ccodeemltkeygtemcodecodeemltvaluegtem"> <a class="anchor" href="#Documentation/git-clone.txt-code-ccodeemltkeygtemcodecodeemltvaluegtem"></a><code>-c</code> <em>&lt;key&gt;</em><code>=</code><em>&lt;value&gt;</em> </dt>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--configcodeemltkeygtemcodecodeemltvaluegtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--configcodeemltkeygtemcodecodeemltvaluegtem"></a><code>--config</code> <em>&lt;key&gt;</em><code>=</code><em>&lt;value&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code-ccodecodeltkeygtltvaluegtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code-ccodecodeltkeygtltvaluegtcode"></a><code>-c</code> <code>&lt;key&gt;=&lt;value&gt;</code> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--configcodecodeltkeygtltvaluegtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--configcodecodeltkeygtltvaluegtcode"></a><code>--config</code> <code>&lt;key&gt;=&lt;value&gt;</code> </dt>
 <dd>
 <p>Set a configuration variable in the newly-created repository;
 this takes effect immediately after the repository is
@@ -290,11 +297,11 @@ additional fetch refspecs to the origin remote.</p>
 <p>Due to limitations of the current implementation, some configuration
 variables do not take effect until after the initial fetch and checkout.
 Configuration variables known to not take effect are:
-<code>remote.</code><em>&lt;name&gt;</em><code>.mirror</code> and <code>remote.</code><em>&lt;name&gt;</em><code>.tagOpt</code>.  Use the
+<code>remote.&lt;name&gt;.mirror</code> and <code>remote.&lt;name&gt;.tagOpt</code>.  Use the
 corresponding <code>--mirror</code> and <code>--no-tags</code> options instead.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--depthcodeemltdepthgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--depthcodeemltdepthgtem"></a><code>--depth</code> <em>&lt;depth&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--depthltdepthgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--depthltdepthgtcode"></a><code>--depth &lt;depth&gt;</code> </dt>
 <dd>
 <p>Create a <em>shallow</em> clone with a history truncated to the
 specified number of commits. Implies <code>--single-branch</code> unless
@@ -302,17 +309,17 @@ specified number of commits. Implies <code>--single-branch</code> unless
 tips of all branches. If you want to clone submodules shallowly,
 also pass <code>--shallow-submodules</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--shallow-sincecodeemltdategtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--shallow-sincecodeemltdategtem"></a><code>--shallow-since=</code><em>&lt;date&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--shallow-sinceltdategtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--shallow-sinceltdategtcode"></a><code>--shallow-since=&lt;date&gt;</code> </dt>
 <dd>
 <p>Create a shallow clone with a history after the specified time.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--shallow-excludecodeemltrevisiongtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--shallow-excludecodeemltrevisiongtem"></a><code>--shallow-exclude=</code><em>&lt;revision&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--shallow-excludeltrefgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--shallow-excludeltrefgtcode"></a><code>--shallow-exclude=&lt;ref&gt;</code> </dt>
 <dd>
 <p>Create a shallow clone with a history, excluding commits
 reachable from a specified remote branch or tag.  This option
 can be specified multiple times.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--codecodeno-codecodesingle-branchcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--codecodeno-codecodesingle-branchcode"></a><code>--</code>[<code>no-</code>]<code>single-branch</code> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--no-single-branchcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--no-single-branchcode"></a><code>--[no-]single-branch</code> </dt>
 <dd>
 <p>Clone only the history leading to the tip of a single branch,
 either specified by the <code>--branch</code> option or the primary
@@ -337,14 +344,14 @@ branch. This is useful e.g. to maintain minimal clones of the default
 branch of some repository for search indexing.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--recurse-submodulescodecodecodeemltpathspecgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--recurse-submodulescodecodecodeemltpathspecgtem"></a><code>--recurse-submodules</code>[<code>=</code><em>&lt;pathspec&gt;</em>] </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--recurse-submodulesltpathspecgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--recurse-submodulesltpathspecgtcode"></a><code>--recurse-submodules[=&lt;pathspec&gt;]</code> </dt>
 <dd>
 <p>After the clone is created, initialize and clone submodules
-within based on the provided <em>&lt;pathspec&gt;</em>.  If no <em>=&lt;pathspec&gt;</em> is
+within based on the provided <em>&lt;pathspec&gt;</em>.  If no <code>=&lt;pathspec&gt;</code> is
 provided, all submodules are initialized and cloned.
 This option can be given multiple times for pathspecs consisting
 of multiple entries.  The resulting clone has <code>submodule.active</code> set to
-the provided pathspec, or "." (meaning all submodules) if no
+the provided pathspec, or "<code>.</code>" (meaning all submodules) if no
 pathspec is provided.</p>
 <div class="paragraph">
 <p>Submodules are initialized and cloned using their default settings. This is
@@ -355,18 +362,18 @@ not have a worktree/checkout (i.e. if any of <code>--no-checkout</code>/<code>-n
 or <code>--mirror</code> is given)</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--codecodeno-codecodeshallow-submodulescode"> <a class="anchor" href="#Documentation/git-clone.txt-code--codecodeno-codecodeshallow-submodulescode"></a><code>--</code>[<code>no-</code>]<code>shallow-submodules</code> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--no-shallow-submodulescode"> <a class="anchor" href="#Documentation/git-clone.txt-code--no-shallow-submodulescode"></a><code>--[no-]shallow-submodules</code> </dt>
 <dd>
 <p>All submodules which are cloned will be shallow with a depth of 1.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--codecodeno-codecoderemote-submodulescode"> <a class="anchor" href="#Documentation/git-clone.txt-code--codecodeno-codecoderemote-submodulescode"></a><code>--</code>[<code>no-</code>]<code>remote-submodules</code> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--no-remote-submodulescode"> <a class="anchor" href="#Documentation/git-clone.txt-code--no-remote-submodulescode"></a><code>--[no-]remote-submodules</code> </dt>
 <dd>
 <p>All submodules which are cloned will use the status of the submodule&#8217;s
 remote-tracking branch to update the submodule, rather than the
 superproject&#8217;s recorded SHA-1. Equivalent to passing <code>--remote</code> to
 <code>git submodule update</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--separate-git-dircodeemltgit-dirgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--separate-git-dircodeemltgit-dirgtem"></a><code>--separate-git-dir=</code><em>&lt;git-dir&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--separate-git-dirltgit-dirgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--separate-git-dirltgit-dirgtcode"></a><code>--separate-git-dir=&lt;git-dir&gt;</code> </dt>
 <dd>
 <p>Instead of placing the cloned repository where it is supposed
 to be, place the cloned repository at the specified directory,
@@ -374,7 +381,7 @@ then make a filesystem-agnostic Git symbolic link to there.
 The result is Git repository can be separated from working
 tree.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--ref-formatcodeemltref-formatgtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--ref-formatcodeemltref-formatgtem"></a><code>--ref-format=</code><em>&lt;ref-format&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--ref-formatltref-formatgtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--ref-formatltref-formatgtcode"></a><code>--ref-format=&lt;ref-format&gt;</code> </dt>
 <dd>
 <p>Specify the given ref storage format for the repository. The valid values are:</p>
 <div class="ulist">
@@ -409,7 +416,7 @@ explicitly given (<code>repo</code> for <code>/path/to/repo.git</code> and <code
 for <code>host.xz:foo/.git</code>).  Cloning into an existing directory
 is only allowed if the directory is empty.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-clone.txt-code--bundle-uricodeemlturigtem"> <a class="anchor" href="#Documentation/git-clone.txt-code--bundle-uricodeemlturigtem"></a><code>--bundle-uri=</code><em>&lt;uri&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-clone.txt-code--bundle-urilturigtcode"> <a class="anchor" href="#Documentation/git-clone.txt-code--bundle-urilturigtcode"></a><code>--bundle-uri=&lt;uri&gt;</code> </dt>
 <dd>
 <p>Before fetching from the remote, fetch a bundle from the given
 <em>&lt;uri&gt;</em> and unbundle the data into the local repository. The refs
@@ -436,7 +443,7 @@ and ftps can be used for fetching, but this is inefficient and
 deprecated; do not use them).</p>
 </div>
 <div class="paragraph">
-<p>The native transport (i.e. git:// URL) does no authentication and
+<p>The native transport (i.e. <code>git://</code> URL) does no authentication and
 should be used with caution on unsecured networks.</p>
 </div>
 <div class="paragraph">
@@ -445,16 +452,16 @@ should be used with caution on unsecured networks.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ssh://[&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;host&gt;</em>[:<em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>git://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>http</code>[<code>s</code>]<code>://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>http[s]://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>ftp</code>[<code>s</code>]<code>://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ftp[s]://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -464,7 +471,7 @@ should be used with caution on unsecured networks.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em><code>:/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>[&lt;user&gt;@]&lt;host&gt;:/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -476,18 +483,18 @@ absolute path or <code>./foo:bar</code> to avoid being misinterpreted as an ssh
 url.</p>
 </div>
 <div class="paragraph">
-<p>The ssh and git protocols additionally support <code>~</code><em>&lt;username&gt;</em> expansion:</p>
+<p>The ssh and git protocols additionally support <code>~&lt;username&gt;</code> expansion:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ssh://[&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;]/~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>git://&lt;host&gt;[:&lt;port&gt;]/~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em><code>:~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>[&lt;user&gt;@]&lt;host&gt;:~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -501,7 +508,7 @@ syntaxes may be used:</p>
 <p><code>/path/to/repo.git/</code></p>
 </li>
 <li>
-<p><code><a href="file:///path/to/repo.git/" class="bare">file:///path/to/repo.git/</a></code></p>
+<p><code>file:///path/to/repo.git/</code></p>
 </li>
 </ul>
 </div>
@@ -515,14 +522,14 @@ accept a suitable bundle file. See <a href='{{< relurl "docs/git-bundle" >}}'>gi
 </div>
 <div class="paragraph">
 <p>When Git doesn&#8217;t know how to handle a certain transport protocol, it
-attempts to use the <code>remote-</code><em>&lt;transport&gt;</em> remote helper, if one
+attempts to use the <code>remote-&lt;transport&gt;</code> remote helper, if one
 exists. To explicitly request a remote helper, the following syntax
 may be used:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>&lt;transport&gt;</em>::<em>&lt;address&gt;</em></p>
+<p><code>&lt;transport&gt;::&lt;address&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -620,6 +627,14 @@ $ cd my-linux</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ git clone --bare -l /home/proj/.git /pub/scm/proj.git</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Clone a local repository from a different user:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone --no-local /home/otheruser/proj.git /pub/scm/proj.git</pre>
 </div>
 </div>
 </li>

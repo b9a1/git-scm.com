@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - hash-function-transition Documentation
 docname: hash-function-transition
-version: 2.40.0
-latest-changes: 2.40.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/hash-function-transition/index.html"
 ---
@@ -268,8 +268,8 @@ aware of the hash function the client is using.</p>
 <h3 id="_repository_format_extension"><a class="anchor" href="#_repository_format_extension"></a>Repository format extension</h3>
 <div class="paragraph">
 <p>A SHA-256 repository uses repository format version <code>1</code> (see
-Documentation/technical/repository-version.txt) with extensions
-<code>objectFormat</code> and <code>compatObjectFormat</code>:</p>
+<a href='{{< relurl "docs/gitrepository-layout" >}}'>gitrepository-layout[5]</a>) with <code>extensions.objectFormat</code> and
+<code>extensions.compatObjectFormat</code> (see <a href='{{< relurl "docs/git-config" >}}'>git-config[1]</a>) set to:</p>
 </div>
 <div class="literalblock">
 <div class="content">

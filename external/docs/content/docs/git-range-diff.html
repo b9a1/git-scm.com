@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-range-diff Documentation
 docname: git-range-diff
-version: 2.43.0
-latest-changes: 2.43.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-range-diff/index.html"
 ---
@@ -25,7 +25,8 @@ aliases:
 <div class="verseblock">
 <pre class="content"><em>git range-diff</em> [--color=[&lt;when&gt;]] [--no-color] [&lt;diff-options&gt;]
 	[--no-dual-color] [--creation-factor=&lt;factor&gt;]
-	[--left-only | --right-only]
+	[--left-only | --right-only] [--diff-merges=&lt;format&gt;]
+	[--remerge-diff]
 	( &lt;range1&gt; &lt;range2&gt; | &lt;rev1&gt;&#8230;&#8203;&lt;rev2&gt; | &lt;base&gt; &lt;rev1&gt; &lt;rev2&gt; )
 	[[--] &lt;path&gt;&#8230;&#8203;]</pre>
 </div>
@@ -120,6 +121,23 @@ needed.</p>
 <dd>
 <p>Suppress commits that are missing from the second specified range
 (or the "right range" when using the <code>&lt;rev1&gt;...&lt;rev2&gt;</code> format).</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-range-diff.txt---diff-mergesltformatgt"> <a class="anchor" href="#Documentation/git-range-diff.txt---diff-mergesltformatgt"></a>--diff-merges=&lt;format&gt; </dt>
+<dd>
+<p>Instead of ignoring merge commits, generate diffs for them using the
+corresponding <code>--diff-merges=&lt;format&gt;</code> option of <a href='{{< relurl "docs/git-log" >}}'>git-log[1]</a>,
+and include them in the comparison.</p>
+<div class="paragraph">
+<p>Note: In the common case, the <code>remerge</code> mode will be the most natural one
+to use, as it shows only the diff on top of what Git&#8217;s merge machinery would
+have produced. In other words, if a merge commit is the result of a
+non-conflicting <code>git merge</code>, the <code>remerge</code> mode will represent it with an empty
+diff.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="Documentation/git-range-diff.txt---remerge-diff"> <a class="anchor" href="#Documentation/git-range-diff.txt---remerge-diff"></a>--remerge-diff </dt>
+<dd>
+<p>Convenience option, equivalent to <code>--diff-merges=remerge</code>.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-range-diff.txt---no-notesltrefgt"> <a class="anchor" href="#Documentation/git-range-diff.txt---no-notesltrefgt"></a>--[no-]notes[=&lt;ref&gt;] </dt>
 <dd>

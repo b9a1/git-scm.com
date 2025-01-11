@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-push Documentation
 docname: git-push
-version: 2.45.0
-latest-changes: 2.45.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-push/index.html"
 ---
@@ -554,7 +554,7 @@ and ftps can be used for fetching, but this is inefficient and
 deprecated; do not use them).</p>
 </div>
 <div class="paragraph">
-<p>The native transport (i.e. git:// URL) does no authentication and
+<p>The native transport (i.e. <code>git://</code> URL) does no authentication and
 should be used with caution on unsecured networks.</p>
 </div>
 <div class="paragraph">
@@ -563,16 +563,16 @@ should be used with caution on unsecured networks.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ssh://[&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;host&gt;</em>[:<em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>git://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>http</code>[<code>s</code>]<code>://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>http[s]://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>ftp</code>[<code>s</code>]<code>://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ftp[s]://&lt;host&gt;[:&lt;port&gt;]/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -582,7 +582,7 @@ should be used with caution on unsecured networks.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em><code>:/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>[&lt;user&gt;@]&lt;host&gt;:/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -594,18 +594,18 @@ absolute path or <code>./foo:bar</code> to avoid being misinterpreted as an ssh
 url.</p>
 </div>
 <div class="paragraph">
-<p>The ssh and git protocols additionally support <code>~</code><em>&lt;username&gt;</em> expansion:</p>
+<p>The ssh and git protocols additionally support <code>~&lt;username&gt;</code> expansion:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>ssh://[&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;]/~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;host&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>git://&lt;host&gt;[:&lt;port&gt;]/~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 <li>
-<p>[<em>&lt;user&gt;</em><code>@</code>]<em>&lt;host&gt;</em><code>:~</code><em>&lt;user&gt;</em><code>/</code><em>&lt;path-to-git-repo&gt;</em></p>
+<p><code>[&lt;user&gt;@]&lt;host&gt;:~&lt;user&gt;/&lt;path-to-git-repo&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -619,7 +619,7 @@ syntaxes may be used:</p>
 <p><code>/path/to/repo.git/</code></p>
 </li>
 <li>
-<p><code><a href="file:///path/to/repo.git/" class="bare">file:///path/to/repo.git/</a></code></p>
+<p><code>file:///path/to/repo.git/</code></p>
 </li>
 </ul>
 </div>
@@ -634,14 +634,14 @@ accept a suitable bundle file. See <a href='{{< relurl "docs/git-bundle" >}}'>gi
 </div>
 <div class="paragraph">
 <p>When Git doesn&#8217;t know how to handle a certain transport protocol, it
-attempts to use the <code>remote-</code><em>&lt;transport&gt;</em> remote helper, if one
+attempts to use the <code>remote-&lt;transport&gt;</code> remote helper, if one
 exists. To explicitly request a remote helper, the following syntax
 may be used:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>&lt;transport&gt;</em>::<em>&lt;address&gt;</em></p>
+<p><code>&lt;transport&gt;::&lt;address&gt;</code></p>
 </li>
 </ul>
 </div>

@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-init Documentation
 docname: git-init
-version: 2.47.0
-latest-changes: 2.47.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-init/index.html"
 ---
@@ -22,12 +22,12 @@ aliases:
 <div class="sect1">
 <h2 id="_synopsis"><a class="anchor" href="#_synopsis"></a>SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="verseblock">
-<pre class="content"><code>git init</code> [<code>-q</code> | <code>--quiet</code>] [<code>--bare</code>] [<code>--template=</code><em>&lt;template-directory&gt;</em>]
-	  [<code>--separate-git-dir</code> <em>&lt;git-dir&gt;</em>] [<code>--object-format=</code><em>&lt;format&gt;</em>]
-	  [<code>--ref-format=</code><em>&lt;format&gt;</em>]
-	  [<code>-b</code> <em>&lt;branch-name&gt;</em> | <code>--initial-branch=</code><em>&lt;branch-name&gt;</em>]
-	  [<code>--shared</code>[<code>=</code><em>&lt;permissions&gt;</em>]] [<em>&lt;directory&gt;</em>]</pre>
+<div class="paragraph">
+<p>git init [-q | --quiet] [--bare] [--template=&lt;template-directory&gt;]
+	 [--separate-git-dir &lt;git-dir&gt;] [--object-format=&lt;format&gt;]
+	 [--ref-format=&lt;format&gt;]
+	 [-b &lt;branch-name&gt; | --initial-branch=&lt;branch-name&gt;]
+	 [--shared[=&lt;permissions&gt;]] [&lt;directory&gt;]</p>
 </div>
 </div>
 </div>
@@ -42,12 +42,12 @@ commits will be created (see the <code>--initial-branch</code> option below
 for its name).</p>
 </div>
 <div class="paragraph">
-<p>If the <code>$GIT_DIR</code> environment variable is set then it specifies a path
+<p>If the <code>GIT_DIR</code> environment variable is set then it specifies a path
 to use instead of <code>./.git</code> for the base of the repository.</p>
 </div>
 <div class="paragraph">
 <p>If the object storage directory is specified via the
-<code>$GIT_OBJECT_DIRECTORY</code> environment variable then the sha1 directories
+<code>GIT_OBJECT_DIRECTORY</code> environment variable then the sha1 directories
 are created underneath; otherwise, the default <code>$GIT_DIR/objects</code>
 directory is used.</p>
 </div>
@@ -74,7 +74,7 @@ the repository to another place if <code>--separate-git-dir</code> is given).</p
 <p>Create a bare repository. If <code>GIT_DIR</code> environment is not set, it is set to the
 current working directory.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--object-formatcodeemltformatgtem"> <a class="anchor" href="#Documentation/git-init.txt-code--object-formatcodeemltformatgtem"></a><code>--object-format=</code><em>&lt;format&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--object-formatltformatgtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--object-formatltformatgtcode"></a><code>--object-format=&lt;format&gt;</code> </dt>
 <dd>
 <p>Specify the given object <em>&lt;format&gt;</em> (hash algorithm) for the repository.  The valid
 values are <code>sha1</code> and (if enabled) <code>sha256</code>.  <code>sha1</code> is the default.</p>
@@ -95,7 +95,7 @@ without data loss.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--ref-formatcodeemltformatgtem"> <a class="anchor" href="#Documentation/git-init.txt-code--ref-formatcodeemltformatgtem"></a><code>--ref-format=</code><em>&lt;format&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--ref-formatltformatgtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--ref-formatltformatgtcode"></a><code>--ref-format=&lt;format&gt;</code> </dt>
 <dd>
 <p>Specify the given ref storage <em>&lt;format&gt;</em> for the repository. The valid values are:</p>
 <div class="ulist">
@@ -110,12 +110,12 @@ internals are subject to change.</p>
 </ul>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--templatecodeemlttemplate-directorygtem"> <a class="anchor" href="#Documentation/git-init.txt-code--templatecodeemlttemplate-directorygtem"></a><code>--template=</code><em>&lt;template-directory&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--templatelttemplate-directorygtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--templatelttemplate-directorygtcode"></a><code>--template=&lt;template-directory&gt;</code> </dt>
 <dd>
 <p>Specify the directory from which templates will be used.  (See the "TEMPLATE
 DIRECTORY" section below.)</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--separate-git-dircodeemltgit-dirgtem"> <a class="anchor" href="#Documentation/git-init.txt-code--separate-git-dircodeemltgit-dirgtem"></a><code>--separate-git-dir=</code><em>&lt;git-dir&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--separate-git-dirltgit-dirgtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--separate-git-dirltgit-dirgtcode"></a><code>--separate-git-dir=&lt;git-dir&gt;</code> </dt>
 <dd>
 <p>Instead of initializing the repository as a directory to either <code>$GIT_DIR</code> or
 <code>./.git/</code>, create a text file there containing the path to the actual
@@ -125,15 +125,15 @@ repository.</p>
 <p>If this is a reinitialization, the repository will be moved to the specified path.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-init.txt-code-bcodeemltbranch-namegtem"> <a class="anchor" href="#Documentation/git-init.txt-code-bcodeemltbranch-namegtem"></a><code>-b</code> <em>&lt;branch-name&gt;</em> </dt>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--initial-branchcodeemltbranch-namegtem"> <a class="anchor" href="#Documentation/git-init.txt-code--initial-branchcodeemltbranch-namegtem"></a><code>--initial-branch=</code><em>&lt;branch-name&gt;</em> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code-bltbranch-namegtcode"> <a class="anchor" href="#Documentation/git-init.txt-code-bltbranch-namegtcode"></a><code>-b &lt;branch-name&gt;</code> </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--initial-branchltbranch-namegtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--initial-branchltbranch-namegtcode"></a><code>--initial-branch=&lt;branch-name&gt;</code> </dt>
 <dd>
 <p>Use <em>&lt;branch-name&gt;</em> for the initial branch in the newly created
 repository.  If not specified, fall back to the default name (currently
 <code>master</code>, but this is subject to change in the future; the name can be
 customized via the <code>init.defaultBranch</code> configuration variable).</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-init.txt-code--sharedcodecodecodecodefalsecodecodetruecodecodeumaskcodecodegroupcodecodeallcodecodeworldcodecodeeverybodycodeemltpermgtem"> <a class="anchor" href="#Documentation/git-init.txt-code--sharedcodecodecodecodefalsecodecodetruecodecodeumaskcodecodegroupcodecodeallcodecodeworldcodecodeeverybodycodeemltpermgtem"></a><code>--shared</code>[<code>=</code>(<code>false</code>|<code>true</code>|<code>umask</code>|<code>group</code>|<code>all</code>|<code>world</code>|<code>everybody</code>|<em>&lt;perm&gt;</em>)] </dt>
+<dt class="hdlist1" id="Documentation/git-init.txt-code--sharedfalsetrueumaskgroupallworldeverybodyltpermgtcode"> <a class="anchor" href="#Documentation/git-init.txt-code--sharedfalsetrueumaskgroupallworldeverybodyltpermgtcode"></a><code>--shared[=(false|true|umask|group|all|world|everybody|&lt;perm&gt;)]</code> </dt>
 <dd>
 <p>Specify that the Git repository is to be shared amongst several users.  This
 allows users belonging to the same group to push into that

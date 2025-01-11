@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-bundle Documentation
 docname: git-bundle
-version: 2.41.0
-latest-changes: 2.41.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-bundle/index.html"
 ---
@@ -41,8 +41,9 @@ sitting on the other side of the network connection.</p>
 </div>
 <div class="paragraph">
 <p>They can be used to create both incremental and full backups of a
-repository, and to relay the state of the references in one repository
-to another.</p>
+repository (see the "full backup" example in "EXAMPLES"), and to relay
+the state of the references in one repository to another (see the second
+example).</p>
 </div>
 <div class="paragraph">
 <p>Git commands that fetch or otherwise "read" via protocols such as
@@ -50,11 +51,8 @@ to another.</p>
 possible <a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a> a new repository from a bundle, to use
 <a href='{{< relurl "docs/git-fetch" >}}'>git-fetch[1]</a> to fetch from one, and to list the references
 contained within it with <a href='{{< relurl "docs/git-ls-remote" >}}'>git-ls-remote[1]</a>. There&#8217;s no
-corresponding "write" support, i.e.a <em>git push</em> into a bundle is not
+corresponding "write" support, i.e. a <em>git push</em> into a bundle is not
 supported.</p>
-</div>
-<div class="paragraph">
-<p>See the "EXAMPLES" section below for examples of how to use bundles.</p>
 </div>
 </div>
 </div>
@@ -176,7 +174,7 @@ on the standard error stream.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Revisions must be accompanied by reference names to be packaged in a
-bundle.</p>
+bundle.  Alternatively <code>--all</code> can be used to package all refs.</p>
 </div>
 <div class="paragraph">
 <p>More than one reference may be packaged, and more than one set of prerequisite objects can
@@ -265,9 +263,7 @@ to contain objects already in the destination, as these are ignored
 when unpacking at the destination.</p>
 </div>
 <div class="paragraph">
-<p>If you want to match <code>git clone --mirror</code>, which would include your
-refs such as <code>refs/remotes/*</code>, use <code>--all</code>.
-If you want to provide the same set of refs that a clone directly
+<p>If you want to provide the same set of refs that a clone directly
 from the source repository would get, use <code>--branches --tags</code> for
 the <code>&lt;git-rev-list-args&gt;</code>.</p>
 </div>
@@ -282,8 +278,47 @@ bundle.</p>
 <h2 id="_examples"><a class="anchor" href="#_examples"></a>EXAMPLES</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Assume you want to transfer the history from a repository R1 on machine A
-to another repository R2 on machine B.
+<p>We&#8217;ll discuss two cases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Taking a full backup of a repository</p>
+</li>
+<li>
+<p>Transferring the history of a repository to another machine when the
+two machines have no direct connection</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>First let&#8217;s consider a full backup of the repository.  The following
+command will take a full backup of the repository in the sense that all
+refs are included in the bundle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git bundle create backup.bundle --all</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But note again that this is only for the refs, i.e. you will only
+include refs and commits reachable from those refs.  You will not
+include other local state, such as the contents of the index, working
+tree, the stash, per-repository configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>You can later recover that repository by using for example
+<a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone backup.bundle &lt;new directory&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the next example, assume you want to transfer the history from a
+repository R1 on machine A to another repository R2 on machine B.
 For whatever reason, direct connection between A and B is not allowed,
 but we can move data from A to B via some mechanism (CD, email, etc.).
 We want to update R2 with development made on the branch master in R1.</p>
@@ -411,6 +446,29 @@ references when fetching:</p>
 <div class="content">
 <pre>$ git ls-remote mybundle</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discussion"><a class="anchor" href="#_discussion"></a>DISCUSSION</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A naive way to make a full backup of a repository is to use something to
+the effect of <code>cp -r &lt;repo&gt; &lt;destination&gt;</code>.  This is discouraged since
+the repository could be written to during the copy operation.  In turn
+some files at <code>&lt;destination&gt;</code> could be corrupted.</p>
+</div>
+<div class="paragraph">
+<p>This is why it is recommended to use Git tooling for making repository
+backups, either with this command or with e.g. <a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a>.
+But keep in mind that these tools will not help you backup state other
+than refs and commits.  In other words they will not help you backup
+contents of the index, working tree, the stash, per-repository
+configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href='{{< relurl "docs/gitfaq" >}}'>gitfaq[7]</a>, section "TRANSFERS" for a discussion of the
+problems associated with file syncing across systems.</p>
 </div>
 </div>
 </div>

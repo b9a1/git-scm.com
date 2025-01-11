@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - gitcli Documentation
 docname: gitcli
-version: 2.45.0
-latest-changes: 2.45.0
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/gitcli/index.html"
 ---
@@ -127,6 +127,16 @@ other words, write <code>git foo -oArg</code> instead of <code>git foo -o Arg</c
 options, and <code>git foo --long-opt=Arg</code> instead of <code>git foo --long-opt Arg</code>
 for long options.  An option that takes optional option-argument must be
 written in the <em>stuck</em> form.</p>
+</li>
+<li>
+<p>Despite the above suggestion, when Arg is a path relative to the
+home directory of a user, e.g. <code>~/directory/file</code> or <code>~u/d/f</code>, you
+may want to use the separate form, e.g. <code>git foo --file ~/mine</code>,
+not <code>git foo --file=~/mine</code>.  The shell will expand <code>~/</code> in the
+former to your home directory, but most shells keep the tilde in
+the latter.  Some of our commands know how to tilde-expand the
+option value even when given in the stuck form, but not all of
+them do.</p>
 </li>
 <li>
 <p>When you give a revision parameter to a command, make sure the parameter is

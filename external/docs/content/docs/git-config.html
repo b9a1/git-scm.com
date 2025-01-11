@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-config Documentation
 docname: git-config
-version: 2.47.1
-latest-changes: 2.47.1
+version: 2.48.0
+latest-changes: 2.48.0
 aliases:
 - "/docs/git-config/index.html"
 ---
@@ -1271,14 +1271,14 @@ other popular tools, and describe them in your documentation.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="Documentation/git-config.txt-addignoreErrors"> <a class="anchor" href="#Documentation/git-config.txt-addignoreErrors"></a>add.ignoreErrors </dt>
-<dt class="hdlist1" id="Documentation/git-config.txt-addignore-errorsdeprecated"> <a class="anchor" href="#Documentation/git-config.txt-addignore-errorsdeprecated"></a>add.ignore-errors (deprecated) </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codeaddignoreErrorscode"> <a class="anchor" href="#Documentation/git-config.txt-codeaddignoreErrorscode"></a><code>add.ignoreErrors</code> </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codeaddignore-errorscodedeprecated"> <a class="anchor" href="#Documentation/git-config.txt-codeaddignore-errorscodedeprecated"></a><code>add.ignore-errors</code> (deprecated) </dt>
 <dd>
-<p>Tells <em>git add</em> to continue adding files when some files cannot be
-added due to indexing errors. Equivalent to the <code>--ignore-errors</code>
-option of <a href='{{< relurl "docs/git-add" >}}'>git-add[1]</a>.  <code>add.ignore-errors</code> is deprecated,
-as it does not follow the usual naming convention for configuration
-variables.</p>
+<p>Tells <code>git add</code> to continue adding files when some files cannot be
+added due to indexing errors.
+Equivalent to the <code>--ignore-errors</code> option of <a href='{{< relurl "docs/git-add" >}}'>git-add[1]</a>.
+<code>add.ignore-errors</code> is deprecated, as it does not follow the usual
+naming convention for configuration variables.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-advice"> <a class="anchor" href="#Documentation/git-config.txt-advice"></a>advice.* </dt>
 <dd>
@@ -2924,7 +2924,7 @@ default in a bare repository.</p>
 <dt class="hdlist1" id="Documentation/git-config.txt-corerepositoryFormatVersion"> <a class="anchor" href="#Documentation/git-config.txt-corerepositoryFormatVersion"></a>core.repositoryFormatVersion </dt>
 <dd>
 <p>Internal variable identifying the repository format and layout
-version.</p>
+version. See <a href='{{< relurl "docs/gitrepository-layout" >}}'>gitrepository-layout[5]</a>.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-coresharedRepository"> <a class="anchor" href="#Documentation/git-config.txt-coresharedRepository"></a>core.sharedRepository </dt>
 <dd>
@@ -3490,23 +3490,24 @@ when trying to lock the credentials file. A value of 0 means not to retry at
 all; -1 means to try indefinitely. Default is 1000 (i.e., retry for
 1s).</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffautoRefreshIndex"> <a class="anchor" href="#Documentation/git-config.txt-diffautoRefreshIndex"></a>diff.autoRefreshIndex </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffautoRefreshIndexcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffautoRefreshIndexcode"></a><code>diff.autoRefreshIndex</code> </dt>
 <dd>
-<p>When using <em>git diff</em> to compare with work tree
+<p>When using <code>git diff</code> to compare with work tree
 files, do not consider stat-only changes as changed.
 Instead, silently run <code>git update-index --refresh</code> to
 update the cached stat information for paths whose
 contents in the work tree match the contents in the
-index.  This option defaults to true.  Note that this
-affects only <em>git diff</em> Porcelain, and not lower level
-<em>diff</em> commands such as <em>git diff-files</em>.</p>
+index.  This option defaults to <code>true</code>.  Note that this
+affects only <code>git diff</code> Porcelain, and not lower level
+<code>diff</code> commands such as <code>git diff-files</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffdirstat"> <a class="anchor" href="#Documentation/git-config.txt-diffdirstat"></a>diff.dirstat </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffdirstatcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffdirstatcode"></a><code>diff.dirstat</code> </dt>
 <dd>
 <p>A comma separated list of <code>--dirstat</code> parameters specifying the
 default behavior of the <code>--dirstat</code> option to <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a>
-and friends. The defaults can be overridden on the command line
-(using <code>--dirstat=&lt;param1,param2,...&gt;</code>). The fallback defaults
+and friends.
+The defaults can be overridden on the command line
+(using <code>--dirstat=&lt;param&gt;,...</code>). The fallback defaults
 (when not changed by <code>diff.dirstat</code>) are <code>changes,noncumulative,3</code>.
 The following parameters are available:</p>
 <div class="openblock">
@@ -3545,7 +3546,7 @@ Note that when using <code>cumulative</code>, the sum of the percentages
 reported may exceed 100%. The default (non-cumulative) behavior can
 be specified with the <code>noncumulative</code> parameter.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-ltlimitgt"> <a class="anchor" href="#Documentation/git-config.txt-ltlimitgt"></a>&lt;limit&gt; </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-emltlimitgtem"> <a class="anchor" href="#Documentation/git-config.txt-emltlimitgtem"></a><em>&lt;limit&gt;</em> </dt>
 <dd>
 <p>An integer parameter specifies a cut-off percent (3% by default).
 Directories contributing less than this percentage of the changes
@@ -3562,66 +3563,66 @@ and accumulating child directory counts in the parent directories:
 <code>files,10,cumulative</code>.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffstatNameWidth"> <a class="anchor" href="#Documentation/git-config.txt-diffstatNameWidth"></a>diff.statNameWidth </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffstatNameWidthcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffstatNameWidthcode"></a><code>diff.statNameWidth</code> </dt>
 <dd>
-<p>Limit the width of the filename part in --stat output. If set, applies
-to all commands generating --stat output except format-patch.</p>
+<p>Limit the width of the filename part in <code>--stat</code> output. If set, applies
+to all commands generating <code>--stat</code> output except <code>format-patch</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffstatGraphWidth"> <a class="anchor" href="#Documentation/git-config.txt-diffstatGraphWidth"></a>diff.statGraphWidth </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffstatGraphWidthcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffstatGraphWidthcode"></a><code>diff.statGraphWidth</code> </dt>
 <dd>
-<p>Limit the width of the graph part in --stat output. If set, applies
-to all commands generating --stat output except format-patch.</p>
+<p>Limit the width of the graph part in <code>--stat</code> output. If set, applies
+to all commands generating <code>--stat</code> output except <code>format-patch</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffcontext"> <a class="anchor" href="#Documentation/git-config.txt-diffcontext"></a>diff.context </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffcontextcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffcontextcode"></a><code>diff.context</code> </dt>
 <dd>
-<p>Generate diffs with &lt;n&gt; lines of context instead of the default
-of 3. This value is overridden by the -U option.</p>
+<p>Generate diffs with <em>&lt;n&gt;</em> lines of context instead of the default
+of 3. This value is overridden by the <code>-U</code> option.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffinterHunkContext"> <a class="anchor" href="#Documentation/git-config.txt-diffinterHunkContext"></a>diff.interHunkContext </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffinterHunkContextcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffinterHunkContextcode"></a><code>diff.interHunkContext</code> </dt>
 <dd>
 <p>Show the context between diff hunks, up to the specified number
 of lines, thereby fusing the hunks that are close to each other.
 This value serves as the default for the <code>--inter-hunk-context</code>
 command line option.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffexternal"> <a class="anchor" href="#Documentation/git-config.txt-diffexternal"></a>diff.external </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffexternalcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffexternalcode"></a><code>diff.external</code> </dt>
 <dd>
 <p>If this config variable is set, diff generation is not
 performed using the internal diff machinery, but using the
-given command.  Can be overridden with the &#8216;GIT_EXTERNAL_DIFF&#8217;
+given command.  Can be overridden with the <code>GIT_EXTERNAL_DIFF</code>
 environment variable.  The command is called with parameters
 as described under "git Diffs" in <a href='{{< relurl "docs/git" >}}'>git[1]</a>.  Note: if
 you want to use an external diff program only on a subset of
 your files, you might want to use <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> instead.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-difftrustExitCode"> <a class="anchor" href="#Documentation/git-config.txt-difftrustExitCode"></a>diff.trustExitCode </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codedifftrustExitCodecode"> <a class="anchor" href="#Documentation/git-config.txt-codedifftrustExitCodecode"></a><code>diff.trustExitCode</code> </dt>
 <dd>
-<p>If this boolean value is set to true then the
+<p>If this boolean value is set to <code>true</code> then the
 <code>diff.external</code> command is expected to return exit code
 0 if it considers the input files to be equal or 1 if it
-considers them to be different, like <code>diff(1)</code>.
-If it is set to false, which is the default, then the command
-is expected to return exit code 0 regardless of equality.
+considers them to be different, like <code>diff</code>(1).
+If it is set to <code>false</code>, which is the default, then the command
+is expected to return exit code <code>0</code> regardless of equality.
 Any other exit code causes Git to report a fatal error.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffignoreSubmodules"> <a class="anchor" href="#Documentation/git-config.txt-diffignoreSubmodules"></a>diff.ignoreSubmodules </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffignoreSubmodulescode"> <a class="anchor" href="#Documentation/git-config.txt-codediffignoreSubmodulescode"></a><code>diff.ignoreSubmodules</code> </dt>
 <dd>
-<p>Sets the default value of --ignore-submodules. Note that this
-affects only <em>git diff</em> Porcelain, and not lower level <em>diff</em>
-commands such as <em>git diff-files</em>. <em>git checkout</em>
-and <em>git switch</em> also honor
+<p>Sets the default value of <code>--ignore-submodules</code>. Note that this
+affects only <code>git diff</code> Porcelain, and not lower level <code>diff</code>
+commands such as <code>git diff-files</code>. <code>git checkout</code>
+and <code>git switch</code> also honor
 this setting when reporting uncommitted changes. Setting it to
-<em>all</em> disables the submodule summary normally shown by <em>git commit</em>
-and <em>git status</em> when <code>status.submoduleSummary</code> is set unless it is
-overridden by using the --ignore-submodules command-line option.
-The <em>git submodule</em> commands are not affected by this setting.
+<code>all</code> disables the submodule summary normally shown by <code>git commit</code>
+and <code>git status</code> when <code>status.submoduleSummary</code> is set unless it is
+overridden by using the <code>--ignore-submodules</code> command-line option.
+The <code>git submodule</code> commands are not affected by this setting.
 By default this is set to untracked so that any untracked
 submodules are ignored.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffmnemonicPrefix"> <a class="anchor" href="#Documentation/git-config.txt-diffmnemonicPrefix"></a>diff.mnemonicPrefix </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffmnemonicPrefixcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffmnemonicPrefixcode"></a><code>diff.mnemonicPrefix</code> </dt>
 <dd>
-<p>If set, <em>git diff</em> uses a prefix pair that is different from the
-standard "a/" and "b/" depending on what is being compared.  When
+<p>If set, <code>git diff</code> uses a prefix pair that is different from the
+standard <code>a/</code> and <code>b/</code> depending on what is being compared.  When
 this configuration is in effect, reverse diff output also swaps
 the order of the prefixes:</p>
 <div class="dlist">
@@ -3638,209 +3639,137 @@ the order of the prefixes:</p>
 <dd>
 <p>compares a (c)ommit and the (i)ndex;</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-codegitdiffHEADfile1file2code"> <a class="anchor" href="#Documentation/git-config.txt-codegitdiffHEADfile1file2code"></a><code>git diff HEAD:file1 file2</code> </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codegitdiffHEADltfile1gtltfile2gtcode"> <a class="anchor" href="#Documentation/git-config.txt-codegitdiffHEADltfile1gtltfile2gtcode"></a><code>git diff HEAD:&lt;file1&gt; &lt;file2&gt;</code> </dt>
 <dd>
 <p>compares an (o)bject and a (w)ork tree entity;</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-codegitdiff--no-indexabcode"> <a class="anchor" href="#Documentation/git-config.txt-codegitdiff--no-indexabcode"></a><code>git diff --no-index a b</code> </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codegitdiff--no-indexltagtltbgtcode"> <a class="anchor" href="#Documentation/git-config.txt-codegitdiff--no-indexltagtltbgtcode"></a><code>git diff --no-index &lt;a&gt; &lt;b&gt;</code> </dt>
 <dd>
-<p>compares two non-git things (1) and (2).</p>
+<p>compares two non-git things <em>&lt;a&gt;</em> and <em>&lt;b&gt;</em>.</p>
 </dd>
 </dl>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffnoPrefix"> <a class="anchor" href="#Documentation/git-config.txt-diffnoPrefix"></a>diff.noPrefix </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffnoPrefixcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffnoPrefixcode"></a><code>diff.noPrefix</code> </dt>
 <dd>
-<p>If set, <em>git diff</em> does not show any source or destination prefix.</p>
+<p>If set, <code>git diff</code> does not show any source or destination prefix.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffsrcPrefix"> <a class="anchor" href="#Documentation/git-config.txt-diffsrcPrefix"></a>diff.srcPrefix </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffsrcPrefixcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffsrcPrefixcode"></a><code>diff.srcPrefix</code> </dt>
 <dd>
-<p>If set, <em>git diff</em> uses this source prefix. Defaults to "a/".</p>
+<p>If set, <code>git diff</code> uses this source prefix. Defaults to <code>a/</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffdstPrefix"> <a class="anchor" href="#Documentation/git-config.txt-diffdstPrefix"></a>diff.dstPrefix </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffdstPrefixcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffdstPrefixcode"></a><code>diff.dstPrefix</code> </dt>
 <dd>
-<p>If set, <em>git diff</em> uses this destination prefix. Defaults to "b/".</p>
+<p>If set, <code>git diff</code> uses this destination prefix. Defaults to <code>b/</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffrelative"> <a class="anchor" href="#Documentation/git-config.txt-diffrelative"></a>diff.relative </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffrelativecode"> <a class="anchor" href="#Documentation/git-config.txt-codediffrelativecode"></a><code>diff.relative</code> </dt>
 <dd>
-<p>If set to <em>true</em>, <em>git diff</em> does not show changes outside of the directory
+<p>If set to <code>true</code>, <code>git diff</code> does not show changes outside of the directory
 and show pathnames relative to the current directory.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-difforderFile"> <a class="anchor" href="#Documentation/git-config.txt-difforderFile"></a>diff.orderFile </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codedifforderFilecode"> <a class="anchor" href="#Documentation/git-config.txt-codedifforderFilecode"></a><code>diff.orderFile</code> </dt>
 <dd>
 <p>File indicating how to order files within a diff.
-See the <em>-O</em> option to <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a> for details.
+See the <code>-O</code> option to <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a> for details.
 If <code>diff.orderFile</code> is a relative pathname, it is treated as
 relative to the top of the working tree.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffrenameLimit"> <a class="anchor" href="#Documentation/git-config.txt-diffrenameLimit"></a>diff.renameLimit </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffrenameLimitcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffrenameLimitcode"></a><code>diff.renameLimit</code> </dt>
 <dd>
 <p>The number of files to consider in the exhaustive portion of
-copy/rename detection; equivalent to the <em>git diff</em> option
+copy/rename detection; equivalent to the <code>git diff</code> option
 <code>-l</code>.  If not set, the default value is currently 1000.  This
 setting has no effect if rename detection is turned off.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffrenames"> <a class="anchor" href="#Documentation/git-config.txt-diffrenames"></a>diff.renames </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffrenamescode"> <a class="anchor" href="#Documentation/git-config.txt-codediffrenamescode"></a><code>diff.renames</code> </dt>
 <dd>
-<p>Whether and how Git detects renames.  If set to "false",
-rename detection is disabled. If set to "true", basic rename
-detection is enabled.  If set to "copies" or "copy", Git will
-detect copies, as well.  Defaults to true.  Note that this
-affects only <em>git diff</em> Porcelain like <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a> and
+<p>Whether and how Git detects renames.  If set to <code>false</code>,
+rename detection is disabled. If set to <code>true</code>, basic rename
+detection is enabled.  If set to <code>copies</code> or <code>copy</code>, Git will
+detect copies, as well.  Defaults to <code>true</code>.  Note that this
+affects only <code>git diff</code> Porcelain like <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a> and
 <a href='{{< relurl "docs/git-log" >}}'>git-log[1]</a>, and not lower level commands such as
 <a href='{{< relurl "docs/git-diff-files" >}}'>git-diff-files[1]</a>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffsuppressBlankEmpty"> <a class="anchor" href="#Documentation/git-config.txt-diffsuppressBlankEmpty"></a>diff.suppressBlankEmpty </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffsuppressBlankEmptycode"> <a class="anchor" href="#Documentation/git-config.txt-codediffsuppressBlankEmptycode"></a><code>diff.suppressBlankEmpty</code> </dt>
 <dd>
 <p>A boolean to inhibit the standard behavior of printing a space
-before each empty output line. Defaults to false.</p>
+before each empty output line. Defaults to <code>false</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffsubmodule"> <a class="anchor" href="#Documentation/git-config.txt-diffsubmodule"></a>diff.submodule </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffsubmodulecode"> <a class="anchor" href="#Documentation/git-config.txt-codediffsubmodulecode"></a><code>diff.submodule</code> </dt>
 <dd>
 <p>Specify the format in which differences in submodules are
-shown.  The "short" format just shows the names of the commits
-at the beginning and end of the range. The "log" format lists
+shown.  The <code>short</code> format just shows the names of the commits
+at the beginning and end of the range. The <code>log</code> format lists
 the commits in the range like <a href='{{< relurl "docs/git-submodule" >}}'>git-submodule[1]</a> <code>summary</code>
-does. The "diff" format shows an inline diff of the changed
-contents of the submodule. Defaults to "short".</p>
+does. The <code>diff</code> format shows an inline diff of the changed
+contents of the submodule. Defaults to <code>short</code>.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffwordRegex"> <a class="anchor" href="#Documentation/git-config.txt-diffwordRegex"></a>diff.wordRegex </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffwordRegexcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffwordRegexcode"></a><code>diff.wordRegex</code> </dt>
 <dd>
 <p>A POSIX Extended Regular Expression used to determine what is a "word"
 when performing word-by-word difference calculations.  Character
 sequences that match the regular expression are "words", all other
 characters are <strong>ignorable</strong> whitespace.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergtcommand"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergtcommand"></a>diff.&lt;driver&gt;.command </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergtcommandcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergtcommandcode"></a><code>diff.&lt;driver&gt;.command</code> </dt>
 <dd>
 <p>The custom diff driver command.  See <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a>
 for details.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergttrustExitCode"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergttrustExitCode"></a>diff.&lt;driver&gt;.trustExitCode </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergttrustExitCodecode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergttrustExitCodecode"></a><code>diff.&lt;driver&gt;.trustExitCode</code> </dt>
 <dd>
-<p>If this boolean value is set to true then the
+<p>If this boolean value is set to <code>true</code> then the
 <code>diff.&lt;driver&gt;.command</code> command is expected to return exit code
 0 if it considers the input files to be equal or 1 if it
-considers them to be different, like <code>diff(1)</code>.
-If it is set to false, which is the default, then the command
+considers them to be different, like <code>diff</code>(1).
+If it is set to <code>false</code>, which is the default, then the command
 is expected to return exit code 0 regardless of equality.
 Any other exit code causes Git to report a fatal error.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergtxfuncname"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergtxfuncname"></a>diff.&lt;driver&gt;.xfuncname </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergtxfuncnamecode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergtxfuncnamecode"></a><code>diff.&lt;driver&gt;.xfuncname</code> </dt>
 <dd>
 <p>The regular expression that the diff driver should use to
 recognize the hunk header.  A built-in pattern may also be used.
 See <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> for details.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergtbinary"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergtbinary"></a>diff.&lt;driver&gt;.binary </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergtbinarycode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergtbinarycode"></a><code>diff.&lt;driver&gt;.binary</code> </dt>
 <dd>
-<p>Set this option to true to make the diff driver treat files as
+<p>Set this option to <code>true</code> to make the diff driver treat files as
 binary.  See <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> for details.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergttextconv"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergttextconv"></a>diff.&lt;driver&gt;.textconv </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergttextconvcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergttextconvcode"></a><code>diff.&lt;driver&gt;.textconv</code> </dt>
 <dd>
 <p>The command that the diff driver should call to generate the
 text-converted version of a file.  The result of the
 conversion is used to generate a human-readable diff.  See
 <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> for details.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergtwordRegex"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergtwordRegex"></a>diff.&lt;driver&gt;.wordRegex </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergtwordRegexcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergtwordRegexcode"></a><code>diff.&lt;driver&gt;.wordRegex</code> </dt>
 <dd>
 <p>The regular expression that the diff driver should use to
 split words in a line.  See <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> for
 details.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffltdrivergtcachetextconv"> <a class="anchor" href="#Documentation/git-config.txt-diffltdrivergtcachetextconv"></a>diff.&lt;driver&gt;.cachetextconv </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffltdrivergtcachetextconvcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffltdrivergtcachetextconvcode"></a><code>diff.&lt;driver&gt;.cachetextconv</code> </dt>
 <dd>
-<p>Set this option to true to make the diff driver cache the text
+<p>Set this option to <code>true</code> to make the diff driver cache the text
 conversion outputs.  See <a href='{{< relurl "docs/gitattributes" >}}'>gitattributes[5]</a> for details.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>araxis</p>
-</li>
-<li>
-<p>bc</p>
-</li>
-<li>
-<p>codecompare</p>
-</li>
-<li>
-<p>deltawalker</p>
-</li>
-<li>
-<p>diffmerge</p>
-</li>
-<li>
-<p>diffuse</p>
-</li>
-<li>
-<p>ecmerge</p>
-</li>
-<li>
-<p>emerge</p>
-</li>
-<li>
-<p>examdiff</p>
-</li>
-<li>
-<p>guiffy</p>
-</li>
-<li>
-<p>gvimdiff</p>
-</li>
-<li>
-<p>kdiff3</p>
-</li>
-<li>
-<p>kompare</p>
-</li>
-<li>
-<p>meld</p>
-</li>
-<li>
-<p>nvimdiff</p>
-</li>
-<li>
-<p>opendiff</p>
-</li>
-<li>
-<p>p4merge</p>
-</li>
-<li>
-<p>smerge</p>
-</li>
-<li>
-<p>tkdiff</p>
-</li>
-<li>
-<p>vimdiff</p>
-</li>
-<li>
-<p>vscode</p>
-</li>
-<li>
-<p>winmerge</p>
-</li>
-<li>
-<p>xxdiff</p>
-</li>
-</ul>
-</div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffindentHeuristic"> <a class="anchor" href="#Documentation/git-config.txt-diffindentHeuristic"></a>diff.indentHeuristic </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffindentHeuristiccode"> <a class="anchor" href="#Documentation/git-config.txt-codediffindentHeuristiccode"></a><code>diff.indentHeuristic</code> </dt>
 <dd>
 <p>Set this option to <code>false</code> to disable the default heuristics
 that shift diff hunk boundaries to make patches easier to read.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffalgorithm"> <a class="anchor" href="#Documentation/git-config.txt-diffalgorithm"></a>diff.algorithm </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffalgorithmcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffalgorithmcode"></a><code>diff.algorithm</code> </dt>
 <dd>
 <p>Choose a diff algorithm.  The variants are as follows:</p>
 <div class="openblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="Documentation/git-config.txt-codedefaultcodecodemyerscode"> <a class="anchor" href="#Documentation/git-config.txt-codedefaultcodecodemyerscode"></a><code>default</code>, <code>myers</code> </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codedefaultcode"> <a class="anchor" href="#Documentation/git-config.txt-codedefaultcode"></a><code>default</code> </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codemyerscode"> <a class="anchor" href="#Documentation/git-config.txt-codemyerscode"></a><code>myers</code> </dt>
 <dd>
 <p>The basic greedy diff algorithm. Currently, this is the default.</p>
 </dd>
@@ -3863,7 +3792,7 @@ low-occurrence common elements".</p>
 </div>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffwsErrorHighlight"> <a class="anchor" href="#Documentation/git-config.txt-diffwsErrorHighlight"></a>diff.wsErrorHighlight </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffwsErrorHighlightcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffwsErrorHighlightcode"></a><code>diff.wsErrorHighlight</code> </dt>
 <dd>
 <p>Highlight whitespace errors in the <code>context</code>, <code>old</code> or <code>new</code>
 lines of the diff.  Multiple values are separated by comma,
@@ -3873,19 +3802,19 @@ whitespace errors are colored with <code>color.diff.whitespace</code>.
 The command line option <code>--ws-error-highlight=&lt;kind&gt;</code>
 overrides this setting.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffcolorMoved"> <a class="anchor" href="#Documentation/git-config.txt-diffcolorMoved"></a>diff.colorMoved </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffcolorMovedcode"> <a class="anchor" href="#Documentation/git-config.txt-codediffcolorMovedcode"></a><code>diff.colorMoved</code> </dt>
 <dd>
-<p>If set to either a valid <code>&lt;mode&gt;</code> or a true value, moved lines
-in a diff are colored differently, for details of valid modes
-see <em>--color-moved</em> in <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a>. If simply set to
-true the default color mode will be used. When set to false,
-moved lines are not colored.</p>
+<p>If set to either a valid <em>&lt;mode&gt;</em> or a <code>true</code> value, moved lines
+in a diff are colored differently.
+For details of valid modes see <code>--color-moved</code> in <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a>.
+If simply set to <code>true</code> the default color mode will be used. When
+set to <code>false</code>, moved lines are not colored.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-diffcolorMovedWS"> <a class="anchor" href="#Documentation/git-config.txt-diffcolorMovedWS"></a>diff.colorMovedWS </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-codediffcolorMovedWScode"> <a class="anchor" href="#Documentation/git-config.txt-codediffcolorMovedWScode"></a><code>diff.colorMovedWS</code> </dt>
 <dd>
 <p>When moved lines are colored using e.g. the <code>diff.colorMoved</code> setting,
-this option controls the <code>&lt;mode&gt;</code> how spaces are treated.
-For details of valid modes see <em>--color-moved-ws</em> in <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a>.</p>
+this option controls the mode how spaces are treated.
+For details of valid modes see <code>--color-moved-ws</code> in <a href='{{< relurl "docs/git-diff" >}}'>git-diff[1]</a>.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-difftool"> <a class="anchor" href="#Documentation/git-config.txt-difftool"></a>diff.tool </dt>
 <dd>
@@ -3940,22 +3869,20 @@ depending on the presence of a <code>DISPLAY</code> environment variable value. 
 default is <code>false</code>, where the <code>--gui</code> argument must be provided
 explicitly for the <code>diff.guitool</code> to be used.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-extensionsobjectFormat"> <a class="anchor" href="#Documentation/git-config.txt-extensionsobjectFormat"></a>extensions.objectFormat </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-extensions"> <a class="anchor" href="#Documentation/git-config.txt-extensions"></a>extensions.* </dt>
 <dd>
-<p>Specify the hash algorithm to use.  The acceptable values are <code>sha1</code> and
-<code>sha256</code>.  If not specified, <code>sha1</code> is assumed.  It is an error to specify
-this key unless <code>core.repositoryFormatVersion</code> is 1.</p>
-<div class="paragraph">
-<p>Note that this setting should only be set by <a href='{{< relurl "docs/git-init" >}}'>git-init[1]</a> or
-<a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a>.  Trying to change it after initialization will not
-work and will produce hard-to-diagnose issues.</p>
-</div>
-</dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-extensionscompatObjectFormat"> <a class="anchor" href="#Documentation/git-config.txt-extensionscompatObjectFormat"></a>extensions.compatObjectFormat </dt>
+<p>Unless otherwise stated, is an error to specify an extension if
+<code>core.repositoryFormatVersion</code> is not <code>1</code>. See
+<a href='{{< relurl "docs/gitrepository-layout" >}}'>gitrepository-layout[5]</a>.</p>
+<div class="openblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1" id="Documentation/git-config.txt-compatObjectFormat"> <a class="anchor" href="#Documentation/git-config.txt-compatObjectFormat"></a>compatObjectFormat </dt>
 <dd>
 <p>Specify a compatibility hash algorithm to use.  The acceptable values
 are <code>sha1</code> and <code>sha256</code>.  The value specified must be different from the
-value of extensions.objectFormat.  This allows client level
+value of <code>extensions.objectFormat</code>.  This allows client level
 interoperability between git repositories whose objectFormat matches
 this compatObjectFormat.  In particular when fully implemented the
 pushes and pulls from a repository in whose objectFormat matches
@@ -3963,7 +3890,55 @@ compatObjectFormat.  As well as being able to use oids encoded in
 compatObjectFormat in addition to oids encoded with objectFormat to
 locally specify objects.</p>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-extensionsrefStorage"> <a class="anchor" href="#Documentation/git-config.txt-extensionsrefStorage"></a>extensions.refStorage </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-noop"> <a class="anchor" href="#Documentation/git-config.txt-noop"></a>noop </dt>
+<dd>
+<p>This extension does not change git&#8217;s behavior at all. It is useful only
+for testing format-1 compatibility.</p>
+<div class="paragraph">
+<p>For historical reasons, this extension is respected regardless of the
+<code>core.repositoryFormatVersion</code> setting.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-noop-v1"> <a class="anchor" href="#Documentation/git-config.txt-noop-v1"></a>noop-v1 </dt>
+<dd>
+<p>This extension does not change git&#8217;s behavior at all. It is useful only
+for testing format-1 compatibility.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-objectFormat"> <a class="anchor" href="#Documentation/git-config.txt-objectFormat"></a>objectFormat </dt>
+<dd>
+<p>Specify the hash algorithm to use.  The acceptable values are <code>sha1</code> and
+<code>sha256</code>.  If not specified, <code>sha1</code> is assumed.</p>
+<div class="paragraph">
+<p>Note that this setting should only be set by <a href='{{< relurl "docs/git-init" >}}'>git-init[1]</a> or
+<a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a>.  Trying to change it after initialization will not
+work and will produce hard-to-diagnose issues.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-partialClone"> <a class="anchor" href="#Documentation/git-config.txt-partialClone"></a>partialClone </dt>
+<dd>
+<p>When enabled, indicates that the repo was created with a partial clone
+(or later performed a partial fetch) and that the remote may have
+omitted sending certain unwanted objects.  Such a remote is called a
+"promisor remote" and it promises that all such omitted objects can
+be fetched from it in the future.</p>
+<div class="paragraph">
+<p>The value of this key is the name of the promisor remote.</p>
+</div>
+<div class="paragraph">
+<p>For historical reasons, this extension is respected regardless of the
+<code>core.repositoryFormatVersion</code> setting.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-preciousObjects"> <a class="anchor" href="#Documentation/git-config.txt-preciousObjects"></a>preciousObjects </dt>
+<dd>
+<p>If enabled, indicates that objects in the repository MUST NOT be deleted
+(e.g., by <code>git-prune</code> or <code>git repack -d</code>).</p>
+<div class="paragraph">
+<p>For historical reasons, this extension is respected regardless of the
+<code>core.repositoryFormatVersion</code> setting.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-refStorage"> <a class="anchor" href="#Documentation/git-config.txt-refStorage"></a>refStorage </dt>
 <dd>
 <p>Specify the ref storage format to use. The acceptable values are:</p>
 <div class="ulist">
@@ -3978,16 +3953,19 @@ internals are subject to change.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>It is an error to specify this key unless <code>core.repositoryFormatVersion</code> is 1.</p>
-</div>
-<div class="paragraph">
-<p>+
-Note that this setting should only be set by <a href='{{< relurl "docs/git-init" >}}'>git-init[1]</a> or
+<p>Note that this setting should only be set by <a href='{{< relurl "docs/git-init" >}}'>git-init[1]</a> or
 <a href='{{< relurl "docs/git-clone" >}}'>git-clone[1]</a>. Trying to change it after initialization will not
 work and will produce hard-to-diagnose issues.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="Documentation/git-config.txt-extensionsworktreeConfig"> <a class="anchor" href="#Documentation/git-config.txt-extensionsworktreeConfig"></a>extensions.worktreeConfig </dt>
+<dt class="hdlist1" id="Documentation/git-config.txt-relativeWorktrees"> <a class="anchor" href="#Documentation/git-config.txt-relativeWorktrees"></a>relativeWorktrees </dt>
+<dd>
+<p>If enabled, indicates at least one worktree has been linked with
+relative paths. Automatically set if a worktree has been created or
+repaired with either the <code>--relative-paths</code> option or with the
+<code>worktree.useRelativePaths</code> config set to <code>true</code>.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-worktreeConfig"> <a class="anchor" href="#Documentation/git-config.txt-worktreeConfig"></a>worktreeConfig </dt>
 <dd>
 <p>If enabled, then worktrees will load config settings from the
 <code>$GIT_DIR/config.worktree</code> file in addition to the
@@ -3998,7 +3976,7 @@ working trees have <code>$GIT_DIR</code> equal to
 <code>config.worktree</code> file will override settings from any other
 config files.</p>
 <div class="paragraph">
-<p>When enabling <code>extensions.worktreeConfig</code>, you must be careful to move
+<p>When enabling this extension, you must be careful to move
 certain values from the common config file to the main working tree&#8217;s
 <code>config.worktree</code> file, if present:</p>
 </div>
@@ -4011,22 +3989,28 @@ certain values from the common config file to the main working tree&#8217;s
 <li>
 <p>If <code>core.bare</code> is true, then it must be moved from <code>$GIT_COMMON_DIR/config</code>
 to <code>$GIT_COMMON_DIR/config.worktree</code>.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>It may also be beneficial to adjust the locations of <code>core.sparseCheckout</code>
 and <code>core.sparseCheckoutCone</code> depending on your desire for customizable
 sparse-checkout settings for each worktree. By default, the <code>git
-sparse-checkout</code> builtin enables <code>extensions.worktreeConfig</code>, assigns
+sparse-checkout</code> builtin enables this extension, assigns
 these config values on a per-worktree basis, and uses the
 <code>$GIT_DIR/info/sparse-checkout</code> file to specify the sparsity for each
 worktree independently. See <a href='{{< relurl "docs/git-sparse-checkout" >}}'>git-sparse-checkout[1]</a> for more
 details.</p>
 </div>
 <div class="paragraph">
-<p>For historical reasons, <code>extensions.worktreeConfig</code> is respected
-regardless of the <code>core.repositoryFormatVersion</code> setting.</p>
+<p>+
+For historical reasons, this extension is respected regardless of the
+<code>core.repositoryFormatVersion</code> setting.</p>
 </div>
-</li>
-</ul>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-fastimportunpackLimit"> <a class="anchor" href="#Documentation/git-config.txt-fastimportunpackLimit"></a>fastimport.unpackLimit </dt>
@@ -6199,79 +6183,6 @@ that a corresponding mergetool.&lt;tool&gt;.cmd variable is defined.</p>
 -g/--gui flag is specified. The list below shows the valid built-in values.
 Any other value is treated as a custom merge tool and requires that a
 corresponding mergetool.&lt;guitool&gt;.cmd variable is defined.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>araxis</p>
-</li>
-<li>
-<p>bc</p>
-</li>
-<li>
-<p>codecompare</p>
-</li>
-<li>
-<p>deltawalker</p>
-</li>
-<li>
-<p>diffmerge</p>
-</li>
-<li>
-<p>diffuse</p>
-</li>
-<li>
-<p>ecmerge</p>
-</li>
-<li>
-<p>emerge</p>
-</li>
-<li>
-<p>examdiff</p>
-</li>
-<li>
-<p>guiffy</p>
-</li>
-<li>
-<p>gvimdiff</p>
-</li>
-<li>
-<p>kdiff3</p>
-</li>
-<li>
-<p>meld</p>
-</li>
-<li>
-<p>nvimdiff</p>
-</li>
-<li>
-<p>opendiff</p>
-</li>
-<li>
-<p>p4merge</p>
-</li>
-<li>
-<p>smerge</p>
-</li>
-<li>
-<p>tkdiff</p>
-</li>
-<li>
-<p>tortoisemerge</p>
-</li>
-<li>
-<p>vimdiff</p>
-</li>
-<li>
-<p>vscode</p>
-</li>
-<li>
-<p>winmerge</p>
-</li>
-<li>
-<p>xxdiff</p>
-</li>
-</ul>
-</div>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-mergeverbosity"> <a class="anchor" href="#Documentation/git-config.txt-mergeverbosity"></a>merge.verbosity </dt>
 <dd>
@@ -7514,6 +7425,32 @@ Changing or clearing this value will only affect fetches for new commits.
 To fetch associated objects for commits already present in the local object
 database, use the <code>--refetch</code> option of <a href='{{< relurl "docs/git-fetch" >}}'>git-fetch[1]</a>.</p>
 </dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-remoteltnamegtserverOption"> <a class="anchor" href="#Documentation/git-config.txt-remoteltnamegtserverOption"></a>remote.&lt;name&gt;.serverOption </dt>
+<dd>
+<p>The default set of server options used when fetching from this remote.
+These server options can be overridden by the <code>--server-option=</code> command
+line arguments.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-remoteltnamegtfollowRemoteHEAD"> <a class="anchor" href="#Documentation/git-config.txt-remoteltnamegtfollowRemoteHEAD"></a>remote.&lt;name&gt;.followRemoteHEAD </dt>
+<dd>
+<p>How <a href='{{< relurl "docs/git-fetch" >}}'>git-fetch[1]</a> should handle updates to <code>remotes/&lt;name&gt;/HEAD</code>.
+The default value is "create", which will create <code>remotes/&lt;name&gt;/HEAD</code>
+if it exists on the remote, but not locally, but will not touch an
+already existing local reference. Setting to "warn" will print
+a message if the remote has a different value, than the local one and
+in case there is no local reference, it behaves like "create".
+A variant on "warn" is "warn-if-not-$branch", which behaves like
+"warn", but if <code>HEAD</code> on the remote is <code>$branch</code> it will be silent.
+Setting to "always" will silently update it to the value on the remote.
+Finally, setting it to "never" will never change or create the local
+reference.</p>
+<div class="paragraph">
+<p>This is a multi-valued variable, and an empty value can be used in a higher
+priority configuration file (e.g. <code>.git/config</code> in a repository) to clear
+the values inherited from a lower priority configuration files (e.g.
+<code>$HOME/.gitconfig</code>).</p>
+</div>
+</dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-remotesltgroupgt"> <a class="anchor" href="#Documentation/git-config.txt-remotesltgroupgt"></a>remotes.&lt;group&gt; </dt>
 <dd>
 <p>The list of remotes which are fetched by "git remote update
@@ -8533,7 +8470,11 @@ keep private data in a separate repository.</p>
 <dd>
 <p>Allow <code>upload-pack</code> to accept a fetch request that asks for any
 object at all.
-Defaults to <code>false</code>.</p>
+It implies <code>uploadpack.allowTipSHA1InWant</code> and
+<code>uploadpack.allowReachableSHA1InWant</code>. If set to <code>true</code> it will
+enable both of them, it set to <code>false</code> it will disable both of
+them.
+By default not set.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-uploadpackkeepAlive"> <a class="anchor" href="#Documentation/git-config.txt-uploadpackkeepAlive"></a>uploadpack.keepAlive </dt>
 <dd>
@@ -8740,6 +8681,18 @@ branch whose name uniquely matches the new branch name.  If
 such a branch exists, it is checked out and set as "upstream"
 for the new branch.  If no such match can be found, it falls
 back to creating a new branch from the current HEAD.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-worktreeuseRelativePaths"> <a class="anchor" href="#Documentation/git-config.txt-worktreeuseRelativePaths"></a>worktree.useRelativePaths </dt>
+<dd>
+<p>Link worktrees using relative paths (when "true") or absolute
+paths (when "false"). This is particularly useful for setups
+where the repository and worktrees may be moved between
+different locations or environments. Defaults to "false".</p>
+<div class="paragraph">
+<p>Note that setting <code>worktree.useRelativePaths</code> to "true" implies enabling the
+<code>extension.relativeWorktrees</code> config (see <a href='{{< relurl "docs/git-config" >}}'>git-config[1]</a>),
+thus making it incompatible with older versions of Git.</p>
+</div>
 </dd>
 </dl>
 </div>

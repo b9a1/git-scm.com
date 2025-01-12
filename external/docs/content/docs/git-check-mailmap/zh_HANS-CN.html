@@ -30,7 +30,7 @@ aliases:
 <h2 id="_描述"><a class="anchor" href="#_描述"></a>描述</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>对于每一个来自命令行或标准输入（当使用 <code>--stdin</code> 时）的 &#8216;`Name &lt;user@host&gt;" 或 ``&lt;user@host&gt;&#8217;，查找该人的规范名称和电子邮件地址（见下面的 “映射作者”）。如果找到了，就打印出来；否则就按原样打印输入。</p>
+<p>For each &#8220;Name &lt;user@host&gt;&#8221;, &#8220;&lt;user@host&gt;&#8221;, or &#8220;user@host&#8221; from the command-line or standard input (when using <code>--stdin</code>), look up the person&#8217;s canonical name and email address (see "Mapping Authors" below). If found, print them; otherwise print the input as-is.</p>
 </div>
 </div>
 </div>
@@ -42,6 +42,14 @@ aliases:
 <dt class="hdlist1" id="git-check-mailmap---stdin"> <a class="anchor" href="#git-check-mailmap---stdin"></a>--stdin </dt>
 <dd>
 <p>在用完命令行上提供的联系人后，从标准输入中读取联系人，每行一个。</p>
+</dd>
+<dt class="hdlist1" id="git-check-mailmap---mailmap-fileltfilegt"> <a class="anchor" href="#git-check-mailmap---mailmap-fileltfilegt"></a>--mailmap-file=&lt;file&gt; </dt>
+<dd>
+<p>除任何已配置的邮件映射文件外，读取指定的邮件映射文件。该文件中的条目优先于默认邮件映射文件或任何已配置邮件映射文件中的条目。</p>
+</dd>
+<dt class="hdlist1" id="git-check-mailmap---mailmap-blobltblobgt"> <a class="anchor" href="#git-check-mailmap---mailmap-blobltblobgt"></a>--mailmap-blob=&lt;blob&gt; </dt>
+<dd>
+<p>类似于 <code>--mailmap-file</code> 选项，但将值视为对仓库中 blob 的引用。如果同时指定了 <code>--mailmap-file</code> 和 <code>--mailmap-blob</code> 选项，则优先使用 <code>--mailmap-file</code> 选项中的条目。</p>
 </dd>
 </dl>
 </div>

@@ -260,9 +260,15 @@ objects denied by filesystem)</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>NEWTREE=$(git merge-tree --write-tree $BRANCH1 $BRANCH2)
-test $? -eq 0 || die "Houveram conflitos..."
-NEWCOMMIT=$(git commit-tree $NEWTREE -p $BRANCH1 -p $BRANCH2)
+<pre>vi message.txt
+BRANCH1=refs/heads/test
+BRANCH2=main
+NEWTREE=$(git merge-tree --write-tree $BRANCH1 $BRANCH2) || {
+    echo "There were conflicts..." 1&gt;&amp;2
+    exit 1
+}
+NEWCOMMIT=$(git commit-tree $NEWTREE -F message.txt \
+    -p $BRANCH1 -p $BRANCH2)
 git update-ref $BRANCH1 $NEWCOMMIT</pre>
 </div>
 </div>

@@ -331,7 +331,7 @@ git push --force-with-lease=master:base master:master</pre>
 <p>Git supporte les protocoles ssh, git, http et https (en plus, ftp et ftps peuvent être utilisés pour la récupération, mais ceux-ci sont inefficaces et déconseillés ; ne les utilisez pas).</p>
 </div>
 <div class="paragraph">
-<p>Le transport natif (c&#8217;est-à-dire l&#8217;URL git://) n&#8217;utilise pas d&#8217;authentification et ne devrait être utilisé qu&#8217;avec précaution sur des réseaux non sécurisés.</p>
+<p>Le transport natif (c&#8217;est-à-dire l&#8217;URL <code>git://</code>) n&#8217;utilise pas d&#8217;authentification et ne devrait être utilisé qu&#8217;avec précaution sur des réseaux non sécurisés.</p>
 </div>
 <div class="paragraph">
 <p>Les syntaxes suivantes peuvent être utilisées avec eux :</p>
@@ -339,16 +339,16 @@ git push --force-with-lease=master:base master:master</pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>ssh://[&lt;utilisateur&gt;@]&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;hôte&gt;</em>[:<em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>git://&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>http</code>[<code>s</code>]<code>://</code><em>&lt;hôtet&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p>git://&lt;hôte&gt;:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;`</p>
 </li>
 <li>
-<p><code>ftp</code>[<code>s</code>]<code>://</code><em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p>git://&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;`</p>
 </li>
 </ul>
 </div>
@@ -358,7 +358,7 @@ git push --force-with-lease=master:base master:master</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em><code>:/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>[&lt;utilisateur&gt;@]&lt;hôte&gt;:/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -366,18 +366,18 @@ git push --force-with-lease=master:base master:master</pre>
 <p>Cette syntaxe n&#8217;est reconnue que s&#8217;il n&#8217;y a pas de barre oblique devant les premiers deux-points. Cela permet de prendre en charge des chemins locaux qui contiendraient des deux-points. Par exemple, le chemin local <code>toto:titi</code> pourrait être spécifié comme un chemin absolu ou <code>./toto:titi</code> pour éviter d&#8217;être interprété comme une url ssh.</p>
 </div>
 <div class="paragraph">
-<p>Les protocoles ssh et git supportent en plus l&#8217;expansion <code>~</code><em>&lt;utilisateur&gt;</em>  :</p>
+<p>Les protocoles ssh et git supportent en plus l&#8217;expansion <code>~&lt;utilisateur&gt;</code>  :</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>ssh://[&lt;utilisateur&gt;@]&lt;hôte&gt;[:&lt;port&gt;]/~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>git://&lt;hôte&gt;[:&lt;port&gt;]/~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em><code>:~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>[&lt;utilisateur&gt;@]&lt;hôte&gt;:~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -390,7 +390,7 @@ git push --force-with-lease=master:base master:master</pre>
 <p><code>/chemin/du/dépôt.git/</code></p>
 </li>
 <li>
-<p><code><a href="file:///chemin/du/dépôt.git/" class="bare">file:///chemin/du/dépôt.git/</a></code></p>
+<p><code>file:///chemin/du/dépôt.git/</code></p>
 </li>
 </ul>
 </div>
@@ -401,12 +401,12 @@ git push --force-with-lease=master:base master:master</pre>
 <p><code>git clone</code>, <code>git fetch</code> et <code>git pull</code>, mais pas <code>git push</code>, acceptent également un fichier paquet approprié. Voir <a href='{{< relurl "docs/git-bundle/fr" >}}'>git-bundle[1]</a>.</p>
 </div>
 <div class="paragraph">
-<p>Quand Git ne sait pas comment gérer un certain protocole, il essaie d&#8217;utiliser l&#8217;assistant de gestion de distant <code>remote-</code><em>&lt;transport&gt;</em>, s&#8217;il existe. Pour requérir l&#8217;emploi d&#8217;un assistant spécifique, la syntaxe suivante peut être utilisée :</p>
+<p>Quand Git ne sait pas comment gérer un certain protocole, il essaie d&#8217;utiliser l&#8217;assistant de gestion de distant <code>remote-&lt;transport&gt;</code>, s&#8217;il existe. Pour requérir l&#8217;emploi d&#8217;un assistant spécifique, la syntaxe suivante peut être utilisée :</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>&lt;transport&gt;</em>::<em>&lt;adresse&gt;</em></p>
+<p><code>&lt;transport&gt;::&lt;adresse&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -820,22 +820,8 @@ git push --force-with-lease=master:base master:master</pre>
 <div class="sect1">
 <h2 id="_configuration"><a class="anchor" href="#_configuration"></a>CONFIGURATION</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>fr/includes/cmd-config-section-all.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Tout ce qui se trouve en dessous de cette ligne dans cette section est inclus de manière sélective à partir de la documentation <a href='{{< relurl "docs/git-config/fr" >}}'>git-config[1]</a>. Le contenu est le même que celui qui s&#8217;y trouve :</p>
 </div>
 <div class="admonitionblock warning">
 <table>

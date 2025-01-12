@@ -123,6 +123,12 @@ aliases:
 <dt class="hdlist1" id="git-index-pack---promisorltgt"> <a class="anchor" href="#git-index-pack---promisorltgt"></a>--promisor[=&lt;信息&gt;] </dt>
 <dd>
 <p>在提交 pack-index 之前，为这个 pack 创建一个 .promosor 文件。在用 --fix-thin 编写 pack 时特别有帮助，因为在完全编写完 pack 之前，pack 的名字还不是最终的。如果提供了 <code>&lt;message&gt;</code>，那么该内容将被写入 .promosor 文件，供将来参考。参见 <a href="{{< relurl "docs/partial-clone/zh_HANS-CN" >}}">partial clone</a> 以了解更多信息。</p>
+<div class="paragraph">
+<p>Also, if there are objects in the given pack that references non-promisor objects (in the repo), repacks those non-promisor objects into a promisor pack. This avoids a situation in which a repo has non-promisor objects that are accessible through promisor objects.</p>
+</div>
+<div class="paragraph">
+<p>Requires &lt;pack-file&gt; to not be specified.</p>
+</div>
 </dd>
 </dl>
 </div>

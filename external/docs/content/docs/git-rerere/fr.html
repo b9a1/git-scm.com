@@ -157,24 +157,24 @@ Vous devez configurer la variable de configuration <code>rerere.enabled</code> p
 <p>Lancer la commande <em>git rerere</em> immédiatement après une autofusion conflictuelle enregistre les fichiers d&#8217;arbres de travail en conflit, avec les marqueurs de conflit habituels <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Plus tard, après que vous avez fini de résoudre les conflits, exécuter <em>git rerere</em> à nouveau enregistrera l&#8217;état résolu de ces fichiers. Supposez que vous avez fait cela lorsque vous avez créé la fusion de test de master dans la branche thématique.</p>
 </div>
 <div class="paragraph">
-<p>Next time, after seeing the same conflicted automerge, running <em>git rerere</em> will perform a three-way merge between the earlier conflicted automerge, the earlier manual resolution, and the current conflicted automerge. If this three-way merge resolves cleanly, the result is written out to your working tree file, so you do not have to manually resolve it. Note that <em>git rerere</em> leaves the index file alone, so you still need to do the final sanity checks with <code>git diff</code> (or <code>git diff -c</code>) and <em>git add</em> when you are satisfied.</p>
+<p>La prochaine fois, après avoir vu la même autofusion conflictuelle, lancer <code>git rerere</code> effectuera une fusion de trois points entre l&#8217;autofusion antérieure en conflit, la résolution manuelle antérieure et l&#8217;autofusion en conflit actuelle. Si cette fusion à trois points se résout proprement, le résultat est écrit à votre fichier d&#8217;arbre de travail, de sorte que vous n&#8217;avez pas à le résoudre manuellement. Notez que <em>git rerere</em> laisse le fichier index seul, donc vous devez toujours faire les vérifications de sanity finales avec <code>git diff</code> (ou <code>git diff -c</code>) et <code>git add</code> lorsque vous êtes satisfait.</p>
 </div>
 <div class="paragraph">
-<p>As a convenience measure, <em>git merge</em> automatically invokes <em>git rerere</em> upon exiting with a failed automerge and <em>git rerere</em> records the hand resolve when it is a new conflict, or reuses the earlier hand resolve when it is not. <em>git commit</em> also invokes <em>git rerere</em> when committing a merge result. What this means is that you do not have to do anything special yourself (besides enabling the rerere.enabled config variable).</p>
+<p>Comme mesure de commodité, <em>git merge</em> invoque automatiquement <em>git rerere</em> à la sortie d&#8217;une autofusion ratée et <em>git rerere</em> enregistre la résolution manuelle lorsqu&#8217;il s&#8217;agit d&#8217;un nouveau conflit, ou réutilise la résolution manuelle antérieure sinon. <em>git commit</em> invoque également <em>git rerere</em> lors de la validation d&#8217;un résultat de fusion. Ce que cela signifie, c&#8217;est que vous n&#8217;avez rien de spécial à faire vous-même (à moins d&#8217;avoir désactivé la variable de configuration <code>rerere.enabled</code>).</p>
 </div>
 <div class="paragraph">
-<p>In our example, when you do the test merge, the manual resolution is recorded, and it will be reused when you do the actual merge later with the updated master and topic branch, as long as the recorded resolution is still applicable.</p>
+<p>Dans notre exemple, lorsque vous faites la fusion de test, la résolution manuelle est enregistrée, et elle sera réutilisée lorsque vous faites la fusion réelle plus tard avec les branches master et topic mises à jour, tant que la résolution enregistrée est toujours applicable.</p>
 </div>
 <div class="paragraph">
-<p>The information <em>git rerere</em> records is also used when running <em>git rebase</em>. After blowing away the test merge and continuing development on the topic branch:</p>
+<p>Les enregistrement d&#8217;information <code>git rerere</code> sont également utilisées lors de l&#8217;exécution de <code>git rebase</code>. Après avoir fait exploser la fusion de test et continué le développement sur la branche thématique :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>              o---*---o-------o---o topic
+<pre>              o---*---o-------o---o sujet
              /
     o---o---o---*---o---o---o---o   master
 
-	$ git rebase master topic
+	$ git rebase master sujet
 
 				  o---*---o-------o---o sujet
 				 /
@@ -182,10 +182,10 @@ Vous devez configurer la variable de configuration <code>rerere.enabled</code> p
 </div>
 </div>
 <div class="paragraph">
-<p>you could run <code>git rebase master topic</code>, to bring yourself up to date before your topic is ready to be sent upstream. This would result in falling back to a three-way merge, and it would conflict the same way as the test merge you resolved earlier. <em>git rerere</em> will be run by <em>git rebase</em> to help you resolve this conflict.</p>
+<p>vous pouvez lancer <code>git rebase master topic</code>, pour vous mettre à jour avant que votre sujet soit prêt à être envoyé en amont. Cela entraînerait un retour à une fusion à trois points et cela serait incompatible avec la fusion que vous avez résolue plus tôt. <em>git rerere</em> sera lancé par <em>git rebase</em> pour vous aider à résoudre ce conflit.</p>
 </div>
 <div class="paragraph">
-<p>[NOTE] <em>git rerere</em> relies on the conflict markers in the file to detect the conflict. If the file already contains lines that look the same as lines with conflict markers, <em>git rerere</em> may fail to record a conflict resolution. To work around this, the <code>conflict-marker-size</code> setting in <a href='{{< relurl "docs/gitattributes/fr" >}}'>gitattributes[5]</a> can be used.</p>
+<p>[NOTE] <em>git rerere</em> s&#8217;appuie sur les marqueurs de conflit dans le dossier pour détecter le conflit. Si le fichier contient déjà des lignes qui ressemblent aux lignes avec des marqueurs de conflit, « git rerere» peut ne pas enregistrer une résolution de conflit. Pour contourner cette limitation, on peut utiliser le réglage de la taille de la marqueur de conflit <code>conflict-marker-size</code> dans <a href='{{< relurl "docs/gitattributes/fr" >}}'>gitattributes[5]</a>.</p>
 </div>
 </div>
 </div>

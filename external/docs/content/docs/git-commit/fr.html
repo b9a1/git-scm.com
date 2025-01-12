@@ -98,13 +98,13 @@ aliases:
 <dd>
 <p>Créer un nouveau commit qui « répare » <code>&lt;commit&gt;</code> quand il est appliqué avec <code>git rebase --autosquash`</code>. Un simple <code>--fixup=&lt;commit&gt;</code> crée un commit "fixup!" qui change le contenu de <code>&lt;commit&gt;</code> mais laisse son message de validation inchangé. <code>--fixup=amend:&lt;commit&gt;</code> est similaire mais crée un commit "amend!" qui remplace aussi le message de validation de <code>&lt;commit&gt;</code> par le message de validation du commit "amend!". <code>--fixup=reword:&lt;commit&gt;</code> crée un commit "amend!" qui remplace le message de validation de <code>&lt;commit&gt;</code> par son propre message de log mais ne fait aucun changement au contenu de <code>&lt;commit&gt;</code>.</p>
 <div class="paragraph">
-<p>Le commit créé par le simple <code>--fixup=&lt;commit&gt;</code> a un sujet composé de "fixup !" suivi de la ligne de sujet de &lt;commit&gt;, et est reconnu spécialement par <code>git rebase --autosquash</code>. L&#8217;option <code>-m</code> peut être utilisée pour compléter le message du journal du commit créé, mais le commentaire supplémentaire sera jeté une fois que le commit "fixup !" sera écrasé dans <code>&lt;commit&gt;</code> par <code>git rebase --autosquash</code>.</p>
+<p>Le commit créé par le simple <code>--fixup=&lt;commit&gt;</code> a un sujet composé de "fixup!" suivi de la ligne de sujet de &lt;commit&gt;, et est reconnu spécialement par <code>git rebase --autosquash</code>. L&#8217;option <code>-m</code> peut être utilisée pour compléter le message du journal du commit créé, mais le commentaire supplémentaire sera jeté une fois que le commit "fixup !" sera écrasé dans <code>&lt;commit&gt;</code> par <code>git rebase --autosquash</code>.</p>
 </div>
 <div class="paragraph">
-<p>Le commit créé par <code>--fixup=amend:&lt;commit&gt;</code> est similaire mais son sujet est à la place préfixé par "amend !". Le message de validation de &lt;commit&gt; est copié dans le message de validation du commit "amend !" et ouvert dans un éditeur afin qu&#8217;il puisse être affiné. Lorsque <code>git rebase --autosquash</code> écrase le commit "amend !" dans <code>&lt;commit&gt;</code>, le message de validation de <code>&lt;commit&gt;</code> est remplacé par le message de validation raffiné du commit "amend !". C&#8217;est une erreur si le message du journal du commit "amend !" est vide, à moins que <code>--allow-empty-message</code> soit spécifié.</p>
+<p>Le commit créé par <code>--fixup=amend:&lt;commit&gt;</code> est similaire mais son sujet est à la place préfixé par "amend!". Le message de validation de &lt;commit&gt; est copié dans le message de validation du commit "amend!" et ouvert dans un éditeur afin qu&#8217;il puisse être affiné. Lorsque <code>git rebase --autosquash</code> écrase le commit "amend!" dans <code>&lt;commit&gt;</code>, le message de validation de <code>&lt;commit&gt;</code> est remplacé par le message de validation raffiné du commit "amend!". C&#8217;est une erreur si le message du journal du commit "amend!" est vide, à moins que <code>--allow-empty-message</code> soit spécifié.</p>
 </div>
 <div class="paragraph">
-<p><code>--fixup=reword:&lt;commit&gt;</code> est un raccourci pour <code>--fixup=amend:&lt;commit&gt; --only</code>. Il crée un commit "amend !" qui touche seulement au message de validation (en ignorant les changements mis en place dans l&#8217;index). Lorsqu&#8217;il est écrasé par <code>git rebase --autosquash</code>, il remplace le message du validation de <code>&lt;commit&gt;</code> sans faire d&#8217;autres changements.</p>
+<p><code>--fixup=reword:&lt;commit&gt;</code> est un raccourci pour <code>--fixup=amend:&lt;commit&gt; --only</code>. Il crée un commit "amend!" qui touche seulement au message de validation (en ignorant les changements mis en place dans l&#8217;index). Lorsqu&#8217;il est écrasé par <code>git rebase --autosquash</code>, il remplace le message du validation de <code>&lt;commit&gt;</code> sans faire d&#8217;autres changements.</p>
 </div>
 <div class="paragraph">
 <p>Ni les commits "fixup!" ni les commits "amend!" ne changent la paternité de <code>&lt;commit&gt;</code> quand ils sont appliqués par <code>git rebase --autosquash</code>. Voir <a href='{{< relurl "docs/git-rebase/fr" >}}'>git-rebase[1]</a> pour plus de détails.</p>
@@ -579,22 +579,8 @@ De plus, la partie date est acceptée dans les formats suivants : <code>AAAA.MM
 <div class="paragraph">
 <p>L&#8217;éditeur utilisé pour éditer le message de validation sera choisi dans l&#8217;ordre de recherche depuis la variable d&#8217;environnement <code>GIT_EDITOR</code>, puis depuis la variable de configuration <code>core.editor</code>, puis depuis la variable d&#8217;environnement <code>VISUAL</code> ou la variable d&#8217;environnement <code>EDITOR</code>. Voir <a href='{{< relurl "docs/git-var/fr" >}}'>git-var[1]</a> pour plus de détails.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>fr/includes/cmd-config-section-rest.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Tout ce qui se trouve au-dessus de cette ligne dans cette section n&#8217;est pas inclus dans la documentation <a href='{{< relurl "docs/git-config/fr" >}}'>git-config[1]</a>. Le contenu qui suit est le même que celui qui s&#8217;y trouve :</p>
 </div>
 <div class="admonitionblock warning">
 <table>

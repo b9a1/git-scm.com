@@ -37,13 +37,10 @@ aliases:
 <p>Créer, décompresser et manipuler des fichiers "bundle". Les colis sont utilisés pour le transfert "hors ligne" d&#8217;objets Git sans qu&#8217;un "serveur" actif se trouve de l&#8217;autre côté de la connexion réseau.</p>
 </div>
 <div class="paragraph">
-<p>Ils peuvent être utilisés pour créer des sauvegardes incrémentielles et complètes d&#8217;un dépôt, et pour relayer l&#8217;état des références d&#8217;un dépôt à un autre.</p>
+<p>Ils peuvent être utilisés pour créer des sauvegardes incrémentielles et complètes d&#8217;un dépôt (voir l&#8217;exemple « sauvegarde complète » dans « EXEMPLE », et pour relayer l&#8217;état des références d&#8217;un dépôt à un autre (voir le second exemple).</p>
 </div>
 <div class="paragraph">
 <p>Les commandes Git qui récupèrent ou autrement "lisent" via des protocoles tels que <code>ssh://</code> et <code>https://</code> peuvent aussi opérer sur des fichiers cois. Il est possible de <a href='{{< relurl "docs/git-clone/fr" >}}'>git-clone[1]</a> un nouveau dépôt à partir d&#8217;un colis, d&#8217;utiliser <a href='{{< relurl "docs/git-fetch/fr" >}}'>git-fetch[1]</a> pour en récupérer, et de lister les références qu&#8217;il contient avec <a href='{{< relurl "docs/git-ls-remote/fr" >}}'>git-ls-remote[1]</a>. Il n&#8217;y a pas de support d'"écriture" correspondant, c&#8217;est-à-dire qu&#8217;un <em>git push</em> dans un colis n&#8217;est pas supporté.</p>
-</div>
-<div class="paragraph">
-<p>Voir la section "EXEMPLES" ci-dessous pour plus des exemples d&#8217;utilisation des colis.</p>
 </div>
 </div>
 </div>
@@ -117,7 +114,7 @@ aliases:
 <h2 id="_spécification_des_références"><a class="anchor" href="#_spécification_des_références"></a>SPÉCIFICATION DES RÉFÉRENCES</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Les révisions doivent être accompagnées de noms de référence pour être regroupées dans un colis.</p>
+<p>Les révisions doivent être accompagnées de noms de référence pour être regroupées dans un colis. Alternativement, <code>--all</code> peut être utilisé pour empaqueter toutes les réfs.</p>
 </div>
 <div class="paragraph">
 <p>Plus d&#8217;une référence peut être empaquetée, et plus d&#8217;un ensemble d&#8217;objets prérequis peut être spécifié. Les objets empaquetés sont ceux qui ne sont pas contenus dans l&#8217;union des prérequis.</p>
@@ -187,7 +184,7 @@ fatal: Refus de créer un colis vide.</pre>
 <p>Il n&#8217;y a pas de problème à être prudent et faire en sorte que le fichier regroupement contienne des objets déjà présents dans la destination, car ceux-ci sont ignorés lors du déballage à la destination.</p>
 </div>
 <div class="paragraph">
-<p>Si vous voulez imiter <code>git clone --mirror</code>, qui inclurait vos refs comme <code>refs/remotes/*</code>, utilisez <code>--all</code>. Si vous voulez fournir le même ensemble de références qu&#8217;un clone directement depuis le dépôt source, utilisez <code>--branches --tags</code> pour les <code>&lt;arguments-git-rev-list&gt;</code>.</p>
+<p>Si vous voulez fournir le même ensemble de références qu&#8217;un clone directement depuis le dépôt source, utilisez <code>--branches --tags</code> pour les <code>&lt;arguments-git-rev-list&gt;</code>.</p>
 </div>
 <div class="paragraph">
 <p>La commande <em>git bundle verify</em> peut être utilisée pour vérifier si votre dépôt destinataire possède les commits pré-requis nécessaires pour un colis.</p>
@@ -198,7 +195,39 @@ fatal: Refus de créer un colis vide.</pre>
 <h2 id="_exemples"><a class="anchor" href="#_exemples"></a>EXEMPLES</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Supposons que vous vouliez transférer l&#8217;historique d&#8217;un dépôt R1 sur la machine A vers un autre dépôt R2 sur la machine B. Pour une raison quelconque, la connexion directe entre A et B n&#8217;est pas autorisée, mais nous pouvons déplacer les données de A à B via un mécanisme quelconque (CD, email, etc.). Nous voulons mettre à jour R2 avec le développement fait sur la branche master dans R1.</p>
+<p>Nous discuterons de deux cas :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Prendre une sauvegarde complète d&#8217;un dépôt</p>
+</li>
+<li>
+<p>Transférer l&#8217;historique d&#8217;un dépôt vers une autre machine lorsque les deux machines n&#8217;ont pas de connexion directe</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Prenons d&#8217;abord une sauvegarde complète du dépôt. La commande suivante prendra une sauvegarde complète du dépôt dans le sens que tous les réfs sont inclus dans le colis :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git bundle create backup.bundle --all</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mais notez encore que ce n&#8217;est que pour les réfs, c&#8217;est-à-dire que vous n&#8217;inclurez que les refs et les commits accessibles à partir de ces réfs. Vous n&#8217;inclurez pas d&#8217;autre état local, tel que le contenu de l&#8217;index, l&#8217;arbre de travail, la remise, la configuration par dépôt, les crochets, etc.</p>
+</div>
+<div class="paragraph">
+<p>Vous pouvez ensuite récupérer ce dépôt en utilisant par exemple <a href='{{< relurl "docs/git-clone/fr" >}}'>git-clone[1]</a> :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone backup.bundle &lt;nouveau-répertoire&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pour l&#8217;exemple suivant, supposons que vous vouliez transférer l&#8217;historique d&#8217;un dépôt R1 sur la machine A vers un autre dépôt R2 sur la machine B. Pour une raison quelconque, la connexion directe entre A et B n&#8217;est pas autorisée, mais nous pouvons déplacer les données de A à B via un mécanisme quelconque (CD, email, etc.). Nous voulons mettre à jour R2 avec le développement fait sur la branche master dans R1.</p>
 </div>
 <div class="paragraph">
 <p>Pour amorcer le processus, vous pouvez d&#8217;abord créer un paquet qui n&#8217;a pas de prérequis. Vous pouvez utiliser une étiquette pour vous rappeler jusqu&#8217;à quel commit le dernier traitement a été fait, afin de faciliter la mise à jour ultérieure de l&#8217;autre dépôt avec un paquet incrémental :</p>
@@ -303,6 +332,20 @@ machineB$ git pull</pre>
 <div class="content">
 <pre>$ git ls-remote monpaquet</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discussion"><a class="anchor" href="#_discussion"></a>DISCUSSION</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Une manière naïve de faire une sauvegarde complète d&#8217;un dépôt est d&#8217;utiliser quelque chose qui fait comme <code>cp -r &lt;dépôt&gt; &lt;destination&gt;</code>. Cela est découragé puisque le dépôt pourrait être écrit pendant l&#8217;opération de copie. À son tour, certains fichiers dans <code>&lt;destination&gt;</code> pourraient être corrompus.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est pourquoi il est recommandé d&#8217;utiliser l&#8217;outillage Git pour faire des sauvegardes de dépôt, soit avec cette commande soit par exemple avec <a href='{{< relurl "docs/git-clone/fr" >}}'>git-clone[1]</a>. Mais gardez à l&#8217;esprit que ces outils ne vous aideront pas à sauvegarder l&#8217;état autre que les refs et les commits. En d&#8217;autres termes, ils ne vous aideront pas à sauvegarder le contenu de l&#8217;index, l&#8217;arbre de travail, la remise, la configuration par dépôt, les crochets, etc.</p>
+</div>
+<div class="paragraph">
+<p>Voir aussi <a href='{{< relurl "docs/gitfaq/fr" >}}'>gitfaq[7]</a>, section "TRANSFERTS" pour une discussion des problèmes associés à la synchronisation de fichiers entre les systèmes.</p>
 </div>
 </div>
 </div>

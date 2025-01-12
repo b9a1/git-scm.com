@@ -123,6 +123,12 @@ aliases:
 <dt class="hdlist1" id="git-index-pack---promisorltmessagegt"> <a class="anchor" href="#git-index-pack---promisorltmessagegt"></a>--promisor[=&lt;message&gt;] </dt>
 <dd>
 <p>Avant de livrer le pack-index, créer un fichier .promisor pour ce paquet. Particulièrement utile lors de l&#8217;écriture d&#8217;un paquet promisor avec --fix-thin puisque le nom du paquet n&#8217;est pas définitif tant que le paquet n&#8217;a pas été entièrement écrit. Si un <code>&lt;message&gt;</code> est fourni, son contenu sera écrit dans le fichier .promisor pour référence future. Voir <a href="{{< relurl "docs/partial-clone/fr" >}}">partial clone</a> pour plus d&#8217;informations.</p>
+<div class="paragraph">
+<p>De plus, s&#8217;il y a des objets dans le paquet donné qui référencent des objets non-prometteurs (dans le dépôt), ré-empaqueter ces objets non-prometteurs dans un paquet à prometteur. Cela évite une situation dans laquelle un dépôt a des objets non-prometteurs qui sont accessibles par des objets promettteurs.</p>
+</div>
+<div class="paragraph">
+<p>Nécessite que <em>&lt;fichier-paquet&gt;</em> ne soit pas spécifié.</p>
+</div>
 </dd>
 </dl>
 </div>

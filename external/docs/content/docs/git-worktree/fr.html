@@ -113,7 +113,7 @@ aliases:
 <p>De même, si un arbre de travail pour un arbre-de-travail lié est déplacé sans utiliser <code>git worktree move</code>, l&#8217;arbre-de-travail principal (ou le dépôt nu) ne pourra pas le localiser. L&#8217;exécution de <code>repair</code> dans l&#8217;arbre-de-travail récemment déplacé rétablira la connexion. Si plusieurs arbres-de-travail liés sont déplacés, l&#8217;exécution de <code>repair</code> à partir de n&#8217;importe quel arbre-de-travail avec le nouveau <code>&lt;chemin&gt;</code> de chaque arbre comme argument, rétablira la connexion à tous les chemins spécifiés.</p>
 </div>
 <div class="paragraph">
-<p>Si l&#8217;arbre-de-travail principal et les arbres-de-travail liés ont été déplacés manuellement, alors l&#8217;exécution de <code>repair</code> dans l&#8217;arbre-de-travail principal et la spécification du nouveau <code>&lt;chemin&gt;</code> de chaque arbre-de-travail lié rétablira toutes les connexions dans les deux directions.</p>
+<p>Si l&#8217;arbre-de-travail principal et les arbres-de-travail liés ont été déplacés ou copiés manuellement, alors l&#8217;exécution de <code>repair</code> dans l&#8217;arbre-de-travail principal et la spécification du nouveau <code>&lt;chemin&gt;</code> de chaque arbre-de-travail lié rétablira toutes les connexions dans les deux directions.</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-worktree-unlock"> <a class="anchor" href="#git-worktree-unlock"></a>unlock </dt>
@@ -159,6 +159,13 @@ aliases:
 <p>Avec <code>worktree add &lt;chemin&gt;</code>, sans <code>&lt;commit-esque&gt;</code>, au lieu de créer une nouvelle branche à partir de <code>HEAD</code>, s&#8217;il existe une branche de suivi d&#8217;exactement un distant correspondant au basename de <code>&lt;chemin&gt;</code>, baser la nouvelle branche sur la branche de suivi à distance, et marquer la branche de suivi à distance comme étant "amont" de la nouvelle branche.</p>
 <div class="paragraph">
 <p>Cela peut également être configuré comme le comportement par défaut en utilisant l&#8217;option de configuration <code>worktree.guessRemote</code>.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="git-worktree---no-relative-paths"> <a class="anchor" href="#git-worktree---no-relative-paths"></a>--[no-]relative-paths </dt>
+<dd>
+<p>Lier les arbres-de-travail par des chemins relatifs ou absolus(par défaut). Surcharge l&#8217;option de configuration `worktree.useRelativePaths ' , voir <a href='{{< relurl "docs/git-config/fr" >}}'>git-config[1]</a>.</p>
+<div class="paragraph">
+<p>Avec <code>repair</code>, les fichiers liens seront mis à jour s&#8217;il y a une différence absolu/relatif, même si les liens sont corrects.</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-worktree---no-track"> <a class="anchor" href="#git-worktree---no-track"></a>--[no-]track </dt>

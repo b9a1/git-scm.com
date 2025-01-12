@@ -113,7 +113,7 @@ aliases:
 <p>Da mesma forma, caso uma árvore de trabalho vinculada seja movida sem usar o comando <code>git worktree move</code>, a principal árvore de trabalho (ou o repositório vazio) não será capaz de localizá-la. Executando o comando <code>repair</code> dentro da árvore de trabalho recém-movida faz com que a conexão seja reestabelecida. Caso várias árvores de trabalho que estejam vinculadas sejam movidas, ao executar o <code>repair</code> a partir de qualquer árvore de trabalho usando o novo <code>&lt;caminho&gt;</code> de cada árvore como argumento, o vínculo será reestabelecido com todos os caminhos especificados.</p>
 </div>
 <div class="paragraph">
-<p>Caso a principal árvore de trabalho e as árvores de trabalho que estejam vinculadas tenham sido movidas manualmente, ao executar <code>repair</code> na principal árvore de trabalho e ao definir um novo <code>&lt;caminho&gt;</code> de cada árvore de trabalho vinculada, fará com que todas as conexões em todas as direções sejam reestabelecidas.</p>
+<p>If both the main worktree and linked worktrees have been moved or copied manually, then running <code>repair</code> in the main worktree and specifying the new <code>&lt;path&gt;</code> of each linked worktree will reestablish all connections in both directions.</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-worktree-unlock"> <a class="anchor" href="#git-worktree-unlock"></a>unlock </dt>
@@ -159,6 +159,13 @@ aliases:
 <p>Com <code>worktree add &lt;caminho&gt;</code>, sem <code>&lt;commit-ish&gt;</code>, em vez de criar uma nova ramificação a partir do <code>HEAD</code>, caso exista uma ramificação de rastreamento em exatamente um ponto remoto que coincida com o <code>basename</code> do <code>&lt;caminho&gt;</code>, baseie a nova ramificação na ramificação remota rastreada e marque a ramificação rastreada remoto como um "upstream" da nova ramificação.</p>
 <div class="paragraph">
 <p>Isso também pode ser definido como um comportamento predefinido ao usar a opção da configuração <code>worktree.guessRemote</code>.</p>
+</div>
+</dd>
+<dt class="hdlist1" id="git-worktree---no-relative-paths"> <a class="anchor" href="#git-worktree---no-relative-paths"></a>--[no-]relative-paths </dt>
+<dd>
+<p>Link worktrees using relative paths or absolute paths (default). Overrides the <code>worktree.useRelativePaths</code> config option, see <a href='{{< relurl "docs/git-config/pt_BR" >}}'>git-config[1]</a>.</p>
+<div class="paragraph">
+<p>With <code>repair</code>, the linking files will be updated if there&#8217;s an absolute/relative mismatch, even if the links are correct.</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-worktree---no-track"> <a class="anchor" href="#git-worktree---no-track"></a>--[no-]track </dt>

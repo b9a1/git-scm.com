@@ -304,7 +304,7 @@ C&#8217;est un mode de fonctionnement potentiellement <em>dangereux</em>. Il ré
 <dd>
 <p>Approfondir ou raccourcir l&#8217;historique d&#8217;un dépôt superficiel pour inclure tous les commits accessibles après &lt;date&gt;.</p>
 </dd>
-<dt class="hdlist1" id="git-pull---shallow-excludeltrvisiongt"> <a class="anchor" href="#git-pull---shallow-excludeltrvisiongt"></a>--shallow-exclude=&lt;révision&gt; </dt>
+<dt class="hdlist1" id="git-pull-code--shallow-excludeltrfgtcode"> <a class="anchor" href="#git-pull-code--shallow-excludeltrfgtcode"></a><code>--shallow-exclude=&lt;réf&gt;</code> </dt>
 <dd>
 <p>Approfondir ou raccourcir l&#8217;historique d&#8217;un dépôt superficiel afin d&#8217;exclure les commits accessibles depuis une branche ou une étiquette distante spécifiée. Cette option peut être spécifiée plusieurs fois.</p>
 </dd>
@@ -411,7 +411,7 @@ Cette option permet de passer outre à ce contrôle.</p>
 <dt class="hdlist1" id="git-pull--oltoptiongt"> <a class="anchor" href="#git-pull--oltoptiongt"></a>-o &lt;option&gt; </dt>
 <dt class="hdlist1" id="git-pull---server-optionltoptiongt"> <a class="anchor" href="#git-pull---server-optionltoptiongt"></a>--server-option=&lt;option&gt; </dt>
 <dd>
-<p>Transmettre la chaîne donnée au serveur lors d&#8217;une communication utilisant la version 2 du protocole. La chaîne donnée ne doit pas contenir de caractère NUL ou LF. La gestion par le serveur des options du serveur, y compris les options inconnues, est spécifique au serveur. Lorsque plusieurs <code>--server-option=&lt;option&gt;</code> sont donnés, ils sont tous envoyés à l&#8217;autre côté dans l&#8217;ordre indiqué sur la ligne de commande.</p>
+<p>Transmettre la chaîne donnée au serveur lors d&#8217;une communication utilisant la version 2 du protocole. La chaîne donnée ne doit pas contenir de caractère NUL ou LF. La gestion par le serveur des options du serveur, y compris les options inconnues, est spécifique au serveur. Lorsque plusieurs <code>--server-option=&lt;option&gt;</code> sont donnés, ils sont tous envoyés à l&#8217;autre côté dans l&#8217;ordre indiqué sur la ligne de commande. Quand aucun <code>--server-option=&lt;option&gt;`est fourni sur la ligne de commande, les valeurs de la variable de configuration `remote.&lt;nom&gt;.serverOption</code> sont utilisées à la place.</p>
 </dd>
 <dt class="hdlist1" id="git-pull---show-forced-updates"> <a class="anchor" href="#git-pull---show-forced-updates"></a>--show-forced-updates </dt>
 <dd>
@@ -445,10 +445,10 @@ Cette option permet de passer outre à ce contrôle.</p>
 (voir la section "<a href="#BRANCHES DE SUIVI À DISTANCE CONFIGURÉES">[BRANCHES DE SUIVI À DISTANCE CONFIGURÉES]</a>"
 dans <a href='{{< relurl "docs/git-fetch/fr" >}}'>git-fetch[1]</a>).</p>
 <div class="paragraph">
-<p>Le format d&#8217;un paramètre &lt;spéc-de-réf&gt; est un plus <code>+</code> optionnel, suivi de la source &lt;src&gt;, suivi de deux points <code>:</code>, suivi de la destination ref &lt;dst&gt;. Les deux points peuvent être omis lorsque &lt;dst&gt; est vide. &lt;src&gt; est typiquement une réf, mais cela peut aussi être un nom d&#8217;objet hexadécimal entier.</p>
+<p>Le format d&#8217;un paramètre &lt;spéc-de-réf&gt; est un plus <code>+</code> optionnel, suivi de la source &lt;src&gt;, suivi de deux points <code>:</code>, suivi de la destination &lt;dst&gt;. Les deux points peuvent être omis lorsque &lt;dst&gt; est vide. &lt;src&gt; est typiquement une réf, ou un motif glob avec un unique <code>*</code> qui est utilisé pour trouver un ensemble de réfs mais cela peut aussi être un nom d&#8217;objet hexadécimal entier.</p>
 </div>
 <div class="paragraph">
-<p>Un &lt;spec-de-réf&gt; peut contenir un <code>*</code> dans son &lt;src&gt; pour indiquer une simple correspondance de motif. Un tel refspec fonctionne comme un motif qui correspond à n&#8217;importe quelle ref avec le même préfixe. Un motif &lt;spec-de-réf&gt; doit avoir un <code>*</code> dans les deux &lt;src&gt; et &lt;dst&gt;. Il va faire correspondre les références à la destination en remplaçant le <code>*</code> par le contenu correspondant de la source.</p>
+<p>Un &lt;spec-de-réf&gt; peut contenir un <code>*</code> dans son &lt;src&gt; pour indiquer une simple correspondance de motif. Un tel refspec fonctionne comme un motif qui correspond à n&#8217;importe quelle ref avec le même préfixe. Un motif &lt;spec-de-réf&gt; doit avoir un et un seul <code>*</code> dans les deux &lt;src&gt; et &lt;dst&gt;. Il va faire correspondre les références à la destination en remplaçant le <code>*</code> par le contenu correspondant de la source.</p>
 </div>
 <div class="paragraph">
 <p>Si un spécificateur de référence est préfixé par <code>^</code>, il sera interprété comme un spécificateur de référence négatif. Plutôt que de spécifier les références à récupérer ou les références locales à mettre à jour, un tel spécificateur de référence spécifiera les références à exclure. Une référence sera considérée comme correspondante si elle correspond à au moins une référence positive, et ne correspond à aucune référence négative. Les spécificateurs de référence négatifs peuvent être utiles pour restreindre le champ d&#8217;application d&#8217;un spécificateur modèle de référence afin qu&#8217;il n&#8217;inclue pas de références spécifiques. Les spécificateurs de référence négatifs peuvent eux-mêmes être des spécificateurs modèles de référence . Cependant, ils ne peuvent contenir qu&#8217;un &lt;src&gt; et ne peuvent pas spécifier un &lt;dst&gt;. Les noms d&#8217;objets hexagonaux complets ne sont pas non plus pris en charge.</p>
@@ -514,7 +514,7 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <p>Git supporte les protocoles ssh, git, http et https (en plus, ftp et ftps peuvent être utilisés pour la récupération, mais ceux-ci sont inefficaces et déconseillés ; ne les utilisez pas).</p>
 </div>
 <div class="paragraph">
-<p>Le transport natif (c&#8217;est-à-dire l&#8217;URL git://) n&#8217;utilise pas d&#8217;authentification et ne devrait être utilisé qu&#8217;avec précaution sur des réseaux non sécurisés.</p>
+<p>Le transport natif (c&#8217;est-à-dire l&#8217;URL <code>git://</code>) n&#8217;utilise pas d&#8217;authentification et ne devrait être utilisé qu&#8217;avec précaution sur des réseaux non sécurisés.</p>
 </div>
 <div class="paragraph">
 <p>Les syntaxes suivantes peuvent être utilisées avec eux :</p>
@@ -522,16 +522,16 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>ssh://[&lt;utilisateur&gt;@]&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;hôte&gt;</em>[:<em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>git://&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>http</code>[<code>s</code>]<code>://</code><em>&lt;hôtet&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p>git://&lt;hôte&gt;:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;`</p>
 </li>
 <li>
-<p><code>ftp</code>[<code>s</code>]<code>://</code><em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p>git://&lt;hôte&gt;[:&lt;port&gt;]/&lt;chemin-du-dépôt-git&gt;`</p>
 </li>
 </ul>
 </div>
@@ -541,7 +541,7 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <div class="ulist">
 <ul>
 <li>
-<p>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em><code>:/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>[&lt;utilisateur&gt;@]&lt;hôte&gt;:/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -549,18 +549,18 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <p>Cette syntaxe n&#8217;est reconnue que s&#8217;il n&#8217;y a pas de barre oblique devant les premiers deux-points. Cela permet de prendre en charge des chemins locaux qui contiendraient des deux-points. Par exemple, le chemin local <code>toto:titi</code> pourrait être spécifié comme un chemin absolu ou <code>./toto:titi</code> pour éviter d&#8217;être interprété comme une url ssh.</p>
 </div>
 <div class="paragraph">
-<p>Les protocoles ssh et git supportent en plus l&#8217;expansion <code>~</code><em>&lt;utilisateur&gt;</em>  :</p>
+<p>Les protocoles ssh et git supportent en plus l&#8217;expansion <code>~&lt;utilisateur&gt;</code>  :</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ssh://</code>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>ssh://[&lt;utilisateur&gt;@]&lt;hôte&gt;[:&lt;port&gt;]/~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p><code>git://</code><em>&lt;hôte&gt;</em>[<code>:</code><em>&lt;port&gt;</em>]<code>/~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>git://&lt;hôte&gt;[:&lt;port&gt;]/~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 <li>
-<p>[<em>&lt;utilisateur&gt;</em><code>@</code>]<em>&lt;hôte&gt;</em><code>:~</code><em>&lt;utilisateur&gt;</em><code>/</code><em>&lt;chemin-du-dépôt-git&gt;</em></p>
+<p><code>[&lt;utilisateur&gt;@]&lt;hôte&gt;:~&lt;utilisateur&gt;/&lt;chemin-du-dépôt-git&gt;</code></p>
 </li>
 </ul>
 </div>
@@ -573,7 +573,7 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <p><code>/chemin/du/dépôt.git/</code></p>
 </li>
 <li>
-<p><code><a href="file:///chemin/du/dépôt.git/" class="bare">file:///chemin/du/dépôt.git/</a></code></p>
+<p><code>file:///chemin/du/dépôt.git/</code></p>
 </li>
 </ul>
 </div>
@@ -584,12 +584,12 @@ Il y a une différence entre le fait de lister plusieurs &lt;spéc-de-réf&gt; d
 <p><code>git clone</code>, <code>git fetch</code> et <code>git pull</code>, mais pas <code>git push</code>, acceptent également un fichier paquet approprié. Voir <a href='{{< relurl "docs/git-bundle/fr" >}}'>git-bundle[1]</a>.</p>
 </div>
 <div class="paragraph">
-<p>Quand Git ne sait pas comment gérer un certain protocole, il essaie d&#8217;utiliser l&#8217;assistant de gestion de distant <code>remote-</code><em>&lt;transport&gt;</em>, s&#8217;il existe. Pour requérir l&#8217;emploi d&#8217;un assistant spécifique, la syntaxe suivante peut être utilisée :</p>
+<p>Quand Git ne sait pas comment gérer un certain protocole, il essaie d&#8217;utiliser l&#8217;assistant de gestion de distant <code>remote-&lt;transport&gt;</code>, s&#8217;il existe. Pour requérir l&#8217;emploi d&#8217;un assistant spécifique, la syntaxe suivante peut être utilisée :</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>&lt;transport&gt;</em>::<em>&lt;adresse&gt;</em></p>
+<p><code>&lt;transport&gt;::&lt;adresse&gt;</code></p>
 </li>
 </ul>
 </div>

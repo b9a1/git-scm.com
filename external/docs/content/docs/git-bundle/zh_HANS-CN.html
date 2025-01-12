@@ -37,13 +37,10 @@ aliases:
 <p>创建、解包和操作 “打包” 文件。捆绑文件用于 Git 对象的 “离线” 传输，而不需要在网络连接的另一端有一个活跃的 “服务器”。</p>
 </div>
 <div class="paragraph">
-<p>它们可以用来创建仓库的增量和完全备份，并将一个仓库中的引用状态传递给另一个版本库。</p>
+<p>They can be used to create both incremental and full backups of a repository (see the "full backup" example in "EXAMPLES"), and to relay the state of the references in one repository to another (see the second example).</p>
 </div>
 <div class="paragraph">
-<p>通过 <code>ssh://</code> 和 <code>https://</code> 等协议获取或以其他方式 “读取” 的 Git 命令也可以对打包文件进行操作。它可以通过 <a href='{{< relurl "docs/git-clone/zh_HANS-CN" >}}'>git-clone[1]</a> 从打包中建立新的仓库，用 <a href='{{< relurl "docs/git-fetch/zh_HANS-CN" >}}'>git-fetch[1]</a> 从其中获取，并通过 <a href='{{< relurl "docs/git-ls-remote/zh_HANS-CN" >}}'>git-ls-remote[1]</a> 列出其中的引用。没有相应的 "写" 支持，也就是说，不支持 <em>git push</em> 捆绑包。</p>
-</div>
-<div class="paragraph">
-<p>关于如何使用捆绑包的例子，见下面的 “实例” 部分。</p>
+<p>Git commands that fetch or otherwise "read" via protocols such as <code>ssh://</code> and <code>https://</code> can also operate on bundle files. It is possible <a href='{{< relurl "docs/git-clone/zh_HANS-CN" >}}'>git-clone[1]</a> a new repository from a bundle, to use <a href='{{< relurl "docs/git-fetch/zh_HANS-CN" >}}'>git-fetch[1]</a> to fetch from one, and to list the references contained within it with <a href='{{< relurl "docs/git-ls-remote/zh_HANS-CN" >}}'>git-ls-remote[1]</a>. There&#8217;s no corresponding "write" support, i.e. a <em>git push</em> into a bundle is not supported.</p>
 </div>
 </div>
 </div>
@@ -117,7 +114,7 @@ aliases:
 <h2 id="_指定引用"><a class="anchor" href="#_指定引用"></a>指定引用</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>修订必须附有引用名称，才能打包成捆绑包。</p>
+<p>Revisions must be accompanied by reference names to be packaged in a bundle. Alternatively <code>--all</code> can be used to package all refs.</p>
 </div>
 <div class="paragraph">
 <p>可以打包一个以上的引用，也可以指定一组以上的先决条件对象。 被打包的对象是那些不包含在先决条件组合中的对象。</p>
@@ -187,7 +184,7 @@ fatal: 拒绝产生空捆绑包。</pre>
 <p>谨慎行事是可以的，使捆绑文件包含已经在目的地的对象，因为在目的地解包时这些对象会被忽略。</p>
 </div>
 <div class="paragraph">
-<p>如果你想匹配 <code>git clone --mirror</code>，这将包括你的 refs 如 <code>refs/remotes/*</code>，使用 <code>--all</code>。 如果你想提供与直接从源码库克隆得到的相同的引用，使用 <code>--branches --tags</code> 作为 <code>&lt;git-rev-list-args&gt;</code>。</p>
+<p>If you want to provide the same set of refs that a clone directly from the source repository would get, use <code>--branches --tags</code> for the <code>&lt;git-rev-list-args&gt;</code>.</p>
 </div>
 <div class="paragraph">
 <p><em>git bundle verify</em> 命令可以用来检查你的接收库是否有一个捆绑包所需的先决条件提交。</p>
@@ -198,7 +195,39 @@ fatal: 拒绝产生空捆绑包。</pre>
 <h2 id="_实例"><a class="anchor" href="#_实例"></a>实例</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>假设你想把 A 机器上的版本库 R1 的历史记录转移到 B 机器上的另一个版本库 R2。由于某种原因，A 和 B 之间不允许直接连接，但我们可以通过某种机制（CD、电子邮件等）把数据从 A 转移到 B。 我们想用 R1 中的分支 master 上的开发来更新 R2。</p>
+<p>We&#8217;ll discuss two cases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Taking a full backup of a repository</p>
+</li>
+<li>
+<p>Transferring the history of a repository to another machine when the two machines have no direct connection</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>First let&#8217;s consider a full backup of the repository. The following command will take a full backup of the repository in the sense that all refs are included in the bundle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git bundle create backup.bundle --all</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But note again that this is only for the refs, i.e. you will only include refs and commits reachable from those refs. You will not include other local state, such as the contents of the index, working tree, the stash, per-repository configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>You can later recover that repository by using for example <a href='{{< relurl "docs/git-clone/zh_HANS-CN" >}}'>git-clone[1]</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone backup.bundle &lt;new directory&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the next example, assume you want to transfer the history from a repository R1 on machine A to another repository R2 on machine B. For whatever reason, direct connection between A and B is not allowed, but we can move data from A to B via some mechanism (CD, email, etc.). We want to update R2 with development made on the branch master in R1.</p>
 </div>
 <div class="paragraph">
 <p>为了启动这个过程，你可以先创建一个没有任何先决条件的捆绑包。你可以使用一个标签来记住你最后处理的提交，以方便以后用增量的捆绑包来更新其他仓库：</p>
@@ -303,6 +332,20 @@ machineA$ git tag -f lastR2bundle master</pre>
 <div class="content">
 <pre>$ git ls-remote mybundle</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_讨论"><a class="anchor" href="#_讨论"></a>讨论</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A naive way to make a full backup of a repository is to use something to the effect of <code>cp -r &lt;repo&gt; &lt;destination&gt;</code>. This is discouraged since the repository could be written to during the copy operation. In turn some files at <code>&lt;destination&gt;</code> could be corrupted.</p>
+</div>
+<div class="paragraph">
+<p>This is why it is recommended to use Git tooling for making repository backups, either with this command or with e.g. <a href='{{< relurl "docs/git-clone/zh_HANS-CN" >}}'>git-clone[1]</a>. But keep in mind that these tools will not help you backup state other than refs and commits. In other words they will not help you backup contents of the index, working tree, the stash, per-repository configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href='{{< relurl "docs/gitfaq/zh_HANS-CN" >}}'>gitfaq[7]</a>, section "TRANSFERS" for a discussion of the problems associated with file syncing across systems.</p>
 </div>
 </div>
 </div>

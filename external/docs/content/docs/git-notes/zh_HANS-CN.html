@@ -23,9 +23,9 @@ aliases:
 <div class="sectionbody">
 <div class="verseblock">
 <pre class="content"><em>git notes</em> [list [&lt;object&gt;]]
-<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [&lt;object&gt;]
+<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [-e] [&lt;object&gt;]
 <em>git notes</em> copy [-f] ( --stdin | &lt;from-object&gt; [&lt;to-object&gt;] )
-<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [&lt;object&gt;]
+<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;paragraph-break&gt;] [--[no-]stripspace] [-F &lt;file&gt; | -m &lt;msg&gt; | (-c | -C) &lt;object&gt;] [-e] [&lt;object&gt;]
 <em>git notes</em> edit [--allow-empty] [&lt;object&gt;] [--[no-]stripspace]
 <em>git notes</em> show [&lt;object&gt;]
 <em>git notes</em> merge [-v | -q] [-s &lt;strategy&gt; ] &lt;notes-ref&gt;
@@ -71,7 +71,7 @@ aliases:
 </dd>
 <dt class="hdlist1" id="git-notes-add"> <a class="anchor" href="#git-notes-add"></a>add </dt>
 <dd>
-<p>为给定对象添加注释（默认为 HEAD）。如果对象已有注释，则终止添加（使用 <code>-f</code> 覆盖现有注释）。 但是，如果使用 <code>add</code> 交互式命令（使用编辑器提供注释内容），那么现有注释将在编辑器中打开（类似于 <code>edit</code> 子命令），而不是终止。如果指定多个 <code>-m</code> 和 <code>-F</code>，将在信息之间插入空行。使用 <code>--separator</code> 选项可以插入其他分隔符。</p>
+<p>Add notes for a given object (defaults to HEAD). Abort if the object already has notes (use <code>-f</code> to overwrite existing notes). However, if you&#8217;re using <code>add</code> interactively (using an editor to supply the notes contents), then - instead of aborting - the existing notes will be opened in the editor (like the <code>edit</code> subcommand). If you specify multiple <code>-m</code> and <code>-F</code>, a blank line will be inserted between the messages. Use the <code>--separator</code> option to insert other delimiters. You can use <code>-e</code> to edit and fine-tune the message(s) supplied from <code>-m</code> and <code>-F</code> options interactively (using an editor) before adding the note.</p>
 </dd>
 <dt class="hdlist1" id="git-notes-copy"> <a class="anchor" href="#git-notes-copy"></a>copy </dt>
 <dd>
@@ -90,7 +90,7 @@ aliases:
 </dd>
 <dt class="hdlist1" id="git-notes-append"> <a class="anchor" href="#git-notes-append"></a>append </dt>
 <dd>
-<p>将 <code>-m</code> 或 <code>-F</code> 选项指定的新信息附加到现有注释中，或将不存在的信息作为新注释添加到对象中（默认为 HEAD）。 当添加到现有注释时，每条新信息前都会添加一个空行作为段间分隔符。 分隔符可使用 <code>--separator</code> 选项自定义。</p>
+<p>Append new message(s) given by <code>-m</code> or <code>-F</code> options to an existing note, or add them as a new note if one does not exist, for the object (defaults to HEAD). When appending to an existing note, a blank line is added before each new message as an inter-paragraph separator. The separator can be customized with the <code>--separator</code> option. Edit the notes to be appended given by <code>-m</code> and <code>-F</code> options with <code>-e</code> interactively (using an editor) before appending the note.</p>
 </dd>
 <dt class="hdlist1" id="git-notes-edit"> <a class="anchor" href="#git-notes-edit"></a>edit </dt>
 <dd>
@@ -289,22 +289,8 @@ $ git notes --ref=built add --allow-empty -C "$blob" HEAD</pre>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>zh_HANS-CN/includes/cmd-config-section-rest.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>本节中这一行以上的内容并不包括在 <a href='{{< relurl "docs/git-config/zh_HANS-CN" >}}'>git-config[1]</a> 文档中。下面的内容与那里的内容相同：</p>
 </div>
 <div class="admonitionblock warning">
 <table>

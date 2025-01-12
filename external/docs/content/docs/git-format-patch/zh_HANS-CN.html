@@ -567,7 +567,7 @@ aliases:
 <p>RFC 意味着“请求评论”（Request For Comments）；在发送一个用于讨论而非应用的实验性补丁时使用这个。使用 "--rfc=WIP" 也可能是一个有用的方式来表明一个补丁尚未完成（"WIP" 代表 "Work In Progress"）。</p>
 </div>
 <div class="paragraph">
-<p>如果接收社区的惯例是将特定的额外字符串放在主题前缀 <em>之后</em>，可以在字符串 <em>&lt;rfc&gt;</em> 前加上一个破折号（"<code>-</code>"）来表示 <em>&lt;rfc&gt;</em> 字符串的其余部分应该附加到主题前缀之后，例如，<code>--rfc='-(WIP)'</code> 的结果将是 "PATCH (WIP)"。</p>
+<p>If the convention of the receiving community for a particular extra string is to have it <em>after</em> the subject prefix, the string <em>&lt;rfc&gt;</em> can be prefixed with a dash ("<code>-</code>") to signal that the rest of the <em>&lt;rfc&gt;</em> string should be appended to the subject prefix instead, e.g., <code>--rfc='-(WIP)'</code> results in "PATCH (WIP)".</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-format-patch--vltngt"> <a class="anchor" href="#git-format-patch--vltngt"></a>-v &lt;n&gt; </dt>

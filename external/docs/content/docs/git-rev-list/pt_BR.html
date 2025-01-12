@@ -386,7 +386,7 @@ $ git rev-list A...B</pre>
 </dd>
 <dt class="hdlist1" id="git-rev-list---ancestry-pathltcommitgt"> <a class="anchor" href="#git-rev-list---ancestry-pathltcommitgt"></a>--ancestry-path[=&lt;commit&gt;] </dt>
 <dd>
-<p>Quando for dado um intervalo de commits a serem exibidos (por exemplo, <em>commit1..commit2</em> ou <em>commit2 ^commit1</em>), exiba apenas os commits neste intervalo que sejam ancestrais do <em>&lt;commit&gt;</em>, descendentes do <em>&lt;commit&gt;</em> ou o próprio <em>&lt;commit&gt;</em>. Se nenhum commit for especificado, use <em>commit1</em> (a parte excluída do intervalo) como &lt;commit&gt;. Pode ser passado várias vezes; nesse caso, um commit será incluído se for qualquer um dos commits fornecidos ou se for um ancestral ou descendente de um deles.</p>
+<p>When given a range of commits to display (e.g. <em>commit1..commit2</em> or <em>commit2 ^commit1</em>), and a commit &lt;commit&gt; in that range, only display commits in that range that are ancestors of &lt;commit&gt;, descendants of &lt;commit&gt;, or &lt;commit&gt; itself. If no commit is specified, use <em>commit1</em> (the excluded part of the range) as &lt;commit&gt;. Can be passed multiple times; if so, a commit is included if it is any of the commits given or if it is an ancestor or descendant of one of them.</p>
 </dd>
 </dl>
 </div>

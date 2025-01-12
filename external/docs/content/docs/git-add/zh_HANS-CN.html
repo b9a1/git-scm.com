@@ -21,12 +21,12 @@ aliases:
 <div class="sect1">
 <h2 id="_概述"><a class="anchor" href="#_概述"></a>概述</h2>
 <div class="sectionbody">
-<div class="verseblock">
-<pre class="content"><em>git add</em> [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
-	  [--edit | -e] [--[no-]all | -A | --[no-]ignore-removal | [--update | -u]] [--sparse]
-	  [--intent-to-add | -N] [--refresh] [--ignore-errors] [--ignore-missing] [--renormalize]
-	  [--chmod=(+|-)x] [--pathspec-from-file=&lt;文件&gt; [--pathspec-file-nul]]
-	  [--] [&lt;路径规范&gt;&#8230;&#8203;]</pre>
+<div class="paragraph">
+<p>git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
+	[--edit | -e] [--[no-]all | -A | --[no-]ignore-removal | [--update | -u]] [--sparse]
+	[--intent-to-add | -N] [--refresh] [--ignore-errors] [--ignore-missing] [--renormalize]
+	[--chmod=(+|-)x] [--pathspec-from-file=&lt;file&gt; [--pathspec-file-nul]]
+	[--] [&lt;pathspec&gt;&#8230;&#8203;]</p>
 </div>
 </div>
 </div>
@@ -46,7 +46,7 @@ aliases:
 <p><code>git status</code> 命令可用于获取摘要，说明哪些变化的文件已暂存，准备下一次提交。</p>
 </div>
 <div class="paragraph">
-<p><code>git add</code> 命令默认不会添加被忽略的文件。如果在命令行上明确指定了任何被忽略的文件，则 <code>git add</code> 会失败，并显示被忽略文件的列表。由目录递归或 Git 执行的文件名通配符（在 shell 之前引用的通配符）所涉及的忽略文件将被静默忽略。 <em>git add</em> 命令可用于通过 <code>-f</code> 选项（force）强制添加忽略的文件。</p>
+<p>The <code>git add</code> command will not add ignored files by default. If any ignored files were explicitly specified on the command line, <code>git add</code> will fail with a list of ignored files. Ignored files reached by directory recursion or filename globbing performed by Git (quote your globs before the shell) will be silently ignored. The <code>git add</code> command can be used to add ignored files with the <code>-f</code> (force) option.</p>
 </div>
 <div class="paragraph">
 <p>请参阅 <a href='{{< relurl "docs/git-commit/zh_HANS-CN" >}}'>git-commit[1]</a> 了解将内容添加到提交的其他替代方法。</p>
@@ -58,116 +58,116 @@ aliases:
 <div class="sectionbody">
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="git-add-ltgt82308203"> <a class="anchor" href="#git-add-ltgt82308203"></a>&lt;路径规范&gt;&#8230;&#8203; </dt>
+<dt class="hdlist1" id="git-add-codeltpathspecgtcode"> <a class="anchor" href="#git-add-codeltpathspecgtcode"></a><code>&lt;pathspec&gt;...</code> </dt>
 <dd>
 <p>要从中添加内容的文件。可以使用文件通配符（例如 <code>*.c</code>）来添加所有匹配的文件。此外，还可以提供一个前导目录名（例如，指定 <code>dir</code> 以添加 <code>dir/file1</code> 和 <code>dir/file2</code>）来更新索引，使其与整个目录的当前状态相匹配（例如，指定 <code>dir</code> 不仅会记录在工作树中修改的文件 <code>dir/file1</code>，还会记录在工作树中添加的文件 <code>dir/file2</code>，还有从工作树中删除的文件 <code>dir/file3</code>）。请注意，旧版本的 Git 会忽略已删除的文件；如果要添加已修改的文件或新文件，但忽略已删除的文件，请使用 <code>--no-all</code> 选项。</p>
 <div class="paragraph">
 <p>For more details about the <em>&lt;pathspec&gt;</em> syntax, see the <em>pathspec</em> entry in <a href='{{< relurl "docs/gitglossary/zh_HANS-CN" >}}'>gitglossary[7]</a>.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add--n"> <a class="anchor" href="#git-add--n"></a>-n </dt>
-<dt class="hdlist1" id="git-add---dry-run"> <a class="anchor" href="#git-add---dry-run"></a>--dry-run </dt>
+<dt class="hdlist1" id="git-add-code-ncode"> <a class="anchor" href="#git-add-code-ncode"></a><code>-n</code> </dt>
+<dt class="hdlist1" id="git-add-code--dry-runcode"> <a class="anchor" href="#git-add-code--dry-runcode"></a><code>--dry-run</code> </dt>
 <dd>
 <p>实际上不添加文件，仅展示文件是否存在或是否忽略。</p>
 </dd>
-<dt class="hdlist1" id="git-add--v"> <a class="anchor" href="#git-add--v"></a>-v </dt>
-<dt class="hdlist1" id="git-add---verbose"> <a class="anchor" href="#git-add---verbose"></a>--verbose </dt>
+<dt class="hdlist1" id="git-add-code-vcode"> <a class="anchor" href="#git-add-code-vcode"></a><code>-v</code> </dt>
+<dt class="hdlist1" id="git-add-code--verbosecode"> <a class="anchor" href="#git-add-code--verbosecode"></a><code>--verbose</code> </dt>
 <dd>
 <p>详细日志。</p>
 </dd>
-<dt class="hdlist1" id="git-add--f"> <a class="anchor" href="#git-add--f"></a>-f </dt>
-<dt class="hdlist1" id="git-add---force"> <a class="anchor" href="#git-add---force"></a>--force </dt>
+<dt class="hdlist1" id="git-add-code-fcode"> <a class="anchor" href="#git-add-code-fcode"></a><code>-f</code> </dt>
+<dt class="hdlist1" id="git-add-code--forcecode"> <a class="anchor" href="#git-add-code--forcecode"></a><code>--force</code> </dt>
 <dd>
 <p>允许添加已被忽略的文件。</p>
 </dd>
-<dt class="hdlist1" id="git-add---sparse"> <a class="anchor" href="#git-add---sparse"></a>--sparse </dt>
+<dt class="hdlist1" id="git-add-code--sparsecode"> <a class="anchor" href="#git-add-code--sparsecode"></a><code>--sparse</code> </dt>
 <dd>
 <p>允许更新稀疏检出 cone 之外的索引条目。 通常，<code>git add</code> 拒绝更新其路径不适合稀疏检出 cone 的索引条目，因为这些文件可能会在没有警告的情况下从工作区中删除。有关更多详细信息，请参阅链接 <a href='{{< relurl "docs/git-sparse-checkout/zh_HANS-CN" >}}'>git-sparse-checkout[1]</a>。</p>
 </dd>
-<dt class="hdlist1" id="git-add--i"> <a class="anchor" href="#git-add--i"></a>-i </dt>
-<dt class="hdlist1" id="git-add---interactive"> <a class="anchor" href="#git-add---interactive"></a>--interactive </dt>
+<dt class="hdlist1" id="git-add-code-icode"> <a class="anchor" href="#git-add-code-icode"></a><code>-i</code> </dt>
+<dt class="hdlist1" id="git-add-code--interactivecode"> <a class="anchor" href="#git-add-code--interactivecode"></a><code>--interactive</code> </dt>
 <dd>
 <p>以交互方式将工作目录树中的修改内容添加到索引。可以提供可选的路径参数，以将操作限制为工作目录树的子集。有关详细信息，请参见 <em>'交互模式</em>'。</p>
 </dd>
-<dt class="hdlist1" id="git-add--p"> <a class="anchor" href="#git-add--p"></a>-p </dt>
-<dt class="hdlist1" id="git-add---patch"> <a class="anchor" href="#git-add---patch"></a>--patch </dt>
+<dt class="hdlist1" id="git-add-code-pcode"> <a class="anchor" href="#git-add-code-pcode"></a><code>-p</code> </dt>
+<dt class="hdlist1" id="git-add-code--patchcode"> <a class="anchor" href="#git-add-code--patchcode"></a><code>--patch</code> </dt>
 <dd>
 <p>交互地在索引和工作目录之间选择补丁块并将它们添加到索引中。这让用户有机会在将修改后的内容添加到索引之前查看差异。</p>
 <div class="paragraph">
 <p>参见这可以有效地运行 <code>add --interactive</code>，但是会绕过初始命令菜单，而直接跳转到 <code>patch</code> 子命令。有关详细信息，请参见 <em>'交互模式</em>'。</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add--e"> <a class="anchor" href="#git-add--e"></a>-e </dt>
-<dt class="hdlist1" id="git-add---edit"> <a class="anchor" href="#git-add---edit"></a>--edit </dt>
+<dt class="hdlist1" id="git-add-code-ecode"> <a class="anchor" href="#git-add-code-ecode"></a><code>-e</code> </dt>
+<dt class="hdlist1" id="git-add-code--editcode"> <a class="anchor" href="#git-add-code--editcode"></a><code>--edit</code> </dt>
 <dd>
 <p>在编辑器中打开与索引的差异，使用户进行编辑。关闭编辑器后，调整块补丁头并将其应用于索引。</p>
 <div class="paragraph">
 <p>此选项的目的是选择并选择要应用的补丁的行，甚至修改要暂存的行的内容。与使用交互式补丁块选择器相比，其更快，更灵活。但是，很容易混淆自己并创建不应用于索引的补丁。请参阅下面的编辑补丁。</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add--u"> <a class="anchor" href="#git-add--u"></a>-u </dt>
-<dt class="hdlist1" id="git-add---update"> <a class="anchor" href="#git-add---update"></a>--update </dt>
+<dt class="hdlist1" id="git-add-code-ucode"> <a class="anchor" href="#git-add-code-ucode"></a><code>-u</code> </dt>
+<dt class="hdlist1" id="git-add-code--updatecode"> <a class="anchor" href="#git-add-code--updatecode"></a><code>--update</code> </dt>
 <dd>
 <p>Update the index just where it already has an entry matching <em>&lt;pathspec&gt;</em>. This removes as well as modifies index entries to match the working tree, but adds no new files.</p>
 <div class="paragraph">
 <p>If no <em>&lt;pathspec&gt;</em> is given when <code>-u</code> option is used, all tracked files in the entire working tree are updated (old versions of Git used to limit the update to the current directory and its subdirectories).</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add--A"> <a class="anchor" href="#git-add--A"></a>-A </dt>
-<dt class="hdlist1" id="git-add---all"> <a class="anchor" href="#git-add---all"></a>--all </dt>
-<dt class="hdlist1" id="git-add---no-ignore-removal"> <a class="anchor" href="#git-add---no-ignore-removal"></a>--no-ignore-removal </dt>
+<dt class="hdlist1" id="git-add-code-Acode"> <a class="anchor" href="#git-add-code-Acode"></a><code>-A</code> </dt>
+<dt class="hdlist1" id="git-add-code--allcode"> <a class="anchor" href="#git-add-code--allcode"></a><code>--all</code> </dt>
+<dt class="hdlist1" id="git-add-code--no-ignore-removalcode"> <a class="anchor" href="#git-add-code--no-ignore-removalcode"></a><code>--no-ignore-removal</code> </dt>
 <dd>
 <p>Update the index not only where the working tree has a file matching <em>&lt;pathspec&gt;</em> but also where the index already has an entry. This adds, modifies, and removes index entries to match the working tree.</p>
 <div class="paragraph">
 <p>If no <em>&lt;pathspec&gt;</em> is given when <code>-A</code> option is used, all files in the entire working tree are updated (old versions of Git used to limit the update to the current directory and its subdirectories).</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add---no-all"> <a class="anchor" href="#git-add---no-all"></a>--no-all </dt>
-<dt class="hdlist1" id="git-add---ignore-removal"> <a class="anchor" href="#git-add---ignore-removal"></a>--ignore-removal </dt>
+<dt class="hdlist1" id="git-add-code--no-allcode"> <a class="anchor" href="#git-add-code--no-allcode"></a><code>--no-all</code> </dt>
+<dt class="hdlist1" id="git-add-code--ignore-removalcode"> <a class="anchor" href="#git-add-code--ignore-removalcode"></a><code>--ignore-removal</code> </dt>
 <dd>
 <p>Update the index by adding new files that are unknown to the index and files modified in the working tree, but ignore files that have been removed from the working tree. This option is a no-op when no <em>&lt;pathspec&gt;</em> is used.</p>
 <div class="paragraph">
-<p>This option is primarily to help users who are used to older versions of Git, whose "git add <em>&lt;pathspec&gt;</em>&#8230;&#8203;" was a synonym for "git add --no-all <em>&lt;pathspec&gt;</em>&#8230;&#8203;", i.e. ignored removed files.</p>
+<p>This option is primarily to help users who are used to older versions of Git, whose <code>git add &lt;pathspec&gt;...</code> was a synonym for <code>git add --no-all &lt;pathspec&gt;...</code>, i.e. ignored removed files.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-add--N"> <a class="anchor" href="#git-add--N"></a>-N </dt>
-<dt class="hdlist1" id="git-add---intent-to-add"> <a class="anchor" href="#git-add---intent-to-add"></a>--intent-to-add </dt>
+<dt class="hdlist1" id="git-add-code-Ncode"> <a class="anchor" href="#git-add-code-Ncode"></a><code>-N</code> </dt>
+<dt class="hdlist1" id="git-add-code--intent-to-addcode"> <a class="anchor" href="#git-add-code--intent-to-addcode"></a><code>--intent-to-add</code> </dt>
 <dd>
 <p>只记录稍后将添加路径的事实。路径的项会被放置在索引中，但不包括改动的内容。这对于使用 <code>git diff</code> 显示文件的未暂存内容以及使 <code>git commit -a</code> 提交这些文件非常有用。</p>
 </dd>
-<dt class="hdlist1" id="git-add---refresh"> <a class="anchor" href="#git-add---refresh"></a>--refresh </dt>
+<dt class="hdlist1" id="git-add-code--refreshcode"> <a class="anchor" href="#git-add-code--refreshcode"></a><code>--refresh</code> </dt>
 <dd>
 <p>不添加文件，只刷新索引中的 stat() 信息。</p>
 </dd>
-<dt class="hdlist1" id="git-add---ignore-errors"> <a class="anchor" href="#git-add---ignore-errors"></a>--ignore-errors </dt>
+<dt class="hdlist1" id="git-add-code--ignore-errorscode"> <a class="anchor" href="#git-add-code--ignore-errorscode"></a><code>--ignore-errors</code> </dt>
 <dd>
 <p>如果由于索引错误而无法添加某些文件，请不要中止操作，而是继续添加其他文件。命令仍应以非零状态退出。可以将配置变量 <code>add.ignoreErrors</code> 设置为 true，使其成为默认行为。</p>
 </dd>
-<dt class="hdlist1" id="git-add---ignore-missing"> <a class="anchor" href="#git-add---ignore-missing"></a>--ignore-missing </dt>
+<dt class="hdlist1" id="git-add-code--ignore-missingcode"> <a class="anchor" href="#git-add-code--ignore-missingcode"></a><code>--ignore-missing</code> </dt>
 <dd>
-<p>此选项只能与 --dry-run 一起使用。通过使用此选项，用户可以检查是否会忽略任何给定的文件，无论它们是否已存在于工作树中。</p>
+<p>This option can only be used together with <code>--dry-run</code>. By using this option the user can check if any of the given files would be ignored, no matter if they are already present in the work tree or not.</p>
 </dd>
-<dt class="hdlist1" id="git-add---no-warn-embedded-repo"> <a class="anchor" href="#git-add---no-warn-embedded-repo"></a>--no-warn-embedded-repo </dt>
+<dt class="hdlist1" id="git-add-code--no-warn-embedded-repocode"> <a class="anchor" href="#git-add-code--no-warn-embedded-repocode"></a><code>--no-warn-embedded-repo</code> </dt>
 <dd>
 <p>默认情况下， <code>git add</code> 将在向索引添加嵌入式存储库时发出警告，而不使用 <code>git submodule add</code> 在 <code>.gitmodules</code> 中创建条目。此选项将抑制警告（例如，如果手动对子模块执行操作）。</p>
 </dd>
-<dt class="hdlist1" id="git-add---renormalize"> <a class="anchor" href="#git-add---renormalize"></a>--renormalize </dt>
+<dt class="hdlist1" id="git-add-code--renormalizecode"> <a class="anchor" href="#git-add-code--renormalizecode"></a><code>--renormalize</code> </dt>
 <dd>
-<p>对所有跟踪文件重新应用 “清除” 程序，将它们强制添加到索引中。 这在更改 <code>core.autocrlf</code> 配置或 <code>text</code> 属性后非常有用，可以纠正添加文件时错误的 CRLF/LF 行尾。 该选项意味着 <code>-u</code> 。由于 CRLF 字符不会被清除，因此 CRLF 会被清除为 LF，而 CRCRLF 序列只会被部分清除为 CRLF。</p>
+<p>Apply the "clean" process freshly to all tracked files to forcibly add them again to the index. This is useful after changing <code>core.autocrlf</code> configuration or the <code>text</code> attribute in order to correct files added with wrong <em>CRLF/LF</em> line endings. This option implies <code>-u</code>. Lone CR characters are untouched, thus while a <em>CRLF</em> cleans to <em>LF</em>, a <em>CRCRLF</em> sequence is only partially cleaned to <em>CRLF</em>.</p>
 </dd>
-<dt class="hdlist1" id="git-add---chmod-x"> <a class="anchor" href="#git-add---chmod-x"></a>--chmod=(+|-)x </dt>
+<dt class="hdlist1" id="git-add-code--chmod-xcode"> <a class="anchor" href="#git-add-code--chmod-xcode"></a><code>--chmod=(+|-)x</code> </dt>
 <dd>
 <p>重写添加文件的可执行位。可执行位仅在索引中更改，磁盘上的文件保持不变。</p>
 </dd>
-<dt class="hdlist1" id="git-add---pathspec-from-fileltfilegt"> <a class="anchor" href="#git-add---pathspec-from-fileltfilegt"></a>--pathspec-from-file=&lt;file&gt; </dt>
+<dt class="hdlist1" id="git-add-code--pathspec-from-fileltfilegtcode"> <a class="anchor" href="#git-add-code--pathspec-from-fileltfilegtcode"></a><code>--pathspec-from-file=&lt;file&gt;</code> </dt>
 <dd>
-<p>Pathspec is passed in <em>&lt;file&gt;</em> instead of commandline args. If <em>&lt;file&gt;</em> is exactly <code>-</code> then standard input is used. Pathspec elements are separated by LF or CR/LF. Pathspec elements can be quoted as explained for the configuration variable <code>core.quotePath</code> (see <a href='{{< relurl "docs/git-config/zh_HANS-CN" >}}'>git-config[1]</a>). See also <code>--pathspec-file-nul</code> and global <code>--literal-pathspecs</code>.</p>
+<p>Pathspec is passed in <em>&lt;file&gt;</em> instead of commandline args. If <em>&lt;file&gt;</em> is exactly <code>-</code> then standard input is used. Pathspec elements are separated by <em>LF</em> or <em>CR/LF</em>. Pathspec elements can be quoted as explained for the configuration variable <code>core.quotePath</code> (see <a href='{{< relurl "docs/git-config/zh_HANS-CN" >}}'>git-config[1]</a>). See also <code>--pathspec-file-nul</code> and global <code>--literal-pathspecs</code>.</p>
 </dd>
-<dt class="hdlist1" id="git-add---pathspec-file-nul"> <a class="anchor" href="#git-add---pathspec-file-nul"></a>--pathspec-file-nul </dt>
+<dt class="hdlist1" id="git-add-code--pathspec-file-nulcode"> <a class="anchor" href="#git-add-code--pathspec-file-nulcode"></a><code>--pathspec-file-nul</code> </dt>
 <dd>
-<p>只有在使用 <code>--pathspec-from-file</code> 选项时才有意义。指定路径元素用 NUL 字符分隔，所有其他字符都按字面意思（包括换行符和引号）表示。</p>
+<p>Only meaningful with <code>--pathspec-from-file</code>. Pathspec elements are separated with <em>NUL</em> character and all other characters are taken literally (including newlines and quotes).</p>
 </dd>
-<dt class="hdlist1" id="git-add---"> <a class="anchor" href="#git-add---"></a>-- </dt>
+<dt class="hdlist1" id="git-add-code--code"> <a class="anchor" href="#git-add-code--code"></a><code>--</code> </dt>
 <dd>
 <p>此选项可用于分离命令行选项和文件列表（当文件名可能被误认为命令行选项时非常有用）。</p>
 </dd>
@@ -181,18 +181,18 @@ aliases:
 <div class="ulist">
 <ul>
 <li>
-<p>添加 <code>Documentation</code> 目录及其子目录下所有 <code>*.txt</code> 文件的内容：</p>
+<p>Adds content from all <code>*.txt</code> files under <code>Documentation</code> directory and its subdirectories:</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ git add Documentation/\*.txt</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>注意，在本例中，星号 <code>*</code> 是从 shell 中引入的；这使得该命令可以包含 <code>Documentation/</code> 的子目录中的文件。</p>
+<p>Note that the asterisk <code>*</code> is quoted from the shell in this example; this lets the command include the files from subdirectories of <code>Documentation/</code> directory.</p>
 </div>
 </li>
 <li>
-<p>从所有 git-*.sh 脚本中添加内容：</p>
+<p>Considers adding content from all <code>git-*.sh</code> scripts:</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ git add git-*.sh</pre>
@@ -233,7 +233,7 @@ aliases:
 <dl>
 <dt class="hdlist1" id="git-add-"> <a class="anchor" href="#git-add-"></a>状态 </dt>
 <dd>
-<p>这将显示每个路径下 HEAD 和索引之间的更改（即，如果输入 <code>git commit</code>，将提交什么），以及索引和工作目录树文件之间的更改（即，在输入 <code>git commit</code> 之前，执行 <code>git add</code> 可以进一步暂存什么）。示例输出如下：</p>
+<p>This shows the change between <code>HEAD</code> and index (i.e. what will be committed if you say <code>git commit</code>), and between index and working tree files (i.e. what you could stage further before <code>git commit</code> using <code>git add</code>) for each path. A sample output looks like this:</p>
 <div class="listingblock">
 <div class="content">
 <pre>              staged     unstaged path
@@ -242,7 +242,7 @@ aliases:
 </div>
 </div>
 <div class="paragraph">
-<p>它表明 foo.png 与 HEAD 有区别（但其是二进制的，因此无法显示行数），索引副本和工作目录树版本之间没有区别（如果工作目录树版本也不同，<code>nothing</code> 的位置上会显示 <code>binary</code> ）。另一个文件 git add-&#x2d;&#x2d;interactive.perl 添加了403 行，如果提交索引中的内容，则删除了 35 行，但工作目录树文件有额外修改（一次添加一次删除）。</p>
+<p>It shows that <code>foo.png</code> has differences from <code>HEAD</code> (but that is binary so line count cannot be shown) and there is no difference between indexed copy and the working tree version (if the working tree version were also different, <em>binary</em> would have been shown in place of <em>nothing</em>). The other file, <code>add-interactive.c</code>, has 403 lines added and 35 lines deleted if you commit what is in the index, but working tree file has further modifications (one addition and one deletion).</p>
 </div>
 </dd>
 <dt class="hdlist1" id="git-add-update"> <a class="anchor" href="#git-add-update"></a>update </dt>
@@ -309,7 +309,7 @@ p - print the current hunk
 </dd>
 <dt class="hdlist1" id="git-add-diff"> <a class="anchor" href="#git-add-diff"></a>diff </dt>
 <dd>
-<p>这使您可以查看要提交的内容（即，在 HEAD 和索引之间）。</p>
+<p>This lets you review what will be committed (i.e. between <code>HEAD</code> and index).</p>
 </dd>
 </dl>
 </div>
@@ -342,7 +342,7 @@ p - print the current hunk
 </div>
 </div>
 <div class="paragraph">
-<p>还可以执行更复杂的操作。但是请注意，由于补丁仅应用于索引而不是工作目录树，因此工作树似乎会 "撤消" 索引中的更改。例如，在索引中添加一行，而该行不在 HEAD 或工作目录树。此时会暂存其以进行提交，但是该行似乎在会在工作目录树中进行还原。</p>
+<p>There are also more complex operations that can be performed. But beware that because the patch is applied only to the index and not the working tree, the working tree will appear to "undo" the change in the index. For example, introducing a new line into the index that is in neither the <code>HEAD</code> nor the working tree will stage the new line for commit, but the line will appear to be reverted in the working tree.</p>
 </div>
 <div class="paragraph">
 <p>避免使用这些构造，除非格外小心。</p>
@@ -388,22 +388,8 @@ p - print the current hunk
 <div class="sect1">
 <h2 id="_配置"><a class="anchor" href="#_配置"></a>配置</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>zh_HANS-CN/includes/cmd-config-section-all.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>本节中这一行以下的内容都是从 <a href='{{< relurl "docs/git-config/zh_HANS-CN" >}}'>git-config[1]</a> 文档中摘录的。其内容与那里的内容相同：</p>
 </div>
 <div class="admonitionblock warning">
 <table>

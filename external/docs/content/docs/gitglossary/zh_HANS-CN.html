@@ -386,7 +386,7 @@ aliases:
 </dd>
 <dt class="hdlist1" id="gitglossary-aiddefpseudorefapseudoref"> <a class="anchor" href="#gitglossary-aiddefpseudorefapseudoref"></a><a id="def_pseudoref"></a>伪引用 (pseudoref) </dt>
 <dd>
-<p>A ref that has different semantics than normal refs. These refs can be read via normal Git commands, but cannot be written to by commands like <a href='{{< relurl "docs/git-update-ref/zh_HANS-CN" >}}'>git-update-ref[1]</a>.</p>
+<p>语义不同于普通引用的引用。这些引用可以通过正常的 Git 命令访问，但在某些情况下可能与正常引用的行为不同，例如<a href='{{< relurl "docs/git-update-ref/zh_HANS-CN" >}}'>git-update-ref[1]</a>。</p>
 <div class="paragraph">
 <p>The following pseudorefs are known to Git:</p>
 </div>
@@ -534,6 +534,10 @@ aliases:
 <dt class="hdlist1" id="gitglossary-aiddeftopicbranchatopicbranch"> <a class="anchor" href="#gitglossary-aiddeftopicbranchatopicbranch"></a><a id="def_topic_branch"></a>主题分支 (topic branch) </dt>
 <dd>
 <p>一个常规的 Git <a href="#def_branch">分支</a>，被开发者用来确定一个概念性的开发路线。由于新建一个分支通常需要很小的代价，所以通常开发中会包含几个小的分支，每个分支都有着非常明确的概念或小的增量但相关的变化。</p>
+</dd>
+<dt class="hdlist1" id="gitglossary-aiddeftraileratrailer"> <a class="anchor" href="#gitglossary-aiddeftraileratrailer"></a><a id="def_trailer"></a>trailer </dt>
+<dd>
+<p>Key-value metadata. Trailers are optionally found at the end of a commit message. Might be called "footers" or "tags" in other communities. See <a href='{{< relurl "docs/git-interpret-trailers/zh_HANS-CN" >}}'>git-interpret-trailers[1]</a>.</p>
 </dd>
 <dt class="hdlist1" id="gitglossary-aiddeftreeatree"> <a class="anchor" href="#gitglossary-aiddeftreeatree"></a><a id="def_tree"></a>树/目录树 (tree) </dt>
 <dd>

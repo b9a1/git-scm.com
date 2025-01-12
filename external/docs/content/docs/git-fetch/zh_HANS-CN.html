@@ -79,7 +79,7 @@ aliases:
 <dd>
 <p>加深或缩短浅层仓库的历史，包括&lt;日期&gt;之后所有可触及的提交。</p>
 </dd>
-<dt class="hdlist1" id="git-fetch---shallow-excludeltgt"> <a class="anchor" href="#git-fetch---shallow-excludeltgt"></a>--shallow-exclude=&lt;修订版本&gt; </dt>
+<dt class="hdlist1" id="git-fetch---shallow-excludeltrefgt"> <a class="anchor" href="#git-fetch---shallow-excludeltrefgt"></a>--shallow-exclude=&lt;ref&gt; </dt>
 <dd>
 <p>深化或缩短浅层版本库的历史，以排除从指定的远程分支或标记中可以到达的提交。 这个选项可以指定多次。</p>
 </dd>
@@ -255,7 +255,7 @@ aliases:
 <dt class="hdlist1" id="git-fetch--oltgt"> <a class="anchor" href="#git-fetch--oltgt"></a>-o &lt;选项&gt; </dt>
 <dt class="hdlist1" id="git-fetch---server-optionltgt"> <a class="anchor" href="#git-fetch---server-optionltgt"></a>--server-option=&lt;选项&gt; </dt>
 <dd>
-<p>使用协议版本2进行通信时，将给定的字符串传输到服务器。给定的字符串不得包含NUL或LF字符。服务器对服务器选项（包括未知选项）的处理是取决于服务器。当给出多个`--server-option=&lt;option&gt;`时，它们都按照命令行中列出的顺序发送到另一端。</p>
+<p>Transmit the given string to the server when communicating using protocol version 2. The given string must not contain a NUL or LF character. The server&#8217;s handling of server options, including unknown ones, is server-specific. When multiple <code>--server-option=&lt;option&gt;</code> are given, they are all sent to the other side in the order listed on the command line. When no <code>--server-option=&lt;option&gt;</code> is given from the command line, the values of configuration variable <code>remote.&lt;name&gt;.serverOption</code> are used instead.</p>
 </dd>
 <dt class="hdlist1" id="git-fetch---show-forced-updates"> <a class="anchor" href="#git-fetch---show-forced-updates"></a>--show-forced-updates </dt>
 <dd>
@@ -292,10 +292,10 @@ aliases:
 <p>指定要获取哪些引用，以及要更新哪些本地引用。 当命令行上没有出现 &lt;引用规范&gt; 时，将从`remote.&lt;仓库&gt;.fetch` 变量中读取要获取的引用
 (参见下文 <a href="#CRTB">配置的远程跟踪分支机构</a> )。</p>
 <div class="paragraph">
-<p>&lt;引用规范&gt; 参数的格式是一个可选的加号 <code>+</code> ，后面是源 &lt;src&gt;，后面是冒号 <code>:</code>，后面是目标引用 &lt;dst&gt;。 当 &lt;dst&gt; 为空时，冒号可以被省略。 &lt;src&gt; 通常是一个引用，但它也可以是一个完全拼写的十六进制对象名称。</p>
+<p>The format of a &lt;refspec&gt; parameter is an optional plus <code>+</code>, followed by the source &lt;src&gt;, followed by a colon <code>:</code>, followed by the destination &lt;dst&gt;. The colon can be omitted when &lt;dst&gt; is empty. &lt;src&gt; is typically a ref, or a glob pattern with a single <code>*</code> that is used to match a set of refs, but it can also be a fully spelled hex object name.</p>
 </div>
 <div class="paragraph">
-<p>一个 &lt;引用规范&gt; 可以在其&lt;src&gt;中包含一个`*'来表示一个简单的模式匹配。这样的 refspec 的功能就像一个 glob，可以匹配任何具有相同前缀的 ref。匹配 &lt;引用规范&gt; 必须在 &lt;src&gt; 和 &lt;dst&gt; 中都有一个 <code>*</code>。它将通过把 <code>*</code> 替换成从源头匹配的内容来把引用映射到目的地。</p>
+<p>A &lt;refspec&gt; may contain a <code>*</code> in its &lt;src&gt; to indicate a simple pattern match. Such a refspec functions like a glob that matches any ref with the pattern. A pattern &lt;refspec&gt; must have one and only one <code>*</code> in both the &lt;src&gt; and &lt;dst&gt;. It will map refs to the destination by replacing the <code>*</code> with the contents matched from the source.</p>
 </div>
 <div class="paragraph">
 <p>如果一个 引用规范的前缀是 <code>^</code>，它将被解释为一个负向引用规范。这样的引用规范不是指定要获取哪些引用或更新哪些本地引用，而是指定要排除的引用。如果一个引用至少与一个正向引用规范匹配，并且不与任何负向引用规范匹配，那么该引用将被视为匹配。负向引用规范可以用来限制引用规范匹配的范围，使其不包括特定的引用。 负向引用规范本身可以是模式引用规范。然而，它们可能只包含一个 &lt;src&gt;，而不指定一个 &lt;dst&gt;。完全拼出的十六进制对象名称也不被支持。</p>
@@ -831,22 +831,8 @@ $ git log FETCH_HEAD</pre>
 <div class="sect1">
 <h2 id="_配置"><a class="anchor" href="#_配置"></a>配置</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>zh_HANS-CN/includes/cmd-config-section-all.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>本节中这一行以下的内容都是从 <a href='{{< relurl "docs/git-config/zh_HANS-CN" >}}'>git-config[1]</a> 文档中摘录的。其内容与那里的内容相同：</p>
 </div>
 <div class="admonitionblock warning">
 <table>

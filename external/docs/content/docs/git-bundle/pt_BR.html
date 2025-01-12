@@ -37,13 +37,10 @@ aliases:
 <p>Crie, desempacote e manipule os arquivos "bundle" (pacote). Os pacotes são usados para a transferência "offline" dos objetos Git sem um "servidor" ativo esperando do outro lado da conexão de rede.</p>
 </div>
 <div class="paragraph">
-<p>Eles podem ser usados para criar backups incrementais e completos de um repositório e para retransmitir o estado das referências de um repositório para outro.</p>
+<p>They can be used to create both incremental and full backups of a repository (see the "full backup" example in "EXAMPLES"), and to relay the state of the references in one repository to another (see the second example).</p>
 </div>
 <div class="paragraph">
-<p>Os comandos do Git que buscam ou "leem" através de protocolos como <code>ssh://</code> e <code>https://</code> também podem operar nos arquivos de pacote (bundle). É possível <a href='{{< relurl "docs/git-clone/pt_BR" >}}'>git-clone[1]</a> (clonar) um novo repositório a partir de um pacote, usar o comando <a href='{{< relurl "docs/git-fetch/pt_BR" >}}'>git-fetch[1]</a> para buscar a partir de um e para listar as referências contidas nele usando o comando <a href='{{< relurl "docs/git-ls-remote/pt_BR" >}}'>git-ls-remote[1]</a>. Não há suporte correspondente de "gravação", ou seja, não há suporte para fazer um <em>git push</em> num pacote.</p>
-</div>
-<div class="paragraph">
-<p>Consulte a seção de EXEMPLOS abaixo para mais exemplos de como usar.</p>
+<p>Git commands that fetch or otherwise "read" via protocols such as <code>ssh://</code> and <code>https://</code> can also operate on bundle files. It is possible <a href='{{< relurl "docs/git-clone/pt_BR" >}}'>git-clone[1]</a> a new repository from a bundle, to use <a href='{{< relurl "docs/git-fetch/pt_BR" >}}'>git-fetch[1]</a> to fetch from one, and to list the references contained within it with <a href='{{< relurl "docs/git-ls-remote/pt_BR" >}}'>git-ls-remote[1]</a>. There&#8217;s no corresponding "write" support, i.e. a <em>git push</em> into a bundle is not supported.</p>
 </div>
 </div>
 </div>
@@ -117,7 +114,7 @@ aliases:
 <h2 id="_especificando_as_referências"><a class="anchor" href="#_especificando_as_referências"></a>ESPECIFICANDO AS REFERÊNCIAS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As revisões devem ser acompanhadas pelos nomes de referência que serão empacotados num pacote (bundle).</p>
+<p>Revisions must be accompanied by reference names to be packaged in a bundle. Alternatively <code>--all</code> can be used to package all refs.</p>
 </div>
 <div class="paragraph">
 <p>Mais de uma referência pode ser empacotada e mais de um conjunto de objetos de pré-requisito podem ser especificados. Os objetos empacotados são aqueles que não estão presentes na união dos pré-requisitos.</p>
@@ -187,7 +184,7 @@ fatal: Recusando a criação de um pacote vazio.</pre>
 <p>É bom errar pelo excesso de zelo, fazendo com que o arquivo bundle (pacote) contenha os objetos já no destino, pois eles são ignorados durante a descompactação no destino.</p>
 </div>
 <div class="paragraph">
-<p>Se quiser corresponder a <code>git clone --mirror</code>, que incluiria as suas referências, como <code>refs/remotes/*</code>, use o comando <code>--all</code>. Caso queira fornecer o mesmo conjunto de referências que um clone obteria diretamente do repositório da origem, use a opção <code>--branches --tags</code> no <code>&lt;git-rev-list-args&gt;</code>.</p>
+<p>If you want to provide the same set of refs that a clone directly from the source repository would get, use <code>--branches --tags</code> for the <code>&lt;git-rev-list-args&gt;</code>.</p>
 </div>
 <div class="paragraph">
 <p>O comando <em>git bundle verify</em> pode ser usado para verificar se o repositório do destinatário tem os pré-requisitos necessários para fazer o commit de um pacote.</p>
@@ -198,7 +195,39 @@ fatal: Recusando a criação de um pacote vazio.</pre>
 <h2 id="_exemplos"><a class="anchor" href="#_exemplos"></a>EXEMPLOS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Suponha que você queira transferir o histórico de um repositório R1 na máquina A para outro repositório R2 na máquina B. Por qualquer motivo, a conexão direta entre A e B não é permitida, mas podemos mover os dados de A para B através de algum mecanismo (CD, e-mail etc.). Queremos atualizar o R2 com o desenvolvimento feito no ramo master de R1.</p>
+<p>We&#8217;ll discuss two cases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Taking a full backup of a repository</p>
+</li>
+<li>
+<p>Transferring the history of a repository to another machine when the two machines have no direct connection</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>First let&#8217;s consider a full backup of the repository. The following command will take a full backup of the repository in the sense that all refs are included in the bundle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git bundle create backup.bundle --all</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But note again that this is only for the refs, i.e. you will only include refs and commits reachable from those refs. You will not include other local state, such as the contents of the index, working tree, the stash, per-repository configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>You can later recover that repository by using for example <a href='{{< relurl "docs/git-clone/pt_BR" >}}'>git-clone[1]</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git clone backup.bundle &lt;new directory&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the next example, assume you want to transfer the history from a repository R1 on machine A to another repository R2 on machine B. For whatever reason, direct connection between A and B is not allowed, but we can move data from A to B via some mechanism (CD, email, etc.). We want to update R2 with development made on the branch master in R1.</p>
 </div>
 <div class="paragraph">
 <p>Para inicializar o processo, você pode primeiro criar um pacote que não exista qualquer pré-requisitos. Você pode usar uma tag para ser lembrado até o último commit que for processado, serve para facilitar a atualização posterior do outro repositório com um pacote incremental:</p>
@@ -303,6 +332,20 @@ machineB$ git pull</pre>
 <div class="content">
 <pre>$ git ls-remote mybundle</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discussão"><a class="anchor" href="#_discussão"></a>DISCUSSÃO</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A naive way to make a full backup of a repository is to use something to the effect of <code>cp -r &lt;repo&gt; &lt;destination&gt;</code>. This is discouraged since the repository could be written to during the copy operation. In turn some files at <code>&lt;destination&gt;</code> could be corrupted.</p>
+</div>
+<div class="paragraph">
+<p>This is why it is recommended to use Git tooling for making repository backups, either with this command or with e.g. <a href='{{< relurl "docs/git-clone/pt_BR" >}}'>git-clone[1]</a>. But keep in mind that these tools will not help you backup state other than refs and commits. In other words they will not help you backup contents of the index, working tree, the stash, per-repository configuration, hooks, etc.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href='{{< relurl "docs/gitfaq/pt_BR" >}}'>gitfaq[7]</a>, section "TRANSFERS" for a discussion of the problems associated with file syncing across systems.</p>
 </div>
 </div>
 </div>

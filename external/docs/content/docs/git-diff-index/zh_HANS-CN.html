@@ -861,7 +861,7 @@ unmerged       :000000 000000 0000000 0000000 U file6</pre>
 <p>使用 <code>-p</code> 选项运行 <a href='{{< relurl "docs/git-diff/zh_HANS-CN" >}}'>git-diff[1]</a>、<a href='{{< relurl "docs/git-log/zh_HANS-CN" >}}'>git-log[1]</a>、<a href='{{< relurl "docs/git-show/zh_HANS-CN" >}}'>git-show[1]</a>、<a href='{{< relurl "docs/git-diff-index/zh_HANS-CN" >}}'>git-diff-index[1]</a>、<a href='{{< relurl "docs/git-diff-tree/zh_HANS-CN" >}}'>git-diff-tree[1]</a> 或 <a href='{{< relurl "docs/git-diff-files/zh_HANS-CN" >}}'>git-diff-files[1]</a> 会生成补丁文本。 你可以通过 <code>GIT_EXTERNAL_DIFF</code> 和 <code>GIT_DIFF_OPTS</code> 环境变量（参见 <a href='{{< relurl "docs/git/zh_HANS-CN" >}}'>git[1]</a>），以及 <code>diff</code> 属性（参见 <a href='{{< relurl "docs/gitattributes/zh_HANS-CN" >}}'>gitattributes[5]</a>）自定义补丁文本的创建。</p>
 </div>
 <div class="paragraph">
-<p>-p 选项产生的内容与传统的差异格式略有不同：</p>
+<p>What the <code>-p</code> option produces is slightly different from the traditional diff format:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -881,23 +881,21 @@ unmerged       :000000 000000 0000000 0000000 U file6</pre>
 </li>
 <li>
 <p>它的后面是一个或多个扩展头信息行：</p>
-<div class="literalblock">
-<div class="content">
-<pre>old mode &lt;模式&gt;
-new mode &lt;模式&gt;
-deleted file mode &lt;模式&gt;
-new file mode &lt;模式&gt;
-copy from &lt;路径&gt;
-copy to &lt;路径&gt;
-rename from &lt;路径&gt;
-rename to &lt;路径&gt;
-similarity index &lt;数字&gt;
-dissimilarity index &lt;数字&gt;
-index &lt;哈希&gt;..&lt;哈希&gt; &lt;模式&gt;</pre>
-</div>
+<div class="paragraph">
+<p>old mode &lt;mode&gt;
+new mode &lt;mode&gt;
+deleted file mode &lt;mode&gt;
+new file mode &lt;mode&gt;
+copy from &lt;path&gt;
+copy to &lt;path&gt;
+rename from &lt;path&gt;
+rename to &lt;path&gt;
+similarity index &lt;number&gt;
+dissimilarity index &lt;number&gt;
+index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p>文件模式被打印为 6 位八进制数字，包括文件类型和文件权限位。</p>
+<p>File modes <em>&lt;mode&gt;</em> are printed as 6-digit octal numbers including the file type and file permission bits.</p>
 </div>
 <div class="paragraph">
 <p>扩展头信息中的路径名称不包括 <code>a/</code> 和 <code>b/</code> 前缀。</p>
@@ -906,7 +904,7 @@ index &lt;哈希&gt;..&lt;哈希&gt; &lt;模式&gt;</pre>
 <p>相似性指数是未改变的行占比，而不相似性指数是改变的行占比。它是四舍五入的整数，后有百分号。因此，100%的相似度指数指为两个文件相等，而 100% 的不相似度意味着入新文件中没有旧文件中的行。</p>
 </div>
 <div class="paragraph">
-<p>索引行包括改变前和改变后的 blob 对象名称。如果文件模式没有变化，则包含 &lt;模式&gt;；否则，分别显示新旧模式。</p>
+<p>The index line includes the blob object names before and after the change. The <em>&lt;mode&gt;</em> is included if the file mode does not change; otherwise, separate lines indicate the old and the new mode.</p>
 </div>
 </li>
 <li>
@@ -992,16 +990,14 @@ index fabadb8,cc95eb0..4866510
 </li>
 <li>
 <p>它的后面是一个或多个扩展头信息行（本例显示的是与两个父提交的合并）：</p>
-<div class="literalblock">
-<div class="content">
-<pre>index &lt;哈希&gt;,&lt;哈希&gt;..&lt;哈希&gt;
-mode &lt;模式&gt;,&lt;模式&gt;..&lt;模式&gt;
-new file mode &lt;模式&gt;
-deleted file mode &lt;模式&gt;,&lt;模式&gt;</pre>
-</div>
+<div class="paragraph">
+<p>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
+mode &lt;mode&gt;,&lt;mode&gt;<code>..</code>&lt;mode&gt;
+new file mode &lt;mode&gt;
+deleted file mode &lt;mode&gt;,&lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p><code>mode&lt;模式&gt;，&lt;模式&gt;..&lt;模式&gt;</code> 行仅在 &lt;模式&gt; 中至少有一个与其余的不同时才会出现。包含有关检测到的内容移动的信息 (重命名和复制检测) 的扩展标头设计为使用两个 &lt;目录树对象&gt; 的 diff，不能用于组合的 diff 格式。</p>
+<p>The <code>mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;</code> line appears only if at least one of the &lt;mode&gt; is different from the rest. Extended headers with information about detected content movement (renames and copying detection) are designed to work with the diff of two <em>&lt;tree-ish&gt;</em> and are not used by combined diff format.</p>
 </div>
 </li>
 <li>

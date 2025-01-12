@@ -230,7 +230,7 @@ $ git checkout &lt;branche&gt;</pre>
 </dd>
 <dt class="hdlist1" id="git-checkout---ignore-other-worktrees"> <a class="anchor" href="#git-checkout---ignore-other-worktrees"></a>--ignore-other-worktrees </dt>
 <dd>
-<p><code>git checkout</code> échoue quand la référence voulue est déjà extraite dans un autre arbre de travail. Cette option force l&#8217;extraction. En d&#8217;autres termes, la réf peut être tenue par plus d&#8217;un arbre de travail.</p>
+<p><code>git checkout</code> échoue quand la branche voulue est déjà extraite ou utilisée dans un autre arbre de travail. Cette option force quand même l&#8217;extraction de la branche. En d&#8217;autres termes, la branche peut être utilisée par plus d&#8217;un arbre de travail.</p>
 </dd>
 <dt class="hdlist1" id="git-checkout---overwrite-ignore"> <a class="anchor" href="#git-checkout---overwrite-ignore"></a>--overwrite-ignore </dt>
 <dt class="hdlist1" id="git-checkout---no-overwrite-ignore"> <a class="anchor" href="#git-checkout---no-overwrite-ignore"></a>--no-overwrite-ignore </dt>
@@ -551,22 +551,8 @@ $ git add frotz</pre>
 <div class="sect1">
 <h2 id="_configuration"><a class="anchor" href="#_configuration"></a>CONFIGURATION</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>fr/includes/cmd-config-section-all.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Tout ce qui se trouve en dessous de cette ligne dans cette section est inclus de manière sélective à partir de la documentation <a href='{{< relurl "docs/git-config/fr" >}}'>git-config[1]</a>. Le contenu est le même que celui qui s&#8217;y trouve :</p>
 </div>
 <div class="admonitionblock warning">
 <table>

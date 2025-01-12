@@ -21,12 +21,12 @@ aliases:
 <div class="sect1">
 <h2 id="_sinopsis"><a class="anchor" href="#_sinopsis"></a>SINOPSIS</h2>
 <div class="sectionbody">
-<div class="verseblock">
-<pre class="content"><code>git init</code> [<code>-q</code> | <code>--quiet</code>] [<code>--bare</code>] [<code>--template=</code><em>&lt;directorio-de-plantilla&gt;</em>]
-	  [<code>--separate-git-dir</code> <em>&lt;directorio-git&gt;</em>] [<code>--object-format=</code><em>&lt;formato&gt;</em>]
-	  [<code>--ref-format=</code><em>&lt;formato&gt;</em>]
-	  [<code>-b</code> <em>&lt;nombre-de-rama&gt;</em> | <code>--initial-branch=</code><em>&lt;nombre-de-rama&gt;</em>]
-	  [<code>--shared</code>[<code>=</code><em>&lt;permisos&gt;</em>]] [<em>&lt;directorio&gt;</em>]</pre>
+<div class="paragraph">
+<p>git init [-q | --quiet] [--bare] [--template=&lt;template-directory&gt;]
+	 [--separate-git-dir &lt;git-dir&gt;] [--object-format=&lt;format&gt;]
+	 [--ref-format=&lt;format&gt;]
+	 [-b &lt;branch-name&gt; | --initial-branch=&lt;branch-name&gt;]
+	 [--shared[=&lt;permissions&gt;]] [&lt;directory&gt;]</p>
 </div>
 </div>
 </div>
@@ -37,10 +37,10 @@ aliases:
 <p>Este comando crea un repositorio Git vacío. Básicamente un directorio <code>.git</code> con subdirectorios para <code>objects</code>, <code>reas/heads</code>, <code>reos/tags</code>, y ficheros de plantillas. Se creará una rama inicial sin confirmaciones (ver la opción <code>--initial-branch</code> abajo por su nombre).</p>
 </div>
 <div class="paragraph">
-<p>Si la variable de ambiente <code>$GIT_DIR</code> se configura, entonces especifica una ruta a usar en lugar de <code>./.git</code> para la base del repositorio.</p>
+<p>If the <code>GIT_DIR</code> environment variable is set then it specifies a path to use instead of <code>./.git</code> for the base of the repository.</p>
 </div>
 <div class="paragraph">
-<p>Si el directorio de almacenamiento de objetos se especifica con la variable de ambiente <code>$GIT_OBJECT_DIRECTORY</code>, entonces los directorios sha1 se crean bajo él, de lo contrario se usa el directorio predeterminado <code>$GIT_DIR/objects</code>.</p>
+<p>If the object storage directory is specified via the <code>GIT_OBJECT_DIRECTORY</code> environment variable then the sha1 directories are created underneath; otherwise, the default <code>$GIT_DIR/objects</code> directory is used.</p>
 </div>
 <div class="paragraph">
 <p>Ejecutar <code>git init</code> en un repositorio existente es seguro. No sobre-escribirá cosas que ya existan ahí. La razón primaria para volver a ejecutar <code>git init</code> es para recoger plantillas agregadas recientemente (o para mover el repositorio a otro lugar si se proporciona <code>--separate-git-dir</code>).</p>
@@ -61,7 +61,7 @@ aliases:
 <dd>
 <p>Crea un repositorio básico. Si la variable de ambiente <code>GIT_DIR</code> no está configurada, se configura al directorio de trabajo actual.</p>
 </dd>
-<dt class="hdlist1" id="git-init-code--object-formatcodeemltformatogtem"> <a class="anchor" href="#git-init-code--object-formatcodeemltformatogtem"></a><code>--object-format=</code><em>&lt;formato&gt;</em> </dt>
+<dt class="hdlist1" id="git-init-code--object-formatltformatgtcode"> <a class="anchor" href="#git-init-code--object-formatltformatgtcode"></a><code>--object-format=&lt;format&gt;</code> </dt>
 <dd>
 <p>Especifica el <em>&lt;formato&gt;</em> de objeto (algoritmo hash )dado para el repositorio. Los valores válidos son <code>sha1</code> y -si esta habilitado- <code>sha256</code>. <code>sha1</code> es el predeterminado.</p>
 <div class="paragraph">
@@ -75,7 +75,7 @@ aliases:
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="git-init-code--ref-formatcodeemltformatogtem"> <a class="anchor" href="#git-init-code--ref-formatcodeemltformatogtem"></a><code>--ref-format=</code><em>&lt;formato&gt;</em> </dt>
+<dt class="hdlist1" id="git-init-code--ref-formatltformatgtcode"> <a class="anchor" href="#git-init-code--ref-formatltformatgtcode"></a><code>--ref-format=&lt;format&gt;</code> </dt>
 <dd>
 <p>Especifica el <em>&lt;formato&gt;</em> de almacenamiento de referencia dado para el repositorio. Los valores válidos son:</p>
 </dd>
@@ -100,23 +100,23 @@ aliases:
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1" id="git-init-code--templatecodeemltdirectorio-de-plantillagtem"> <a class="anchor" href="#git-init-code--templatecodeemltdirectorio-de-plantillagtem"></a><code>--template=</code><em>&lt;directorio-de-plantilla&gt;</em> </dt>
+<dt class="hdlist1" id="git-init-code--templatelttemplate-directorygtcode"> <a class="anchor" href="#git-init-code--templatelttemplate-directorygtcode"></a><code>--template=&lt;template-directory&gt;</code> </dt>
 <dd>
 <p>Especifica el directorio de dónde usar plantillas. (Ver la sección "DIRECTORIO DE PLANTILLAS" mas adelante.)</p>
 </dd>
-<dt class="hdlist1" id="git-init-code--separate-git-dircodeemltdirectorio-gitgtem"> <a class="anchor" href="#git-init-code--separate-git-dircodeemltdirectorio-gitgtem"></a><code>--separate-git-dir=</code><em>&lt;directorio-git&gt;</em> </dt>
+<dt class="hdlist1" id="git-init-code--separate-git-dirltgit-dirgtcode"> <a class="anchor" href="#git-init-code--separate-git-dirltgit-dirgtcode"></a><code>--separate-git-dir=&lt;git-dir&gt;</code> </dt>
 <dd>
 <p>En lugar de inicializar el repositorio como un directorio ya sea de <code>$GIT_DIR</code> o <code>./.git</code>, crea un fichero de texto conteniendo la ruta al repositorio actual. Este fichero actúa como una liga simbólica de Git agnóstica de sistema de ficheros hacia el repositorio.</p>
 <div class="paragraph">
 <p>Si es una re-inicialización, el repositorio se moverá a la ruta especificada.</p>
 </div>
 </dd>
-<dt class="hdlist1" id="git-init-code-bcodeemltnombre-ramagtem"> <a class="anchor" href="#git-init-code-bcodeemltnombre-ramagtem"></a><code>-b</code> <em>&lt;nombre-rama&gt;</em> </dt>
-<dt class="hdlist1" id="git-init-code--initial-branchcodeemltnombre-ramagtem"> <a class="anchor" href="#git-init-code--initial-branchcodeemltnombre-ramagtem"></a><code>--initial-branch=</code><em>&lt;nombre-rama&gt;</em> </dt>
+<dt class="hdlist1" id="git-init-code-bltbranch-namegtcode"> <a class="anchor" href="#git-init-code-bltbranch-namegtcode"></a><code>-b &lt;branch-name&gt;</code> </dt>
+<dt class="hdlist1" id="git-init-code--initial-branchltbranch-namegtcode"> <a class="anchor" href="#git-init-code--initial-branchltbranch-namegtcode"></a><code>--initial-branch=&lt;branch-name&gt;</code> </dt>
 <dd>
 <p>Usar el <em>&lt;nombre-de-rama&gt;</em> especificado para la rama inicial en el repositorio recientemente creado. Si no se especifica, recae en el nombre predeterminado (actualmente <code>master</code>, pero está sujeto a cambio en el futuro; el nombre puede ser personalizado con la variable de configuración <code>init.defaultBranch</code>).</p>
 </dd>
-<dt class="hdlist1" id="git-init-code--sharedcodecodecodecodefalsecodecodetruecodecodeumaskcodecodegroupcodecodeallcodecodeworldcodecodeeverybodycodeemltpermisogtem"> <a class="anchor" href="#git-init-code--sharedcodecodecodecodefalsecodecodetruecodecodeumaskcodecodegroupcodecodeallcodecodeworldcodecodeeverybodycodeemltpermisogtem"></a><code>--shared</code>[<code>=</code>(<code>false</code>|<code>true</code>|<code>umask</code>|<code>group</code>|<code>all</code>|<code>world</code>|<code>everybody</code>|<em>&lt;permiso&gt;</em>)] </dt>
+<dt class="hdlist1" id="git-init-code--sharedfalsetrueumaskgroupallworldeverybodyltpermgtcode"> <a class="anchor" href="#git-init-code--sharedfalsetrueumaskgroupallworldeverybodyltpermgtcode"></a><code>--shared[=(false|true|umask|group|all|world|everybody|&lt;perm&gt;)]</code> </dt>
 <dd>
 <p>Especifica que el repositorio Git será compartido entre varios usuarios. Esto permite a los usuarios pertenecientes al mismo grupo hacer push en ese repositorio. Cuando se especifica, la variable de configuración <code>core.sharedRepository</code> se asigna de tal manera que esos ficheros y directorios bajo <code>$GIT_DIR</code> son creados con los permisos solicitados. Cuando no se especifica, Git usará los permisos reportados por <code>umask</code>(2).</p>
 <div class="paragraph">
@@ -233,22 +233,8 @@ $ git commit    <b class="conum">(3)</b></pre>
 <div class="sect1">
 <h2 id="_configuración"><a class="anchor" href="#_configuración"></a>CONFIGURACIÓN</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>es/includes/cmd-config-section-all.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Todo debajo de ésta línea en ésta sección es incluido selectivamente de la documentación de <a href='{{< relurl "docs/git-config/es" >}}'>git-config[1]</a>. El contenido es el mismo al que se encuentra ahí:</p>
 </div>
 <div class="admonitionblock warning">
 <table>

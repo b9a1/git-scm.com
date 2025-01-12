@@ -1437,7 +1437,7 @@ o mesmo que <code>-M5%</code>.  Para limitar a detecção para renomeações exa
 <p>Executando <a href='{{< relurl "docs/git-diff/pt_BR" >}}'>git-diff[1]</a>, <a href='{{< relurl "docs/git-log/pt_BR" >}}'>git-log[1]</a>, <a href='{{< relurl "docs/git-show/pt_BR" >}}'>git-show[1]</a>, <a href='{{< relurl "docs/git-diff-index/pt_BR" >}}'>git-diff-index[1]</a>, <a href='{{< relurl "docs/git-diff-tree/pt_BR" >}}'>git-diff-tree[1]</a>, ou <a href='{{< relurl "docs/git-diff-files/pt_BR" >}}'>git-diff-files[1]</a> com a opção <code>-p</code> produz um patch em formato texto. É possível personalizar a criação do patch em um formato texto através das variáveis de ambiente <code>GIT_EXTERNAL_DIFF</code>, <code>GIT_DIFF_OPTS</code> (consulte <a href='{{< relurl "docs/git/pt_BR" >}}'>git[1]</a>) e o atributo <code>diff</code> (consulte <a href='{{< relurl "docs/gitattributes/pt_BR" >}}'>gitattributes[5]</a>).</p>
 </div>
 <div class="paragraph">
-<p>O que a opção <code>-p</code> produz é um pouco diferente do formato diff tradicional:</p>
+<p>What the <code>-p</code> option produces is slightly different from the traditional diff format:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1457,23 +1457,21 @@ o mesmo que <code>-M5%</code>.  Para limitar a detecção para renomeações exa
 </li>
 <li>
 <p>É seguido por uma ou mais linhas estendidas do cabeçalho:</p>
-<div class="literalblock">
-<div class="content">
-<pre>modo antigo               &lt;modo&gt;
-modo novo                 &lt;modo&gt;
-modo de arquivo excluído  &lt;modo&gt;
-novo modo de arquivo      &lt;modo&gt;
-copiar de                 &lt;caminho&gt;
-copiar para               &lt;caminho&gt;
-renomear de               &lt;caminho&gt;
-renomear para             &lt;caminho&gt;
-índice de similaridade    &lt;quantidade&gt;
-índice de dissimilaridade &lt;quantidade&gt;
-índice                    &lt;hash&gt;..&lt;hash&gt; &lt;modo&gt;</pre>
-</div>
+<div class="paragraph">
+<p>old mode &lt;mode&gt;
+new mode &lt;mode&gt;
+deleted file mode &lt;mode&gt;
+new file mode &lt;mode&gt;
+copy from &lt;path&gt;
+copy to &lt;path&gt;
+rename from &lt;path&gt;
+rename to &lt;path&gt;
+similarity index &lt;number&gt;
+dissimilarity index &lt;number&gt;
+index &lt;hash&gt;..&lt;hash&gt; &lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p>Os modos dos arquivo são impressos como números octais com 6 dígitos, incluindo o tipo do arquivo e dos bits de permissão do arquivo.</p>
+<p>File modes <em>&lt;mode&gt;</em> are printed as 6-digit octal numbers including the file type and file permission bits.</p>
 </div>
 <div class="paragraph">
 <p>Os nomes do caminho nos cabeçalhos estendidos não incluem os prefixos <code>a/</code> e <code>b/</code>.</p>
@@ -1482,7 +1480,7 @@ renomear para             &lt;caminho&gt;
 <p>O índice de similaridade é a porcentagem das linhas inalteradas e o índice de dissimilaridade é a porcentagem das linhas alteradas. É um número inteiro arredondado, seguido por um sinal de porcentagem. O valor do índice de similaridade de 100% é reservado para dois arquivos iguais, enquanto a dissimilaridade de 100% significa que nenhuma linha do arquivo antigo chegou ao novo.</p>
 </div>
 <div class="paragraph">
-<p>A linha do índice inclui os nomes dos objetos bolha antes e depois da alteração. O <code>&lt;modo&gt;</code> será incluído caso o modo do arquivo não seja alterado; caso contrário, linhas separadas indicam o modo antigo e o novo.</p>
+<p>The index line includes the blob object names before and after the change. The <em>&lt;mode&gt;</em> is included if the file mode does not change; otherwise, separate lines indicate the old and the new mode.</p>
 </div>
 </li>
 <li>
@@ -1568,16 +1566,14 @@ index fabadb8,cc95eb0..4866510
 </li>
 <li>
 <p>Ele é seguido por uma ou mais linhas estendidas do cabeçalho (este exemplo exibe uma mesclagem com duas origens):</p>
-<div class="literalblock">
-<div class="content">
-<pre>índice &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
-modo &lt;modo&gt;,&lt;modo&gt;..&lt;modo&gt;
-modo novo arquivo &lt;modo&gt;
-modo arquivo excluído &lt;modo&gt;,&lt;modo&gt;</pre>
-</div>
+<div class="paragraph">
+<p>index &lt;hash&gt;,&lt;hash&gt;..&lt;hash&gt;
+mode &lt;mode&gt;,&lt;mode&gt;<code>..</code>&lt;mode&gt;
+new file mode &lt;mode&gt;
+deleted file mode &lt;mode&gt;,&lt;mode&gt;</p>
 </div>
 <div class="paragraph">
-<p>A linha <code>modo &lt;modo&gt;,&lt;modo&gt;..&lt;modo&gt;</code> aparece apenas caso pelo menos um dos &lt;modos&gt; seja diferente do restante. Os cabeçalhos estendidos com informações sobre a movimentação do conteúdo detectado (renomeação e detecção da cópia) são projetados para trabalhar com o diff com duas <code>&lt;árvore&gt;s</code> e não são utilizados pela combinação do formato diff.</p>
+<p>The <code>mode &lt;mode&gt;,&lt;mode&gt;..&lt;mode&gt;</code> line appears only if at least one of the &lt;mode&gt; is different from the rest. Extended headers with information about detected content movement (renames and copying detection) are designed to work with the diff of two <em>&lt;tree-ish&gt;</em> and are not used by combined diff format.</p>
 </div>
 </li>
 <li>

@@ -23,9 +23,9 @@ aliases:
 <div class="sectionbody">
 <div class="verseblock">
 <pre class="content"><em>git notes</em> [list [&lt;objet&gt;]]
-<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;coupure-paragraphe&gt;] [--[no-]stripspace] [-F &lt;fichier&gt; | -m &lt;msg&gt; | (-c | -C) &lt;objet&gt;] [&lt;objet&gt;]
+<em>git notes</em> add [-f] [--allow-empty] [--[no-]separator | --separator=&lt;coupure-paragraphe&gt;] [--[no-]stripspace] [-F &lt;fichier&gt; | -m &lt;msg&gt; | (-c | -C) &lt;objet&gt;] [-e] [&lt;objet&gt;]
 <em>git notes</em> copy [-f] ( --stdin | &lt;objet-source&gt; [&lt;objet-cible&gt;] )
-<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;coupure-paragraphe&gt;] [--[no-]stripspace] [-F &lt;fichier&gt; | -m &lt;msg&gt; | (-c | -C) &lt;objet&gt;] [&lt;objet&gt;]
+<em>git notes</em> append [--allow-empty] [--[no-]separator | --separator=&lt;coupure-paragraphe&gt;] [--[no-]stripspace] [-F &lt;fichier&gt; | -m &lt;msg&gt; | (-c | -C) &lt;objet&gt;] [-e] [&lt;objet&gt;]
 <em>git notes</em> edit [--allow-empty] [&lt;objet&gt;]
 <em>git notes</em> show [&lt;objet&gt;]
 <em>git notes</em> merge [-v | -q] [-s &lt;strategie&gt; ] &lt;ref-de-notes&gt;
@@ -71,7 +71,7 @@ aliases:
 </dd>
 <dt class="hdlist1" id="git-notes-add"> <a class="anchor" href="#git-notes-add"></a>add </dt>
 <dd>
-<p>Ajouter des notes pour un objet donné (par défaut HEAD). Abandonner si l&#8217;objet a déjà des notes (utilisez <code>-f</code> pour écraser les notes existantes). Cependant, si vous utilisez <code>add</code> de manière interactive (en utilisant un éditeur pour fournir le contenu des notes), alors - au lieu d&#8217;abandonner - les notes existantes seront ouvertes dans l&#8217;éditeur (comme la sous-commande <code>edit</code>). Si vous spécifiez plusieurs <code>-m</code> et <code>-F</code>, une ligne vierge sera insérée entre les messages. Utilisez l&#8217;option <code>--separator</code> pour insérer d&#8217;autres délimiteurs.</p>
+<p>Ajouter des notes pour un objet donné (par défaut <code>HEAD</code>). Abandonner si l&#8217;objet a déjà des notes (utilisez <code>-f</code> pour écraser les notes existantes). Cependant, si vous utilisez <code>add</code> de manière interactive (en utilisant un éditeur pour fournir le contenu des notes), alors - au lieu d&#8217;abandonner - les notes existantes seront ouvertes dans l&#8217;éditeur (comme la sous-commande <code>edit</code>). Si vous spécifiez plusieurs <code>-m</code> et <code>-F</code>, une ligne vierge sera insérée entre les messages. Utilisez l&#8217;option <code>--separator</code> pour insérer d&#8217;autres délimiteurs. Vous pouvez utiliser <code>-e</code> pour éditer et affiner interactivement le(s) message(s) fourni(s) par les options <code>-m</code> et <code>-F</code> (en utilisant un éditeur) avant d&#8217;ajouter une note.</p>
 </dd>
 <dt class="hdlist1" id="git-notes-copy"> <a class="anchor" href="#git-notes-copy"></a>copy </dt>
 <dd>
@@ -90,7 +90,7 @@ aliases:
 </dd>
 <dt class="hdlist1" id="git-notes-append"> <a class="anchor" href="#git-notes-append"></a>append </dt>
 <dd>
-<p>Appliquer un ou plusieurs nouveaux messages donnés par des options <code>-m</code> ou <code>-F</code> à une note existante, ou les ajouter comme une nouvelle note si aucune n&#8217;existe , pour l&#8217;objet (par défaut à HEAD). Lorsqu&#8217;elle continue une note existante, une ligne vierge est ajoutée avant chaque nouveau message en tant que séparateur inter-paragraphe. Le séparateur peut être personnalisé avec l&#8217;option <code>--separator</code>.</p>
+<p>Appliquer un ou plusieurs nouveaux messages donnés par des options <code>-m</code> ou <code>-F</code> à une note existante, ou les ajouter comme une nouvelle note si aucune n&#8217;existe , pour l&#8217;objet (par défaut à HEAD). Lorsqu&#8217;elle continue une note existante, une ligne vierge est ajoutée avant chaque nouveau message en tant que séparateur inter-paragraphe. Le séparateur peut être personnalisé avec l&#8217;option <code>--separator</code>. Éditer les notes à ajouter données par les options <code>-m</code> et <code>-F</code> et <code>-e</code> interactivement (en utilisant un éditeur) avant d&#8217;ajouter la note.</p>
 </dd>
 <dt class="hdlist1" id="git-notes-edit"> <a class="anchor" href="#git-notes-edit"></a>edit </dt>
 <dd>
@@ -289,22 +289,8 @@ $ git notes --ref=built add --allow-empty -C "$blob" HEAD</pre>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Missing <code>fr/includes/cmd-config-section-rest.txt</code></p>
-</div>
-<div class="paragraph">
-<p>See original version for this content.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Tout ce qui se trouve au-dessus de cette ligne dans cette section n&#8217;est pas inclus dans la documentation <a href='{{< relurl "docs/git-config/fr" >}}'>git-config[1]</a>. Le contenu qui suit est le même que celui qui s&#8217;y trouve :</p>
 </div>
 <div class="admonitionblock warning">
 <table>

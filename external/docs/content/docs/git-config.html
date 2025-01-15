@@ -6,8 +6,8 @@ section: documentation
 subsection: manual
 title: Git - git-config Documentation
 docname: git-config
-version: 2.48.0
-latest-changes: 2.48.0
+version: 2.48.1
+latest-changes: 2.48.1
 aliases:
 - "/docs/git-config/index.html"
 ---
@@ -3464,6 +3464,19 @@ respect this option as well.</p>
 <p>When acquiring credentials, consider the "path" component of an http
 or https URL to be important. Defaults to false. See
 <a href='{{< relurl "docs/gitcredentials" >}}'>gitcredentials[7]</a> for more information.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-credentialsanitizePrompt"> <a class="anchor" href="#Documentation/git-config.txt-credentialsanitizePrompt"></a>credential.sanitizePrompt </dt>
+<dd>
+<p>By default, user names and hosts that are shown as part of the
+password prompt are not allowed to contain control characters (they
+will be URL-encoded by default). Configure this setting to <code>false</code> to
+override that behavior.</p>
+</dd>
+<dt class="hdlist1" id="Documentation/git-config.txt-credentialprotectProtocol"> <a class="anchor" href="#Documentation/git-config.txt-credentialprotectProtocol"></a>credential.protectProtocol </dt>
+<dd>
+<p>By default, Carriage Return characters are not allowed in the protocol
+that is used when Git talks to a credential helper. This setting allows
+users to override this default.</p>
 </dd>
 <dt class="hdlist1" id="Documentation/git-config.txt-credentialusername"> <a class="anchor" href="#Documentation/git-config.txt-credentialusername"></a>credential.username </dt>
 <dd>

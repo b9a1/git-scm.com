@@ -48,7 +48,7 @@ def wrap_front_matter(front_matter)
 end
 
 def expand_l10n(path, content, get_f_content, categories)
-  content.gsub!(/include::(\S+)\.txt/) do |line|
+  content.gsub!(/include::({build_dir}\/)?(\S+)\.txt/) do |line|
     line.gsub!("include::", "")
     if categories[line]
       new_content = categories[line]
@@ -240,7 +240,7 @@ def drop_uninteresting_tags(tags)
 end
 
 def expand_content(content, path, get_f_content, generated)
-  content.gsub(/include::(\S+)\.txt\[\]/) do |_line|
+  content.gsub(/include::(?:{build_dir}\/)?(\S+)\.txt\[\]/) do |_line|
     if File.dirname(path) == "."
       new_fname = "#{$1}.txt"
     else

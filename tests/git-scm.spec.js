@@ -59,7 +59,7 @@ test.describe('Windows', () => {
     await expect(page.getByRole('link', { name: 'Graphical UIs' })).toBeHidden()
     const windowsGUIs = page.getByRole('link', { name: 'Windows GUIs' })
     await expect(windowsGUIs).toBeVisible()
-    await expect(windowsGUIs).toHaveAttribute('href', /\/download\/gui\/windows$/)
+    await expect(windowsGUIs).toHaveAttribute('href', /\/downloads\/guis\?os=windows$/)
 
     // navigate to Windows GUIs
     await windowsGUIs.click()

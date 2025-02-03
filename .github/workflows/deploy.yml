@@ -27,3 +27,4 @@ jobs:
         with:
           cloudflare-token: ${{ secrets.CLOUDFLARE_TOKEN }}
           cloudflare-zone: ${{ secrets.CLOUDFLARE_ZONE }}
+          external-https: ${{ vars.EXTERNAL_HTTPS }}

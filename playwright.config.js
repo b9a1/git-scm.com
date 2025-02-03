@@ -34,6 +34,10 @@ module.exports = defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    /* Ignore ERR_CERT_COMMON_NAME_INVALID when tesing against GitHub's server,
+    if the real certificate is hosted by a third party (e.g. Cloudflare). */
+    ignoreHTTPSErrors: process.env.PLAYWRIGHT_EXTERNAL_HTTPS === 'true',
   },
 
   /* Configure projects for major browsers */

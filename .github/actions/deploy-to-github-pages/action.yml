@@ -20,6 +20,10 @@ inputs:
   cloudflare-zone:
     description: The Cloudflare zone to purge.
     required: false
+  external-https:
+    description: Whether HTTPS is set up externally, e.g. on Cloudflare instead of GitHub.
+    default: false
+    required: false
 outputs:
   url:
     description: The URL to which the site was deployed
@@ -41,6 +45,15 @@ runs:
       id: pages
       uses: actions/configure-pages@v5
 
+    - name: set base URL
+      shell: bash
+      run: |
+        base_url="${{ steps.pages.outputs.base_url }}"
+        if [ "${{ inputs.external-https }}" = true ] ; then
+          base_url="$(echo "$base_url" | sed 's/^http:/https:/')"
+        fi
+        echo "base_url=$base_url" >>"$GITHUB_ENV"
+
     - name: configure Hugo and Pagefind version
       shell: bash
       run: |
@@ -59,7 +72,7 @@ runs:
       env:
         HUGO_RELATIVEURLS: false
       shell: bash
-      run: hugo config && hugo --baseURL "${{ steps.pages.outputs.base_url }}/"
+      run: hugo config && hugo --baseURL "${{ env.base_url }}/"
 
     - name: run Pagefind ${{ env.PAGEFIND_VERSION }} to build the search index
       shell: bash
@@ -110,7 +123,6 @@ runs:
       id: remap
       shell: bash
       run: |
-        base_url='${{ steps.pages.outputs.base_url }}'
         echo "result=$(echo "$base_url" |
           sed 's|^\(.*\)\(/git-scm\.com\)$|(\1)?\2(.*)|') file://$PWD/public\$2" \
           >>$GITHUB_OUTPUT
@@ -120,6 +132,17 @@ runs:
           sed -n 's|^\(https\?:\/\/.*\)\(/git-scm\.com\)$|--remap '\''(\1.*) file://../$1'\''|p')" \
           >>$GITHUB_OUTPUT
 
+    - name: check for downgrades to unencrypted HTTP
+      if: startsWith(env.base_url, 'https://')
+      shell: bash
+      # The `--require-https` option of lychee could come in handy,
+      # but it also complains about `http://` links to other sites,
+      # and (more importantly) doesn't work in offline mode.
+      # A simple `grep` should work without any false positives,
+      # unless git-scm.com mentions the base URL of one of its forks,
+      # which is unlikely.
+      run: '! grep -FInr "http:${base_url#https:}" public'
+
     - name: check for broken links
       id: lychee
       uses: lycheeverse/lychee-action@v2
@@ -127,7 +150,7 @@ runs:
         args: >-
           --offline
           --fallback-extensions html
-          --base '${{ steps.pages.outputs.base_url }}'
+          --base '${{ env.base_url }}'
           --remap '${{ steps.remap.outputs.result }}'
           ${{ steps.remap.outputs.remap-dotdot }}
           --exclude file:///path/to/repo.git/
@@ -195,20 +218,17 @@ runs:
     - name: Edit /etc/hosts to map git-scm.com to GitHub
       shell: bash
       # This side-steps the Cloudflare caches
-      run: sudo sh -c 'echo "185.199.108.153 git-scm.com" >>/etc/hosts'
+      run: |
+        host="$(echo "$base_url" | sed -E 's|^https?://([^:/]+).*|\1|')"
+        sudo sh -c "echo '185.199.108.153 $host' >>/etc/hosts"
     - name: Run Playwright tests
       shell: bash
       id: playwright
       env:
-        PLAYWRIGHT_TEST_URL: ${{ steps.pages.outputs.base_url }}
-      run: |
+        PLAYWRIGHT_TEST_URL: ${{ env.base_url }}
         # avoid test failures when HTTPS is enforced half-way through
-        case "$PLAYWRIGHT_TEST_URL" in
-        https://*|http://git-scm.com) ;; # okay, leave as-is
-        http://*) PLAYWRIGHT_TEST_URL="https://${PLAYWRIGHT_TEST_URL#http://}";;
-        esac &&
-        echo "result=$PLAYWRIGHT_TEST_URL" >>$GITHUB_OUTPUT &&
-        npx playwright test --project=chrome
+        PLAYWRIGHT_EXTERNAL_HTTPS: ${{ inputs.external-https }}
+      run: npx playwright test --project=chrome
     - uses: actions/upload-artifact@v4
       if: always() && steps.playwright.outputs.result != ''
       with:

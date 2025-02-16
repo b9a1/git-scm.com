@@ -1,0 +1,10 @@
+---
+name: "tig"
+project_url: "https://github.com/jonas/tig#readme"
+image_tag: "images/guis/tig@2x.png"
+platforms:
+  - "Linux"
+price: "Free"
+license: "GPL-2.0"
+order: 19
+---

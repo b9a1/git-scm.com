@@ -15,7 +15,7 @@ DOCS_INDEX_FILE = "#{SITE_ROOT}external/docs/content/docs/_index.html"
 DATA_FILE = "#{SITE_ROOT}external/docs/data/docs.yml"
 
 def read_data
-  if File.exists?(DATA_FILE)
+  if File.exist?(DATA_FILE)
     # `permitted_classes` required to allow running with Ruby v3.1
     data = YAML.load_file(DATA_FILE, permitted_classes: [Time])
   else
@@ -133,7 +133,7 @@ def index_l10n_doc(filter_tags, doc_list, get_content)
       end
       asciidoc = make_asciidoc(content)
       asciidoc_sha = Digest::SHA1.hexdigest(asciidoc.source)
-      if !File.exists?("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}")
+      if !File.exist?("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}")
         FileUtils.mkdir_p("#{SITE_ROOT}external/docs/asciidoc")
         File.open("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}", "w") do |out|
           out.write(content)
@@ -204,7 +204,7 @@ def index_l10n_doc(filter_tags, doc_list, get_content)
     # not exist. In these cases, redirect to the English version.
     check_paths.each do |path|
       doc_path = "#{SITE_ROOT}external/docs/content/#{path}.html"
-      if !File.exists?(doc_path)
+      if !File.exist?(doc_path)
         front_matter = { "redirect_to" => "#{path.sub(/\/[^\/]*$/, '')}" } # rtrim `/<lang>`
         FileUtils.mkdir_p(File.dirname(doc_path))
         File.open(doc_path, "w") do |out|
@@ -416,7 +416,7 @@ def index_doc(filter_tags, doc_list, get_content)
 
         asciidoc = make_asciidoc(content)
         asciidoc_sha = Digest::SHA1.hexdigest(asciidoc.source)
-        if !File.exists?("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}")
+        if !File.exist?("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}")
           FileUtils.mkdir_p("#{SITE_ROOT}external/docs/asciidoc")
           File.open("#{SITE_ROOT}external/docs/asciidoc/#{asciidoc_sha}", "w") do |out|
             out.write(content)
@@ -481,7 +481,7 @@ def index_doc(filter_tags, doc_list, get_content)
           "version" => doc_versions[changed_in],
         }
 
-        if changed_in != doc_version_index && File.exists?("#{doc_path}/#{version}.html")
+        if changed_in != doc_version_index && File.exist?("#{doc_path}/#{version}.html")
           # remove obsolete file
           File.delete("#{doc_path}/#{version}.html")
         end
@@ -552,7 +552,7 @@ def index_doc(filter_tags, doc_list, get_content)
       # git/git repository.
       check_paths.each do |path|
         doc_path = "#{SITE_ROOT}external/docs/content/#{path}.html"
-        if !File.exists?(doc_path)
+        if !File.exist?(doc_path)
           type = 'blob'
           target = path.sub(/^docs\//, '')
           if target == 'api-index'

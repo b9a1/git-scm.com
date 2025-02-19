@@ -5,7 +5,6 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 /.bundle/
-/Gemfile.lock
 /vendor/
 /.hugo_build.lock
 /public/

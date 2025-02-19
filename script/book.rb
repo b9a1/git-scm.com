@@ -207,7 +207,7 @@ class Book
   def book_v1_aliases(cs_number)
     if @book_v1_aliases.nil?
       path = File.absolute_path(File.join(File.dirname(__FILE__), "..", "data", "book_v1.yml"))
-      if File.exists?(path)
+      if File.exist?(path)
         @book_v1_aliases = YAML.load_file(path)&.[](@language_code)
       end
       @book_v1_aliases = {} if @book_v1_aliases.nil?

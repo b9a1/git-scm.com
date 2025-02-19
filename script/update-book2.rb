@@ -5,6 +5,7 @@ require "nokogiri"
 require "octokit"
 require "open-uri"
 require "pathname"
+require "base64"
 require_relative "book"
 
 def expand(content, path, &get_content)

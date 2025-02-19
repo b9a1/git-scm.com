@@ -31,7 +31,7 @@ $translations = []
 def retrieve_mapping(language)
   puts "Retrieving TOC for #{language}"
   cached = "cached.book-toc.#{language}.html"
-  if File.exists?(cached)
+  if File.exist?(cached)
     html = File.read(cached)
   else
     html = URI.parse("https://web.archive.org/web/20140109005424/http://git-scm.com/book/#{language}/").read
